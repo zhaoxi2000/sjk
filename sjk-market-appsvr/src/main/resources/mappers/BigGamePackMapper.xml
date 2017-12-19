@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ijinshan.sjk.mapper.BigGamePackMapper">
+	<sql id="bigGame">
+		Id AS
+		bigGamePackId,MarketAppId,Cputype,Url,Size,FreeSize,UnsupportPhoneType,MarketUpdateTime
+	</sql>
+	<sql id="biginfo">
+		bp.Id as
+		bigGamePackId,bp.MarketAppId,bp.Cputype,bp.Url,bp.Size,bp.FreeSize,bp.UnsupportPhoneType,bp.MarketUpdateTime
+	</sql>
+	<sql id="biginfos">
+		bp.Id as
+		bigGamePackId,bp.Cputype,bp.Url,bp.Size,bp.FreeSize,bp.UnsupportPhoneType,bp.MarketUpdateTime,
+		app.Id,app.MarketAppId,app.Name,app.Catalog,app.SubCatalog,app.LogoUrl,app.Version,app.Minsdkversion,app.VersionCode,
+		app.Pkname,app.LastUpdateTime,app.StrImageUrls,app.PageUrl,app.ShortDesc,app.IndexImgUrl,app.OfficeHomepage,app.Language,app.SignatureSHA1,
+		app.OfficialSigSHA1,app.Advertises,app.AdActionTypes,app.AdPopupTypes,app.VirusKind,app.DownloadRank,app.scSta,app.AppId,app.ApkId,app.Models,
+		app.MarketName as MarketName,
+		app.PublisherShortName,app.Keywords,app.LastFetchTime,app.UpdateInfo,app.Screens,app.Price,
+		app.Minsdkversion,app.OSVersion,app.Screens,app.Price,app.EnumStatus,app.Md5,app.PathStatus
+	</sql>
+	<sql id="bigGameinfos">
+		bp.Id as bigGamePackId,bp.Cputype as cputype,bp.Url as url,bp.Size as size,bp.FreeSize as freeSize,
+		bp.UnsupportPhoneType as unsupportPhoneType,bp.MarketUpdateTime as marketUpdateTime,
+		app.Id as id,app.Name as
+		name,app.MarketName as marketName,app.LogoUrl as logoUrl,app.PageUrl as pageUrl,
+		app.SubCatalog as
+		subCatalog,app.Pkname as pkname,app.Version as version,
+		app.DownloadRank as downloadRank,app.VersionCode as versionCode
+		,app.SignatureSHA1 as signatureSha1,app.OfficialSigSHA1 as officialSigSha1,
+		app.ScSta as scSta,app.IndexImgUrl as
+		indexImgUrl,app.AdActionTypes as adActionTypes,
+		app.AdPopupTypes as adPopupTypes,app.VirusKind as
+		virusKind,app.ShortDesc as shortDesc,
+		bp.MarketAppId as marketAppId
+	</sql>
+
+	<select id="getBigGameByMarkAppId" parameterType="int" resultType="com.ijinshan.sjk.po.BigGamePack">
+		select
+		<include refid="bigGame" />
+		from BigGamePack
+		where MarketAppId = #{marketAppId}
+	</select>
+
+	<select id="getBigGameByMarkAppIds" resultType="com.ijinshan.sjk.po.BigGamePack">
+		select
+		<include refid="bigGame" />
+		from BigGamePack
+		where MarketAppId in
+		<foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+	<select id="getBigGameList" resultType="com.ijinshan.sjk.po.BigGamePack">
+		select
+		<include refid="biginfo" />
+		FROM BigGamePack bp INNER
+		JOIN App app
+		ON app.MarketAppId = bp.MarketAppId and bp.Cputype > 0
+		<if test="cputype!=null">
+			AND bp.Cputype = #{cputype}
+		</if>
+	</select>
+
+	<select id="getAllBigGameList" resultType="com.ijinshan.sjk.vo.AppForBigGamePacksVo">
+		select
+		<include refid="biginfos" />
+		FROM BigGamePack bp INNER
+		JOIN App app
+		ON app.MarketAppId = bp.MarketAppId and bp.Cputype > 0
+	</select>
+	<select id="getBigGamePakcList" resultType="com.ijinshan.sjk.vo.pc.biggame.AppBigGamePacks">
+		select
+		<include refid="bigGameinfos" />
+		FROM BigGamePack bp INNER
+		JOIN App app
+		ON app.MarketAppId = bp.MarketAppId and bp.Cputype > 0 ORDER BY bp.MarketAppId;
+	</select>
+
+	<select id="findBigPackListByParams" resultType="com.ijinshan.sjk.po.BigGamePack">
+		select
+		<include refid="biginfo" />
+		FROM BigGamePack bp WHERE bp.MarketAppId = #{marketAppId} AND bp.Cputype IN
+		(
+		SELECT DISTINCT prel.Cpu FROM
+		PhoneBasicInfo pinfo
+		INNER JOIN PhoneRelations prel
+		ON pinfo.Id = prel.PhoneId
+		AND pinfo.Product= #{product} AND
+		pinfo.Product NOT IN('设备', 'Android设备') AND pinfo.Brand=#{brand}
+		)
+
+		<!-- <![CDATA[ -->
+		<!-- from BigGamePack bp where bp.MarketAppId=#{marketAppId} and bp.Cputype -->
+		<!-- in(select prel.Cpu from PhoneBasicInfo pinfo -->
+		<!-- join PhoneRelations prel -->
+		<!-- where pinfo.Id = prel.PhoneId -->
+		<!-- and (pinfo.Product <>'Android设备' or pinfo.Product <> '设备') -->
+		<!-- and pinfo.Product is not null -->
+		<!-- and pinfo.Product= #{product} and pinfo.Brand=#{brand} group by prel.Cpu) -->
+		<!-- ]]> -->
+	</select>
+
+	<select id="findBigGamePackList" resultType="com.ijinshan.sjk.po.BigGamePack">
+		select
+		<include refid="biginfo" />
+		from BigGamePack bp
+		where 1=1
+		<if test="marketAppId!=null">
+			and bp.MarketAppId = #{marketAppId}
+		</if>
+		<if test="cputype!=null">
+			and bp.Cputype = #{cputype}
+		</if>
+	</select>
+
+
+
+
+
+	<!-- bp.Id as bigGamePackId,bp.Cputype,bp.Url,bp.Size,bp.FreeSize,bp.UnsupportPhoneType,bp.MarketUpdateTime, -->
+
+	<!-- app.Id,app.MarketAppId,app.Name,app.Catalog,app.SubCatalog,app.LogoUrl,app.Version,app.Minsdkversion,app.VersionCode, 
+		app.Pkname,app.LastUpdateTime,app.StrImageUrls,app.PageUrl,app.ShortDesc,app.IndexImgUrl,app.OfficeHomepage,app.Language,app.SignatureSHA1, 
+		app.OfficialSigSHA1,app.Advertises,app.AdActionTypes,app.AdPopupTypes,app.VirusKind,app.DownloadRank,app.scSta,app.AppId,app.ApkId,app.Models, 
+		app.PublisherShortName,app.Keywords,app.LastFetchTime,app.UpdateInfo,app.Screens,app.Price, app.Minsdkversion,app.OSVersion,app.Screens,app.Price,app.EnumStatus,app.Md5 -->
+	<resultMap id="BigGameManyPacksResult" type="com.ijinshan.sjk.vo.pc.biggame.BigGamePacks">
+		<id property="id" column="Id" />
+		<result property="name" column="Name" />
+		<result property="marketName" column="marketName" />
+		<result property="marketAppId" column="marketAppId" javaType="int" />
+		<result property="pathStatus" column="pathStatus" javaType="short" />
+		<result property="logoUrl" column="LogoUrl" />
+		<result property="pageUrl" column="PageUrl" />
+		<result property="subCatalog" column="SubCatalog" javaType="int" />
+		<result property="pkname" column="Pkname" />
+		<result property="version" column="Version" />
+		<result property="downloadRank" column="DownloadRank" javaType="long" />
+		<result property="versionCode" column="VersionCode" javaType="long" />
+		<result property="signatureSha1" column="SignatureSHA1" />
+		<result property="officialSigSha1" column="OfficialSigSHA1" />
+		<result property="scSta" column="scSta" javaType="int" />
+		<result property="indexImgUrl" column="IndexImgUrl" />
+		<result property="adActionTypes" column="AdActionTypes" />
+		<result property="adPopupTypes" column="AdPopupTypes" />
+		<result property="virusKind" column="VirusKind" />
+		<result property="shortDesc" column="ShortDesc" />
+		<collection property="apkPackList" column="marketAppId" javaType="ArrayList" ofType="com.ijinshan.sjk.vo.pc.biggame.Apk"
+			resultMap="ApkPackListResult">
+		</collection>
+	</resultMap>
+	<resultMap id="ApkPackListResult" type="com.ijinshan.sjk.vo.pc.biggame.Apk">
+		<id property="bigGamePackId" column="bigGamePackId" javaType="int" />
+		<result property="marketAppId" column="marketAppId" javaType="int" />
+		<result property="cputype" column="cputype" javaType="byte" />
+		<result property="url" column="url" />
+		<result property="size" column="size" javaType="int" />
+		<result property="freeSize" column="freeSize" javaType="long" />
+		<result property="marketUpdateTime" column="marketUpdateTime" />
+		<result property="unsupportPhoneType" column="unsupportPhoneType" />
+	</resultMap>
+	<select id="getAllBigGameListV1" resultMap="BigGameManyPacksResult">
+		select
+		<include refid="biginfos" />
+		FROM BigGamePack bp INNER
+		JOIN App app
+		ON app.MarketAppId = bp.MarketAppId and bp.Cputype > 0
+	</select>
+
+	<select id="getBigGameListByCputypeOrCatalog" resultMap="BigGameManyPacksResult">
+		select
+		<include refid="bigGameinfos" />
+		FROM BigGamePack bp INNER
+		JOIN App app
+		ON app.MarketAppId = bp.MarketAppId and bp.Cputype > 0
+		<if test="subCatalog != null">
+			and app.SubCatalog = #{subCatalog}
+		</if>
+		<if test="cputype !=null">
+			and bp.Cputype=#{cputype}
+		</if>
+
+		<if test="phoneId!=null">
+			AND bp.UnsupportPhoneType NOT LIKE CONCAT('%;','${phoneId}',';%' )
+		</if>
+		ORDER BY app.DownloadRank DESC
+	</select>
+
+
+</mapper>

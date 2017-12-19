@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ijinshan.sjk.mapper.AppAndTagMapper">
+	<resultMap id="tags4App_resultMap" type="com.ijinshan.sjk.vo.index.Tags4App">
+		<id property="appId" column="appId" javaType="int" />
+		<collection property="tagIds" column="appId" javaType="ArrayList" ofType="int">
+			<result property="id" column="tagId" javaType="int" />
+		</collection>
+	</resultMap>
+	<select id="getTags4App" resultMap="tags4App_resultMap">
+		select
+		x.appId , x.tagId
+		from
+		AppAndTag x
+		<where>
+			x.tagType = 2
+			<if test="appIds != null">
+				and x.appId in
+				<foreach collection="appIds" index="index" item="item" open="(" separator="," close=")"> 
+		            #{item} 
+		        </foreach>
+			</if>
+		</where>
+	</select>
+</mapper>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<assembly>
+	<id>zip-classes</id>
+	<formats>
+		<format>zip</format>
+	</formats>
+	<includeBaseDirectory>false</includeBaseDirectory>
+	<fileSets>
+		<fileSet>
+			<directory>target/classes/com</directory>
+			<outputDirectory>/com</outputDirectory>
+		</fileSet>
+		<fileSet>
+			<directory>target/classes/sql-file</directory>
+			<outputDirectory>/sql-file</outputDirectory>
+		</fileSet>
+		<fileSet>
+			<directory>target/classes/mappers</directory>
+			<outputDirectory>/mappers</outputDirectory>
+		</fileSet>
+		<fileSet>
+			<directory>target/classes/dictionary</directory>
+			<outputDirectory>/dictionary</outputDirectory>
+		</fileSet>
+	</fileSets>
+	<files>
+		<file>
+			<source>target/classes/IKAnalyzer.cfg.xml</source>
+			<outputDirectory>/</outputDirectory>
+		</file>
+	</files>
+</assembly>

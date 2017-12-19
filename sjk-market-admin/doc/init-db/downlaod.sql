@@ -1,0 +1,44 @@
+UPDATE App x INNER JOIN  (select id from App where catalog = 1 order by downloads desc limit 0 ,100 ) B ON x.ID = B.ID and catalog = 1 SET x.realdownload = x.realdownload + 3000 ;
+UPDATE App x INNER JOIN  (select id from App where catalog = 1 order by downloads desc limit 100, 400 ) B ON x.ID = B.ID and catalog = 1 SET x.realdownload = x.realdownload + 2500 ;
+UPDATE App x INNER JOIN  (select id from App where catalog = 1 order by downloads desc limit 500, 500 ) B ON x.ID = B.ID and catalog = 1 SET x.realdownload = x.realdownload + 2000 ;
+UPDATE App x INNER JOIN  (select id from App where catalog = 1 order by downloads desc limit  1000, 1000 ) B ON x.ID = B.ID and catalog = 1 SET x.realdownload = x.realdownload + 1500 ;
+
+UPDATE App x INNER JOIN  (select id from App where catalog = 2 order by downloads desc limit 0 , 100 ) B ON x.ID = B.ID and catalog = 2 SET x.realdownload = x.realdownload + 3000 ;
+UPDATE App x INNER JOIN  (select id from App where catalog = 2 order by downloads desc limit 100, 400 ) B ON x.ID = B.ID and catalog = 2 SET x.realdownload = x.realdownload + 2500 ;
+UPDATE App x INNER JOIN  (select id from App where catalog = 2 order by downloads desc limit 500, 500 ) B ON x.ID = B.ID and catalog = 2 SET x.realdownload = x.realdownload + 2000 ;
+UPDATE App x INNER JOIN  (select id from App where catalog = 2 order by downloads desc limit  1000, 1000 ) B ON x.ID = B.ID and catalog = 2 SET x.realdownload = x.realdownload + 1500 ;
+
+
+UPDATE App x INNER JOIN  (select id from App where catalog = 	1	and subcatalog = 	1	order by downloads desc limit  20 ) B ON x.ID = B.ID 	and catalog =	1	and subcatalog = 	1	SET x.realdownload = x.realdownload + 500 ;
+UPDATE App x INNER JOIN  (select id from App where catalog = 	1	and subcatalog = 	2	order by downloads desc limit  20 ) B ON x.ID = B.ID	and catalog =	1	and subcatalog = 	2	SET x.realdownload = x.realdownload + 500 ;
+UPDATE App x INNER JOIN  (select id from App where catalog = 	1	and subcatalog = 	3	order by downloads desc limit  20 ) B ON x.ID = B.ID	and catalog =	1	and subcatalog = 	3	SET x.realdownload = x.realdownload + 500 ;
+UPDATE App x INNER JOIN  (select id from App where catalog = 	1	and subcatalog = 	4	order by downloads desc limit  20 ) B ON x.ID = B.ID	and catalog =	1	and subcatalog = 	4	SET x.realdownload = x.realdownload + 500 ;
+UPDATE App x INNER JOIN  (select id from App where catalog = 	1	and subcatalog = 	5	order by downloads desc limit  20 ) B ON x.ID = B.ID	and catalog =	1	and subcatalog = 	5	SET x.realdownload = x.realdownload + 500 ;
+UPDATE App x INNER JOIN  (select id from App where catalog = 	1	and subcatalog = 	6	order by downloads desc limit  20 ) B ON x.ID = B.ID	and catalog =	1	and subcatalog = 	6	SET x.realdownload = x.realdownload + 500 ;
+UPDATE App x INNER JOIN  (select id from App where catalog = 	1	and subcatalog = 	7	order by downloads desc limit  20 ) B ON x.ID = B.ID	and catalog =	1	and subcatalog = 	7	SET x.realdownload = x.realdownload + 500 ;
+UPDATE App x INNER JOIN  (select id from App where catalog = 	1	and subcatalog = 	8	order by downloads desc limit  20 ) B ON x.ID = B.ID	and catalog =	1	and subcatalog = 	8	SET x.realdownload = x.realdownload + 500 ;
+UPDATE App x INNER JOIN  (select id from App where catalog = 	1	and subcatalog = 	9	order by downloads desc limit  20 ) B ON x.ID = B.ID	and catalog =	1	and subcatalog = 	9	SET x.realdownload = x.realdownload + 500 ;
+UPDATE App x INNER JOIN  (select id from App where catalog = 	1	and subcatalog = 	10	order by downloads desc limit  20 ) B ON x.ID = B.ID	and catalog =	1	and subcatalog = 	10	SET x.realdownload = x.realdownload + 500 ;
+UPDATE App x INNER JOIN  (select id from App where catalog = 	1	and subcatalog = 	11	order by downloads desc limit  20 ) B ON x.ID = B.ID	and catalog =	1	and subcatalog = 	11	SET x.realdownload = x.realdownload + 500 ;
+UPDATE App x INNER JOIN  (select id from App where catalog = 	1	and subcatalog = 	12	order by downloads desc limit  20 ) B ON x.ID = B.ID	and catalog =	1	and subcatalog = 	12	SET x.realdownload = x.realdownload + 500 ;
+UPDATE App x INNER JOIN  (select id from App where catalog = 	1	and subcatalog = 	13	order by downloads desc limit  20 ) B ON x.ID = B.ID	and catalog =	1	and subcatalog = 	13	SET x.realdownload = x.realdownload + 500 ;
+UPDATE App x INNER JOIN  (select id from App where catalog = 	1	and subcatalog = 	14	order by downloads desc limit  20 ) B ON x.ID = B.ID	and catalog =	1	and subcatalog = 	14	SET x.realdownload = x.realdownload + 500 ;
+UPDATE App x INNER JOIN  (select id from App where catalog = 	1	and subcatalog = 	15	order by downloads desc limit  20 ) B ON x.ID = B.ID	and catalog =	1	and subcatalog = 	15	SET x.realdownload = x.realdownload + 500 ;
+UPDATE App x INNER JOIN  (select id from App where catalog = 	1	and subcatalog = 	16	order by downloads desc limit  20 ) B ON x.ID = B.ID	and catalog =	1	and subcatalog = 	16	SET x.realdownload = x.realdownload + 500 ;
+UPDATE App x INNER JOIN  (select id from App where catalog = 	1	and subcatalog = 	17	order by downloads desc limit  20 ) B ON x.ID = B.ID	and catalog =	1	and subcatalog = 	17	SET x.realdownload = x.realdownload + 500 ;
+UPDATE App x INNER JOIN  (select id from App where catalog = 	1	and subcatalog = 	18	order by downloads desc limit  20 ) B ON x.ID = B.ID	and catalog =	1	and subcatalog = 	18	SET x.realdownload = x.realdownload + 500 ;
+UPDATE App x INNER JOIN  (select id from App where catalog = 	1	and subcatalog = 	19	order by downloads desc limit  20 ) B ON x.ID = B.ID	and catalog =	1	and subcatalog = 	19	SET x.realdownload = x.realdownload + 500 ;
+UPDATE App x INNER JOIN  (select id from App where catalog = 	1	and subcatalog = 	20	order by downloads desc limit  20 ) B ON x.ID = B.ID	and catalog =	1	and subcatalog = 	20	SET x.realdownload = x.realdownload + 500 ;
+UPDATE App x INNER JOIN  (select id from App where catalog = 	1	and subcatalog = 	21	order by downloads desc limit  20 ) B ON x.ID = B.ID	and catalog =	1	and subcatalog = 	21	SET x.realdownload = x.realdownload + 500 ;
+UPDATE App x INNER JOIN  (select id from App where catalog = 	1	and subcatalog = 	22	order by downloads desc limit  20 ) B ON x.ID = B.ID	and catalog =	1	and subcatalog = 	22	SET x.realdownload = x.realdownload + 500 ;
+UPDATE App x INNER JOIN  (select id from App where catalog = 	1	and subcatalog = 	23	order by downloads desc limit  20 ) B ON x.ID = B.ID	and catalog =	1	and subcatalog = 	23	SET x.realdownload = x.realdownload + 500 ;
+UPDATE App x INNER JOIN  (select id from App where catalog = 	1	and subcatalog = 	24	order by downloads desc limit  20 ) B ON x.ID = B.ID	and catalog =	1	and subcatalog = 	24	SET x.realdownload = x.realdownload + 500 ;
+UPDATE App x INNER JOIN  (select id from App where catalog = 	2	and subcatalog = 	1	order by downloads desc limit  20 ) B ON x.ID = B.ID	and catalog =	2	and subcatalog = 	1	SET x.realdownload = x.realdownload + 500 ;
+UPDATE App x INNER JOIN  (select id from App where catalog = 	2	and subcatalog = 	2	order by downloads desc limit  20 ) B ON x.ID = B.ID	and catalog =	2	and subcatalog = 	2	SET x.realdownload = x.realdownload + 500 ;
+UPDATE App x INNER JOIN  (select id from App where catalog = 	2	and subcatalog = 	3	order by downloads desc limit  20 ) B ON x.ID = B.ID	and catalog =	2	and subcatalog = 	3	SET x.realdownload = x.realdownload + 500 ;
+UPDATE App x INNER JOIN  (select id from App where catalog = 	2	and subcatalog = 	4	order by downloads desc limit  20 ) B ON x.ID = B.ID	and catalog =	2	and subcatalog = 	4	SET x.realdownload = x.realdownload + 500 ;
+UPDATE App x INNER JOIN  (select id from App where catalog = 	2	and subcatalog = 	5	order by downloads desc limit  20 ) B ON x.ID = B.ID	and catalog =	2	and subcatalog = 	5	SET x.realdownload = x.realdownload + 500 ;
+UPDATE App x INNER JOIN  (select id from App where catalog = 	2	and subcatalog = 	6	order by downloads desc limit  20 ) B ON x.ID = B.ID	and catalog =	2	and subcatalog = 	6	SET x.realdownload = x.realdownload + 500 ;
+UPDATE App x INNER JOIN  (select id from App where catalog = 	2	and subcatalog = 	7	order by downloads desc limit  20 ) B ON x.ID = B.ID	and catalog =	2	and subcatalog = 	7	SET x.realdownload = x.realdownload + 500 ;
+UPDATE App x INNER JOIN  (select id from App where catalog = 	2	and subcatalog = 	8	order by downloads desc limit  20 ) B ON x.ID = B.ID	and catalog =	2	and subcatalog = 	8	SET x.realdownload = x.realdownload + 500 ;
+UPDATE App x INNER JOIN  (select id from App where catalog = 	2	and subcatalog = 	9	order by downloads desc limit  20 ) B ON x.ID = B.ID	and catalog =	2	and subcatalog = 	9	SET x.realdownload = x.realdownload + 500 ;

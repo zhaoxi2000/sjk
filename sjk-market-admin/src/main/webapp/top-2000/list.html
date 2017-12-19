@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <!--<base href="../" />-->
+        <!--IE doesnot support relative path.-->
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>专题类别管理</title>
+        <link href="../css/admin_dig.css" rel="stylesheet" type="text/css" />
+        <link href="../css/easyui.css" rel="stylesheet" type="text/css" />
+        <link href="../css/common.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../js/lib/jquery-1.7.1.min.js"></script>
+        <script type="text/javascript" src="../js/lib/jquery.easyui.min.js"></script>
+        <script type="text/javascript" src="../js/top-2000/list.js"></script>
+    </head>
+    <body>
+        <div class="con">
+            <div class="title">
+                <span class="f_l pt_5">
+                    <a href="list.html" class="ref_ico">刷新</a>
+                    
+                    <span class="f_l">keyword：</span>
+                    <input name="keyword" type="text" class="f_l w_120 mt_8 mr_10" id="keyword" />
+                    
+                    <span class="f_l">Id：</span>
+                    <input name="Id" type="text" class="f_l w_80 mt_8 mr_10" id="keyId" />
+                    
+                    <span class="btn w_400 mt_8"> 
+                        <button type="submit" class="h_20 f_l mr_10" id="search">搜索</button>
+                        <button value="" type="button" class="w_130 f_l mr_10" id="stateBtn_0">修改状态为无更新</button> 
+                        <button value="" type="button" class="w_130 f_l" id="stateBtn_1">修改状态为有更新</button> 
+                    </span>
+                </span>
+            </div>
+            <div class="clear"></div>
+            <table id="dataList"></table>
+        </div>
+        <div id="editTop" class="dp_n">
+            <table class="tab3 mt_10" border="0" cellspacing="0" cellpadding="0">
+                <tr> 
+                    <td align='right' class="w_100">
+                        <input type="hidden" name="id"/>
+                        appId：
+                    </td>
+                    <td class="w_400">
+                        <input type="text" class="w_200" name="appId"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td align='right'>
+                        旧名称：
+                    </td>
+                    <td>
+                        <input type="text" class="w_200" name="name"/>
+                    </td>
+                </tr>
+                <tr> 
+                    <td align='right'>
+                        pkname：
+                    </td>
+                    <td>
+                        <input type="text" class="w_200" name="pkname"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td align='right'>
+                        新名称：
+                    </td>
+                    <td>
+                        <input type="text" class="w_200" name="newName"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td align='right'>
+                        状态：
+                    </td>
+                    <td>
+                        <input name="state" type="radio" value="0" checked="checked" /> 无更新  <input name="state" type="radio" value="1"/> 有更新
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <span class="btn"><button id="topPost" type="button">提交</button></span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>

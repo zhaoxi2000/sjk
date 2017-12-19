@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ijinshan.sjk.mapper.TagMapper">
+	<select id="getList" resultType="Tag">
+		SELECT
+		Tag.Id,
+		Tag.`Name`,
+		Tag.TagDesc,
+		Tag.PId,
+		Tag.Catalog,
+		Tag.TagType,
+		Tag.ImgUrl
+		FROM
+		Tag
+		ORDER BY Tag.Rank DESC
+	</select>
+
+	<select id="getById" resultType="com.ijinshan.sjk.vo.TagMobileVo">
+		select id,name,tagType,imgUrl,TagDesc from Mo_Tag where id = #{id}
+	</select>
+
+	<select id="getByIds" resultType="com.ijinshan.sjk.vo.TagMobileVo">
+		select id,name,tagType,imgUrl,TagDesc
+		from Mo_Tag where
+		id in
+		<foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+	<select id="getTagList" resultType="com.ijinshan.sjk.vo.TagMobileVo">
+		select
+        mt.Id,mt.Name,mo.PicType,mt.Catalog,mt.TagType,mo.BigPics,mo.MediumPics,mo.SmallPics,mt.TagDesc,mt.ImgUrl
+        from Mo_Tag mt LEFT JOIN Mo_MixFeatured mo on mo.AppOrTagId = mt.Id where mo.PicType is not null and mo.Hidden = 0 and mo.Type = 2
+	</select>
+
+</mapper>

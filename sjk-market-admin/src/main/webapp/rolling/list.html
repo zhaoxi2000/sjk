@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!--<base href="../" />-->
+        <!--IE doesnot support relative path.-->
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>软件列表</title>
+        <link href="../css/admin_dig.css?v=201209081245" rel="stylesheet" type="text/css" />
+        <link href="../css/easyui.css" rel="stylesheet" type="text/css" />
+        <link href="../css/common.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../js/lib/jquery-1.7.1.min.js"></script>
+        <script type="text/javascript" src="../js/lib/jquery.easyui.min.js"></script>
+        <script type="text/javascript" src="../js/common/common.js"></script>
+        <script type="text/javascript" src="../js/common/data.js"></script>
+        <script type="text/javascript" src="../js/rolling/list.js"></script>
+    </head>
+    <body>
+        <div class="con">
+            <div class="title">
+                <span class="btn w_120 mt_8">
+                    <button type="button" class="w_100 f_l" id="addBtn">新增</button> 
+                </span>
+                 <select class="f_l w_120 mt_8 mr_10" id="keyDicVale">
+                 
+                 </select> 
+                         （推广位置的个数，设为<span class="co_red" name="setNumber">1</span>，则有<span  class="co_red" name="setNumber">1</span>/5的位置展现推广的APP）
+                <br />
+                <input name="keywords" type="text" class="f_l w_120 mt_8 mr_10" id="keyword" /> 
+                <span class="btn w_100 mt_8 "> 
+                    <button type="submit" class="h_20 f_l mr_10" id="search">搜索</button> 
+                </span>
+                <br />
+                <span class="btn w_340 mt_8">
+                    <button type="button" class="w_100 f_l mr_10" id="unrecBtn">设为普通</button> 
+                    <button type="button" class="w_100 f_l mr_10" id="recBtn">设为推荐</button> 
+                    <button type="button" class="w_100 f_l" id="delBtn">批量删除</button> 
+                </span> 
+                <a href="list.html" class="ref_ico">刷新</a>
+            </div>
+            <div class="clear"></div> 
+            <table id="softList"></table>
+        </div>
+        <div id="addTagApp" class="dp_n">
+            <table class="tab3 w_300 mt_20" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td class="w_60 ta_r">ID：</td>
+                <td><input name="id" type="text" class="w_150" id="appid"/></td>
+              </tr>
+              <tr>
+                <td class="ta_r">大类：</td>
+                <td>
+                    <select class="f_l w_140" id="catalog">
+                        <option value="1" selected="selected">软件</option>
+                        <option value="2">游戏</option>
+                        <option value="100">大型游戏</option>
+                    </select>
+                </td>
+              </tr>
+              <tr>
+                <td></td>
+                <td><span class="btn"><button id="addPost">确定</button><button class="ml_20" id="addClose">取消</button></span></td>
+              </tr>
+            </table>
+        </div>
+        <div id="editLogo" class="dp_n">
+            <form action="/sjk-market-admin/admin/app/rolling/upd-logo.d" method="post" enctype="multipart/form-data" accept-charset="UTF-8" id="formData">
+                <input name="id" type="hidden" id="logoid"/>
+                <table class="tab3 w_300 mt_20" border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td class="w_80 ta_r">URL地址：</td>
+                    <td><input name="remoteLogoUrl" id="remoteLogoUrl" type="text" class="w_150"/></td>
+                  </tr>
+                  <tr>
+                    <td class="ta_r">本地上传：</td>
+                    <td>
+                        <input name="logo" type="file" id="logofile" class="w_150"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td><span class="btn"><button type="button" id="addLogo">确定</button><button type="button" class="ml_20" id="LogoClose">取消</button></span></td>
+                  </tr>
+                </table>
+            </form>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,12 @@
+CREATE TABLE `TopApp` (
+    `Id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `AppId` INT(10) UNSIGNED NOT NULL,
+    `Name` VARCHAR(80) NOT NULL,
+    `Pkname` VARCHAR(200) NOT NULL,
+    `NewName` VARCHAR(80) NULL DEFAULT NULL,
+    `LastUpdateTime` DATETIME NOT NULL DEFAULT '2000-01-01 00:00:00',
+    `State` TINYINT(1) NOT NULL COMMENT '判断是否更新1更新，0未更新',
+    UNIQUE INDEX `Index_Id` (`Id`, `AppId`) USING BTREE,
+    INDEX `Index_AppId` (`AppId`) USING BTREE,
+    INDEX `Index_Name` (`Name`) USING BTREE
+)

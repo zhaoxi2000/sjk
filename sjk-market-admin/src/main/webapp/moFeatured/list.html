@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!--<base href="../" />-->
+        <!--IE doesnot support relative path.-->
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>软件列表</title>
+        <link href="../css/admin_dig.css?v=201209081245" rel="stylesheet"
+        type="text/css" />
+        <link href="../css/easyui.css" rel="stylesheet" type="text/css" />
+        <link href="../css/common.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../js/lib/jquery-1.7.1.min.js"></script>
+        <script type="text/javascript" src="../js/lib/jquery.easyui.min.js"></script>
+        <script type="text/javascript" src="../js/common/common.js"></script>
+        <script type="text/javascript" src="../js/moFeatured/list.js"></script>
+    </head>
+    <body>
+        <div class="con">
+            <div class="title">
+                <span class="btn w_120 mt_8"> <button type="button" class="w_100 f_l" id="addBtn">新增推荐</button> </span><a href="list.html" class="ref_ico">刷新</a>
+                <select
+                class="f_l w_100 mt_8 mr_10" id="keyHidden">
+                    <option value="">-选择状态-</option>
+                    <option value="0">显示</option>
+                    <option value="1">隐藏</option>
+                </select>
+                <span class="btn w_120 mt_8"> <button type="button" class="w_100 f_l" id="btnDeleted">显示已刪除</button> </span>
+            </div>
+            <div class="clear"></div>
+            <table class="tab1">
+                <thead>
+                    <tr>
+                        <th class="w_150">
+                            操作时间
+                        </th>
+                        <th class="w_80">
+                            ID
+                        </th>
+                        <th class="w_80">
+                            分类
+                        </th>
+                        <th class="w_250">
+                            名称
+                        </th>
+                        <th class="w_80">
+                            图片类型
+                        </th>
+                        <th class="w_300">
+                            图片
+                        </th>
+                        <th class="w_80">
+                            状态
+                        </th>
+                        <th class="w_80">
+                            排序
+                        </th>
+                        <th class="w_150">
+                            操作
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="List"></tbody>
+            </table>
+        </div>
+        <div id="addMetro" class="dp_n">
+            <form action="/sjk-market-admin/admin/featuredapp/save.d" method="post" enctype="multipart/form-data" accept-charset="UTF-8" id="formData">
+                <table class="tab3 mt_20" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td class="w_100 ta_r">
+                            分类：
+                        </td>
+                        <td id="addtype"><input name="type" type="radio" value="1"
+                            checked="checked" /> 单个应用<input name="type" type="radio"
+                            value="2" /> 专题
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="ta_r" id="addappOrTagName">
+                            软件ID：
+                        </td>
+                        <td><input name="appOrTagId" type="text" class="w_150"
+                            onkeypress="return event.keyCode>=48&&event.keyCode<=57||event.keyCode==46"
+                            onpaste="return !clipboardData.getData('text').match(/\D/)"
+                            ondragenter="return false" style="ime-mode: Disabled" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="ta_r">
+                            名称：
+                        </td>
+                        <td><input name="name" type="text" class="w_150" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="ta_r">
+                            排序：
+                        </td>
+                        <td><input name="rank" type="text" class="w_150"
+                            onkeypress="return event.keyCode>=48&&event.keyCode<=57||event.keyCode==46"
+                            onpaste="return !clipboardData.getData('text').match(/\D/)"
+                            ondragenter="return false" style="ime-mode: Disabled" />排序:是升序（从小到大）
+                            如：1-20;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="ta_r">
+                            图片类型：
+                        </td>
+                        <td>
+                            <input name="picType" type="radio" value="1" checked="checked" /> 大图 
+                            <input name="picType" type="radio" value="3" /> 中图
+                            <input name="picType" type="radio" value="2" /> 小图
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="ta_r" valign="top">
+                            上传图片：
+                        </td>
+                        <td>
+                            <input name="strImageUrls" type="hidden" value="" />
+                            <span id="AddPics">
+                                <input name="pics" type="hidden" value="" />
+                                <input name="picsFile" type="file" class="f_l mr_10 mt_15" />
+                                <input name="pics" type="hidden" value="" />
+                                <input name="picsFile" type="file" class="f_l mr_10 mt_15" />
+                                <input name="pics" type="hidden" value="" />
+                                <input name="picsFile" type="file" class="f_l mr_10 mt_15" />
+                            </span>
+                            <span class="dp_n" id="AddBigPics">
+                                <input name="bigPics" type="hidden" value="" />
+                                <input name="bigPicsFile" type="file" class="f_l mr_10 mt_15" />
+                                <input name="bigPics" type="hidden" value="" />
+                                <input name="bigPicsFile" type="file" class="f_l mr_10 mt_15" />
+                                <input name="bigPics" type="hidden" value="" />
+                                <input name="bigPicsFile" type="file" class="f_l mr_10 mt_15" />
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="ta_r">
+                            是否显示：
+                        </td>
+                        <td><input name="hidden" type="radio" value="false"
+                            checked="checked" /> 显示 <input name="hidden" type="radio"
+                            value="true" /> 隐藏
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <span class="btn"><button type="button"
+                                id="addPost">确定</button> <button type="button" class="ml_20" id="closePost">取消</button></span>
+                        </td>
+                    </tr>
+                </table>
+                <input name="shortDesc" type="hidden" value="" /><input name="id"
+                type="hidden" value="0" /><input name="deleted" type="hidden"
+                value="0" />
+            </form>
+        </div>
+        <div id="editMetro" class="dp_n">
+            <form action="/sjk-market-admin/admin/featuredapp/save.d" method="post" enctype="multipart/form-data" accept-charset="UTF-8" id="formEditData">
+                <table class="tab3 mt_20" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td class="w_100 ta_r">
+                            分类：
+                        </td>
+                        <td id="edittype"><input name="type" type="radio" value="1"
+                            checked="checked" /> 单个应用<input name="type" type="radio"
+                            value="2" /> 专题
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="ta_r" id="editappOrTagName">
+                            软件ID：
+                        </td>
+                        <td><input name="appOrTagId" type="text" class="w_150"
+                            onkeypress="return event.keyCode>=48&&event.keyCode<=57||event.keyCode==46"
+                            onpaste="return !clipboardData.getData('text').match(/\D/)"
+                            ondragenter="return false" style="ime-mode: Disabled" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="ta_r">
+                            名称：
+                        </td>
+                        <td><input name="name" type="text" class="w_150" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="ta_r">
+                            排序：
+                        </td>
+                        <td><input name="rank" type="text" class="w_150"
+                            onkeypress="return event.keyCode>=48&&event.keyCode<=57||event.keyCode==46"
+                            onpaste="return !clipboardData.getData('text').match(/\D/)"
+                            ondragenter="return false" style="ime-mode: Disabled" />排序:是升序（从小到大）
+                            如：1-20;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="ta_r">
+                            图片类型：
+                        </td>
+                        <td><input name="picType" type="radio" value="1" checked="checked" /> 大图 
+                            <input name="picType" type="radio" value="3" /> 中图
+                            <input name="picType" type="radio" value="2" /> 小图
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="ta_r" valign="top">
+                            上传图片：
+                        </td>
+                        <td>
+                            <input name="strImageUrls" type="hidden" value="" />
+                            <span id="EditPics">
+                                <input name="pics" type="hidden" value="" />
+                                <input name="picsFile" type="file" class="f_l mr_10 mt_15" />
+                                <input name="pics" type="hidden" value="" />
+                                <input name="picsFile" type="file" class="f_l mr_10 mt_15" />
+                                <input name="pics" type="hidden" value="" />
+                                <input name="picsFile" type="file" class="f_l mr_10 mt_15" />
+                            </span>
+                            <span class="dp_n" id="EditBigPics">
+                                <input name="bigPics" type="hidden" value="" />
+                                <input name="bigPicsFile" type="file" class="f_l mr_10 mt_15" />
+                                <input name="bigPics" type="hidden" value="" />
+                                <input name="bigPicsFile" type="file" class="f_l mr_10 mt_15" />
+                                <input name="bigPics" type="hidden" value="" />
+                                <input name="bigPicsFile" type="file" class="f_l mr_10 mt_15" />
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="ta_r">
+                            是否显示：
+                        </td>
+                        <td><input name="hidden" type="radio" value="false" /> 显示 <input
+                            name="hidden" type="radio" value="true" /> 隐藏
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <span class="btn"><button type="button"
+                                id="editPost">确定</button> <button type="button" class="ml_20" id="editClose">取消</button></span>
+                        </td>
+                    </tr>
+                </table>
+                <input name="shortDesc" type="hidden" value="" />
+                <input name="id" type="hidden" value="0" />
+                <input name="deleted" type="hidden" value="0" />
+            </form>
+        </div>
+    </body>
+</html>

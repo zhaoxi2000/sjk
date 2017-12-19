@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+
+
+
+	<!-- downloads update -->
+	<bean id="downloadsJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="downloadsUpdateServiceImpl" />
+		<property name="targetMethod" value="update" />
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="downloadsTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+		<property name="jobDetail" ref="downloadsJobDetail" />
+		<property name="startDelay" value="5000" />
+		<property name="repeatInterval" value="6000" />
+	</bean>
+	<bean id="dayDownloadJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="downloadsUpdateServiceImpl" />
+		<property name="targetMethod" value="updateDay" />
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="dayDownloadTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+		<property name="jobDetail" ref="dayDownloadJobDetail" />
+		<property name="startDelay" value="5000" />
+		<property name="repeatInterval" value="6000" />
+	</bean>
+	<bean id="weekDownloadJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="downloadsUpdateServiceImpl" />
+		<property name="targetMethod" value="updateWeek" />
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="weekDownloadTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+		<property name="jobDetail" ref="weekDownloadJobDetail" />
+		<property name="startDelay" value="5000" />
+		<property name="repeatInterval" value="6000" />
+	</bean>
+
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<!-- <ref bean="downloadsTrigger" /> -->
+				<!-- <ref bean="dayDownloadTrigger" /> -->
+				<!-- <ref bean="weekDownloadTrigger" /> -->
+			</list>
+		</property>
+	</bean>
+</beans>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jee="http://www.springframework.org/schema/jee" xmlns:cache="http://www.springframework.org/schema/cache"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.1.xsd
+http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd
+http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+	<aop:aspectj-autoproxy />
+	<context:annotation-config />
+	<context:component-scan base-package="com.ijinshan" />
+	<import resource="app-config.xml" />
+	<import resource="jobs.xml" />
+	<!-- <import resource="dev-jobs.xml" /> -->
+
+
+	<!-- json bean -->
+	<bean id="jsonStyle" class="net.minidev.json.JSONStyle">
+		<constructor-arg index="0" value="#{T(net.minidev.json.JSONStyle).FLAG_PROTECT_4WEB}" />
+	</bean>
+	<bean id="emptyArray" class=" java.util.ArrayList">
+		<constructor-arg index="0" value="0" />
+	</bean>
+	<!-- json bean end -->
+
+	<!-- lucene searcher bean -->
+	<bean id="ikAnalyzer" class="org.wltea.analyzer.lucene.IKAnalyzer">
+		<constructor-arg index="0" value="true" />
+	</bean>
+	<bean id="fieldName" class="java.lang.String">
+		<constructor-arg index="0" value="name" />
+	</bean>
+
+
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:conf/app-config.properties</value>
+				<value>classpath:conf/bonecp.jdbc.properties</value>
+				<value>classpath:conf/write.bonecp.jdbc.properties</value>
+				<value>classpath:conf/redis.properties</value>
+				<value>classpath:conf/memcached.config.properties</value>
+			</list>
+		</property>
+	</bean>
+	<!-- redis definition -->
+	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		<property name="maxActive" value="${redis.pool.maxActive}" />
+		<property name="maxIdle" value="${redis.pool.maxIdle}" />
+		<property name="maxWait" value="${redis.pool.maxWait}" />
+		<property name="testOnBorrow" value="${redis.pool.testOnBorrow}" />
+	</bean>
+	<bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
+		p:use-pool="true" p:host-name="${redis.host}" p:port="${redis.port}">
+		<property name="poolConfig" ref="jedisPoolConfig" />
+	</bean>
+	<!-- redis template definition -->
+	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate" p:connection-factory-ref="jedisConnectionFactory"></bean>
+	<bean id="valueOperations" class="org.springframework.data.redis.core.DefaultValueOperations">
+		<constructor-arg ref="redisTemplate" />
+	</bean>
+
+	<!-- jedis pool配置 -->
+	<bean id="jedisPool" class="redis.clients.jedis.JedisPool" destroy-method="destroy">
+		<constructor-arg index="0" ref="jedisPoolConfig" />
+		<constructor-arg index="1" value="${redis.host}" />
+		<constructor-arg index="2" value="${redis.port}" />
+	</bean>
+
+	<!-- redis definition end. -->
+
+
+	<bean name="memcachedClient" class="net.rubyeye.xmemcached.utils.XMemcachedClientFactoryBean" destroy-method="shutdown">
+		<property name="servers">
+			<value>${memcached.servers}</value>
+		</property>
+		<!-- server's weights -->
+		<!-- <property name="weights"> <list> <value>1</value> </list> </property> -->
+		<!-- nio connection pool size -->
+		<property name="connectionPoolSize" value="${memcached.connectionPoolSize}" />
+		<!-- Use binary protocol,default is TextCommandFactory -->
+		<property name="commandFactory">
+			<bean class="net.rubyeye.xmemcached.command.BinaryCommandFactory" />
+		</property>
+		<!-- Failure mode -->
+		<property name="failureMode" value="true" />
+	</bean>
+
+	<bean id="dataSource" class="com.jolbox.bonecp.BoneCPDataSource" destroy-method="close">
+		<property name="driverClass" value="${jdbc.driverClassName}" />
+		<property name="jdbcUrl" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="idleConnectionTestPeriodInMinutes" value="${jdbc.idleConnectionTestPeriodInMinutes}" />
+		<property name="idleMaxAgeInMinutes" value="${jdbc.idleMaxAgeInMinutes}" />
+		<property name="maxConnectionsPerPartition" value="${jdbc.maxConnectionsPerPartition}" />
+		<property name="minConnectionsPerPartition" value="${jdbc.minConnectionsPerPartition}" />
+		<property name="partitionCount" value="${jdbc.partitionCount}" />
+		<property name="acquireIncrement" value="${jdbc.acquireIncrement}" />
+		<property name="statementsCacheSize" value="${jdbc.statementsCacheSize}" />
+		<property name="releaseHelperThreads" value="${jdbc.releaseHelperThreads}" />
+	</bean>
+	<bean id="writeDataSource" class="com.jolbox.bonecp.BoneCPDataSource" destroy-method="close">
+		<property name="driverClass" value="${write.jdbc.driverClassName}" />
+		<property name="jdbcUrl" value="${write.jdbc.url}" />
+		<property name="username" value="${write.jdbc.username}" />
+		<property name="password" value="${write.jdbc.password}" />
+		<property name="idleConnectionTestPeriodInMinutes" value="${write.jdbc.idleConnectionTestPeriodInMinutes}" />
+		<property name="idleMaxAgeInMinutes" value="${write.jdbc.idleMaxAgeInMinutes}" />
+		<property name="maxConnectionsPerPartition" value="${write.jdbc.maxConnectionsPerPartition}" />
+		<property name="minConnectionsPerPartition" value="${write.jdbc.minConnectionsPerPartition}" />
+		<property name="partitionCount" value="${write.jdbc.partitionCount}" />
+		<property name="acquireIncrement" value="${write.jdbc.acquireIncrement}" />
+		<property name="statementsCacheSize" value="${write.jdbc.statementsCacheSize}" />
+		<property name="releaseHelperThreads" value="${write.jdbc.releaseHelperThreads}" />
+	</bean>
+
+
+
+	<import resource="spring-jdbc-write.xml" />
+	<import resource="spring-jdbc-readonly.xml" />
+	<import resource="mybatis-mappers.xml" />
+
+	<aop:config>
+		<aop:pointcut id="serviceOperation" expression="execution(public * com.ijinshan.*.service.impl.*.*(..))" />
+		<aop:advisor advice-ref="writeJdbcTxAdvice" pointcut-ref="serviceOperation" />
+		<aop:advisor advice-ref="jdbcTxAdvice" pointcut-ref="serviceOperation" />
+		<aop:advisor advice-ref="myBatisTxAdvice" pointcut-ref="serviceOperation" />
+	</aop:config>
+</beans>

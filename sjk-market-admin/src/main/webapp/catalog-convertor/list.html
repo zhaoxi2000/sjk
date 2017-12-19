@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!--<base href="../" />-->
+        <!--IE doesnot support relative path.-->
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>软件列表</title>
+        <link href="../css/admin_dig.css" rel="stylesheet" type="text/css" />
+        <link href="../css/easyui.css" rel="stylesheet" type="text/css" />
+        <link href="../css/common.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../js/lib/jquery-1.7.1.min.js"></script>
+        <script type="text/javascript" src="../js/lib/jquery.easyui.min.js"></script> 
+        <script type="text/javascript" src="../js/common/common.js"></script>
+        <script type="text/javascript" src="../js/catalog-convertor/list.js"></script>
+        
+    </head>
+    <body>
+        <div class="con">
+            <div class="title"> 
+        		<div class="title tag">   
+            		合作市场类别对于关系列表
+            	</div>  
+            	<div class="btn w_400 pb_10">
+            		<span  id="markets"  class="pb_10  f_l"></span> 
+            	</div> 
+                    
+        	</div>
+        	<div class="clear"></div>
+        	
+            <div class="clear"></div>
+            <div class="title"> 
+            	<div class="title tag">   
+            	市场类别对于关系列表
+            	</div> 
+            	<div class="clear"></div>
+                <span class="f_l pt_5"> 
+                    <a href="list.html" class="ref_ico">刷新</a>
+                    <select class="f_l w_100 mt_8 mr_10" id="keyMarketName"> 
+                    </select> 
+                    <select class="f_l w_100 mt_8 mr_10" id="keyCatalog">
+                        <option value="" selected="selected">选择类别</option>
+                        <option value="1">软件</option>
+                        <option value="2">游戏</option> 
+                    </select> 
+                    <input name="keyword" type="text" class="f_l w_120 mt_8 mr_10" id="keyword" /> 
+                    <span class="btn w_100 mt_8 "> 
+                        <button type="submit" class="h_20 f_l mr_10" id="search">搜索</button> 
+                    </span> 
+                </span>
+            </div>
+            <div class="clear"></div>
+            <table id="dataList"></table> 
+        </div> 
+         
+         <div id="editPanlCatalog" class="dp_n">
+             <div class="editType w_500">
+                 <table class="tab2 w_500 datagrid-htable" border="0" cellspacing="0" cellpadding="0">
+                     <thead  > 
+                         <tr  style="font-weight:bold" >  
+                         <th   style="font-weight:bold"  align='center' class="w_80">市场名称</th>
+                         <th   style="font-weight:bold"  align='center' class="w_80">一级类别</th>
+                         <th   style="font-weight:bold" align='center' class="w_120">二级类别</th>
+                       </tr> 
+                     </thead> 
+                     <tbody> 
+                     <tr>
+                     <td align='center'> <span id="editMarketName"></span> 
+                         <input type="hidden" name="id"/>
+                         <input type="hidden" name="marketName"/> 
+                         <input type="hidden" name="catalog" />
+                         <input type="hidden" name="subCatalog"  />
+                         <input type="hidden" name="subCatalogName"/>  
+                     </td>
+                     <td id="editCatalog" align='center'></td>
+                     <td id="editSubCatalogName" align='center'></td> 
+                   </tr>
+                   <tr>
+                     <td></td>
+                     <td  align='center'>↓</td>
+                     <td  align='center'>↓</td>
+                   </tr>
+                   <tr>
+                     <td align='center'>手机控平台</td>
+                     <td align='center'>
+                         <select class="w_80" name="targetCatalog"> 
+                             <option value="0">--选择--</option>
+                             <option value="1">软件</option>
+                             <option value="2">游戏</option>
+                         </select>
+                     </td>
+                     <td align='center'>
+                         <select class="w_100" name="targetSubCatalog">  
+                             <option value="0"  >--选择--</option>
+                         </select>
+                     </td>
+                   </tr>  
+                     </tbody>
+                </table>
+            </div>
+            <span class="btn"><button class="ml_20" id="tagsPost">提交</button></span>
+        </div>
+    </body>
+</html>

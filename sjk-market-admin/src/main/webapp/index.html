@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+        <link href="css/admin_dig.css" rel="stylesheet" type="text/css" />
+        <link href="css/common.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="js/lib/jquery-1.7.1.min.js"></script>
+        <script type="text/javascript" src="js/user/index.js"></script>
+    </head>
+    <body scroll="no" class="topbg hidden">
+        <div class="mainDiv">
+            <div class="centerDiv">
+                <div id="menu" class="leftDiv hide">
+                    <div class="w_180 f_l pb_5 hide" id="login">
+                        <span class="login_nav">登录信息</span>
+                        <span class="w_150 f_l pl_30 lh_28">帐号：<a id="userName" class="co_red"></a></span>
+                        <span class="w_150 f_l pl_30 lh_26">操作：<a id="loginout" class="co_bl mr_10">注销</a><a id="editPwd" class="co_bl dp_n">修改密码</a></span>
+                    </div>
+                    <ul id="app_menu" class="menu">
+                        <li style="height: auto">
+                            <a class="up la_cur"
+                            href="./soft/list.html" target="softiframe">基础应用数据临时管理</a><a
+                            class="link" href="./soft/list.html" target="softiframe">软件</a><a
+                            class="link" href="./game/list.html" target="softiframe">游戏</a>
+                        </li>
+                        <li style="height: auto">
+                            <a class="up la_cur"
+                            href="./soft/softlist.html" target="softiframe">应用管理</a><a
+                            class="link" href="./soft/softlist.html" target="softiframe">软件</a>
+                            <a class="link" href="./game/gamelist.html" target="softiframe">游戏</a>
+                            <a class="link" href="./market-app/list.html" target="softiframe">大游戏MarketApp</a>
+                            <a class="link" href="./rolling/list.html" target="softiframe">摇一摇</a>
+                            <a class="link" href="./metro/list.html" target="softiframe">WIN8推荐页</a>
+                        </li>
+                        <li style="height: auto">
+                            <a class="up la_cur"
+                            href="./catalog/list.html" target="softiframe">类别管理</a><a
+                            class="link" href="./catalog/list.html" target="softiframe">平台类别</a>
+                            <a class="link" href="./catalog-convertor/list.html"
+                            target="softiframe">类别转换</a>
+                        </li>
+                        <li style="height: auto">
+                            <a class="up la_cur"
+                            href="./tag/list.html" target="softiframe">标签管理</a><a
+                            class="link" href="./tag/list.html" target="softiframe">标签类别管理</a>
+                            <a class="link" href="./tagapp/applist.html" target="softiframe">标签应用管理</a>
+                        </li>
+                        <li style="height: auto">
+                            <a class="up la_cur"
+                            href="./tag/index.html" target="softiframe">专题管理</a><a
+                            class="link" href="./tag/index.html" target="softiframe">专题类别管理</a>
+                            <a class="link" href="./tagapp/index.html" target="softiframe">专题应用管理</a>
+                        </li>
+                        <li style="height: auto">
+                            <a class="up la_cur" href="./top-2000/list.html" target="softiframe">Top2000软件更新管理</a>
+                            <a class="link" href="./top-2000/list.html" target="softiframe">Top2000</a>
+                        </li>
+                        <li style="height: auto">
+                            <a class="up la_cur" href="./monchannel/list.html" target="softiframe">渠道包监控管理</a>
+                            <a class="link" href="./monchannel/list.html" target="softiframe">渠道包监控</a>
+                        </li>
+                        <li style="height: auto">
+                            <!--   <a class="link" href="./motag/indexNew.html" target="softiframe">专题类别管理</a> -->
+                            <a class="up la_cur" href="./motag/index.html" target="softiframe">移动端</a>
+                            <a class="link" href="./motag/index.html" target="softiframe">专题类别管理</a>
+                            <a class="link" href="./moFeatured/list.html" target="softiframe">推荐位管理</a>
+                            <a class="link" href="./mo-tagapp/index.html" target="softiframe">专题应用管理</a>
+                            <a class="link" href="./metro-tagapp/index.html"
+                            target="softiframe">Metro专题应用管理</a><a class="link"
+                            href="./mixfeatured/list.html" target="softiframe">手机Metro</a>
+                        </li>
+                        <li style="height: auto">
+                            <a class="up la_cur"
+                            href="./keyword/index.html" target="softiframe">搜索词管理</a><a
+                            class="link" href="./keyword/index.html" target="softiframe">搜索词列表</a>
+                        </li>
+                        <li style="height: auto">
+                            <a class="up la_cur"
+                            href="./user/list.html" target="softiframe">用户管理</a><a
+                            class="link" href="./user/list.html" target="softiframe">用户列表</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="rightDiv hide">
+                    <iframe id="softiframe" scrolling="auto" src="" width="100%"
+                    height="100%" frameborder="0" name="softiframe"></iframe>
+                </div>
+            </div>
+        </div>
+        <span id="treeNode" style="display: none"></span>
+        <script type="text/javascript">
+            var urlWithParam = "/sjk-market-admin";
+            $(function() {
+                NavEve();
+                MenEve("app_menu");
+                //initUserInfo();
+                clickTree();
+                getUserInfo();
+                $('#loginout').click(function() {
+                    loginOut();
+                });
+            });
+            function loginOut() {
+                $.ajax({
+                    type : "GET",
+                    url : urlWithParam + "/admin/user/doLogoff.d",
+                    success : function(data) {
+                        if(data != null && data.status == true) {
+                            window.parent.location.href = urlWithParam + "/login.html";
+                        }
+                    }
+                });
+            }
+
+            //取用户登录信息
+            function getUserInfo() {
+                $.ajax({
+                    type : "POST",
+                    url : urlWithParam + "/admin/user/get-curuser.d",
+                    error : function(err, status) {
+                        var params = arguments;
+                        if(params[0].status == 403) {
+                            alert("您还没有登陆,请登录。");
+                            window.parent.location.href = urlWithParam + "/login.html";
+                        }
+                    },
+                    success : function(data) {
+                        if(null != data.result && '' != data.result && 'null' != data.result) {
+                            $("#menu").show();
+                            $("#login").show();
+                            $(".rightDiv").show();
+                            $("#userName").html(data.result.name);
+                        } else {
+                            //showMessager('<span class="co_red">加载当前用户信息失败,请先登录</span>');
+                            alert('请先登录');
+                            window.parent.location.href = urlWithParam + "/login.html";
+                        }
+                    }
+                });
+            }
+        </script>
+    </body>
+</html>

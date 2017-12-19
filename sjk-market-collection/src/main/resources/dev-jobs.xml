@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+	<!-- update App from MarketApp -->
+	<bean id="updateAppJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="mergeServiceImpl" />
+		<property name="targetMethod" value="mergeToApp" />
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="updateAppTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+		<property name="jobDetail" ref="updateAppJobDetail" />
+		<property name="startDelay" value="5000" />
+		<property name="repeatInterval" value="40000" />
+	</bean>
+
+
+	<!-- eoemarket -->
+	<bean id="eoemarketServiceImpl" class="com.ijinshan.sjk.service.programmeimpl.ApiImporterMarketServiceImpl">
+		<property name="marketName" value="#{T(com.ijinshan.sjk.config.EnumMarket).EOEMARKET.getName()}" />
+		<property name="accessMarketDao" ref="accessEoemarketDaoImpl" />
+		<property name="marketAppFromMarketAdapter" ref="eoemarketAdapterImpl" />
+	</bean>
+	<!-- import full -->
+	<bean id="eoemarketImportFullJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="eoemarketServiceImpl" />
+		<property name="targetMethod" value="importFull" />
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="eoemarketImportFullTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+		<property name="jobDetail" ref="eoemarketImportFullJobDetail" />
+		<property name="startDelay" value="5000" />
+		<property name="repeatCount" value="0" />
+	</bean>
+	<!-- import increment -->
+	<bean id="eoemarketImportIncrementJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="eoemarketServiceImpl" />
+		<property name="targetMethod" value="importIncrement" />
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="eoemarketImportIncrementTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+		<property name="jobDetail" ref="eoemarketImportIncrementJobDetail" />
+		<property name="startDelay" value="3000" />
+		<property name="repeatInterval" value="40000" />
+	</bean>
+	<!-- eoemarket end -->
+
+	<!-- appChina -->
+	<bean id="appChinaServiceImpl" class="com.ijinshan.sjk.service.programmeimpl.FileImporterMarketServiceImpl">
+		<property name="marketName" value="#{T(com.ijinshan.sjk.config.EnumMarket).APPCHINA.getName()}" />
+		<property name="accessMarketDao" ref="accessAppChinaDaoImpl" />
+		<property name="marketAppFromMarketAdapter" ref="appChinaAdapterImpl" />
+	</bean>
+	<!-- import full -->
+	<bean id="appChinaImportFullJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="appChinaServiceImpl" />
+		<property name="targetMethod" value="importFull" />
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="appChinaImportFullTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+		<property name="jobDetail" ref="appChinaImportFullJobDetail" />
+		<property name="startDelay" value="5000" />
+		<property name="repeatCount" value="0" />
+	</bean>
+	<!-- import increment -->
+	<bean id="appChinaImportIncrementJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="appChinaServiceImpl" />
+		<property name="targetMethod" value="importIncrement" />
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="appChinaImportIncrementTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+		<property name="jobDetail" ref="appChinaImportIncrementJobDetail" />
+		<property name="startDelay" value="3000" />
+		<property name="repeatInterval" value="40000" />
+	</bean>
+	<!-- off app -->
+	<bean id="appChinaOffJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="appChinaServiceImpl" />
+		<property name="targetMethod" value="doDelete" />
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="appChinaOffTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+		<property name="jobDetail" ref="appChinaOffJobDetail" />
+		<property name="startDelay" value="5000" />
+		<property name="repeatInterval" value="6000" />
+	</bean>
+	<!-- appChina end -->
+
+	<!-- hiapk -->
+	<bean id="hiapkServiceImpl" class="com.ijinshan.sjk.service.programmeimpl.ApiImporterMarketServiceImpl">
+		<property name="marketName" value="#{T(com.ijinshan.sjk.config.EnumMarket).HIAPK.getName()}" />
+		<property name="accessMarketDao" ref="accessHiapkDaoImpl" />
+	</bean>
+	<!-- import full -->
+	<bean id="hiapkImportFullJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="hiapkServiceImpl" />
+		<property name="targetMethod" value="importFull" />
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="hiapkImportFullTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+		<property name="jobDetail" ref="hiapkImportFullJobDetail" />
+		<property name="startDelay" value="5000" />
+		<property name="repeatCount" value="0" />
+	</bean>
+	<!-- import increment -->
+	<bean id="hiapkImportIncrementJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="hiapkServiceImpl" />
+		<property name="targetMethod" value="importIncrement" />
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="hiapkImportIncrementTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+		<property name="jobDetail" ref="hiapkImportIncrementJobDetail" />
+		<property name="startDelay" value="3000" />
+		<property name="repeatInterval" value="40000" />
+	</bean>
+	<!-- hiapk end -->
+
+
+	<!-- yingyongso -->
+	<bean id="yingyongsoServiceImpl" class="com.ijinshan.sjk.service.programmeimpl.FileImporterMarketServiceImpl">
+		<property name="marketName" value="#{T(com.ijinshan.sjk.config.EnumMarket).YINGYONGSO.getName()}" />
+		<property name="accessMarketDao" ref="accessYingyongsoDaoImpl" />
+		<property name="marketAppFromMarketAdapter" ref="yingyongsoAdapterImpl" />
+	</bean>
+	<!-- import full -->
+	<bean id="yingyongsoImportFullJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="yingyongsoServiceImpl" />
+		<property name="targetMethod" value="importFull" />
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="yingyongsoImportFullTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+		<property name="jobDetail" ref="yingyongsoImportFullJobDetail" />
+		<property name="startDelay" value="5000" />
+		<property name="repeatCount" value="0" />
+	</bean>
+	<!-- import increment -->
+	<bean id="yingyongsoImportIncrementJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="yingyongsoServiceImpl" />
+		<property name="targetMethod" value="importIncrement" />
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="yingyongsoImportIncrementTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+		<property name="jobDetail" ref="yingyongsoImportIncrementJobDetail" />
+		<property name="startDelay" value="3000" />
+		<property name="repeatInterval" value="40000" />
+	</bean>
+	<!-- yingyongso end -->
+
+	<!-- shoujikong_channel inherited from yingyongso -->
+	<bean id="shoujikong_channelServiceImpl" class="com.ijinshan.sjk.service.programmeimpl.FileImporterMarketServiceImpl">
+		<property name="marketName" value="#{T(com.ijinshan.sjk.config.EnumMarket).SHOUJIKONG_CHANNEL.getName()}" />
+		<property name="accessMarketDao" ref="accessShoujikong_ChannelDaoImpl" />
+		<property name="marketAppFromMarketAdapter" ref="shoujikong_ChannelAdapterImpl" />
+	</bean>
+	<!-- import full -->
+	<bean id="shoujikong_channelImportFullJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="shoujikong_channelServiceImpl" />
+		<property name="targetMethod" value="importFull" />
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="shoujikong_channelImportFullTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+		<property name="jobDetail" ref="shoujikong_channelImportFullJobDetail" />
+		<property name="startDelay" value="5000" />
+		<property name="repeatInterval" value="40000" />
+	</bean>
+	<!-- import increment -->
+	<bean id="shoujikong_channelImportIncrementJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="shoujikong_channelServiceImpl" />
+		<property name="targetMethod" value="importIncrement" />
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="shoujikong_channelImportIncrementTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+		<property name="jobDetail" ref="shoujikong_channelImportIncrementJobDetail" />
+		<property name="startDelay" value="3000" />
+		<property name="repeatInterval" value="40000" />
+	</bean>
+	<!-- shoujikong_channel end -->
+
+	<!-- 91助手 -->
+	<bean id="m91ServiceImpl" class="com.ijinshan.sjk.service.programmeimpl.FileImporterMarketServiceImpl">
+		<property name="marketName" value="#{T(com.ijinshan.sjk.config.EnumMarket).M91.getName()}" />
+		<property name="accessMarketDao" ref="accessM91DaoImpl" />
+		<property name="marketAppFromMarketAdapter" ref="m91AdapterImpl" />
+	</bean>
+	<!-- import full -->
+	<bean id="m91ImportFullJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="m91ServiceImpl" />
+		<property name="targetMethod" value="importFull" />
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="m91ImportFullTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+		<property name="jobDetail" ref="m91ImportFullJobDetail" />
+		<property name="startDelay" value="5000" />
+		<property name="repeatCount" value="0" />
+	</bean>
+	<!-- import increment -->
+	<bean id="m91ImportIncrementJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="m91ServiceImpl" />
+		<property name="targetMethod" value="importIncrement" />
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="m91ImportIncrementTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+		<property name="jobDetail" ref="m91ImportIncrementJobDetail" />
+		<property name="startDelay" value="3000" />
+		<property name="repeatInterval" value="40000" />
+	</bean>
+	<!-- 91助手 end -->
+
+
+
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<!-- <ref bean="eoemarketImportFullTrigger" /> -->
+				<!-- <ref bean="eoemarketImportIncrementTrigger" /> -->
+				<!-- <ref bean="appChinaImportFullTrigger" /> -->
+				<!-- <ref bean="appChinaImportIncrementTrigger" /> -->
+				<!-- <ref bean="hiapkImportFullTrigger" /> -->
+				<!-- <ref bean="hiapkImportIncrementTrigger" /> -->
+				<!-- <ref bean="yingyongsoImportFullTrigger" /> -->
+				<!-- <ref bean="yingyongsoImportIncrementTrigger" /> -->
+				<!-- <ref bean="shoujikong_channelImportFullTrigger" /> -->
+				<!-- <ref bean="shoujikong_channelImportIncrementTrigger" /> -->
+				<!-- <ref bean="m91ImportFullTrigger" /> -->
+				<!-- <ref bean="m91ImportIncrementTrigger" /> -->
+
+				<!-- <ref bean="appChinaOffTrigger" /> -->
+
+				<!-- <ref bean="updateAppTrigger" /> -->
+			</list>
+		</property>
+	</bean>
+</beans>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+	<bean id="downloadStatDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="downloadStatServiceImpl" />
+		<property name="targetMethod" value="updateFlushIncrementToDB" />
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="downloadStatCronTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+		<property name="jobDetail" ref="downloadStatDetail" />
+		<property name="startDelay" value="300000" />
+		<property name="repeatInterval" value="600000" />
+		<property name="priority" value="6" />
+	</bean>
+
+
+	<bean id="resetSearchIndexDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="searchService1Impl" />
+		<property name="targetMethod" value="reset" />
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="resetSearchIndexCronTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+		<property name="jobDetail" ref="resetSearchIndexDetail" />
+		<property name="startDelay" value="360000" />
+		<!-- 6 min -->
+		<property name="repeatInterval" value="360000" />
+		<property name="priority" value="10" />
+	</bean>
+
+	<bean id="resetQuickTipsIndexDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="quickTipsServiceImpl" />
+		<property name="targetMethod" value="reset" />
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="resetQuickTipsIndexCronTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+		<property name="jobDetail" ref="resetQuickTipsIndexDetail" />
+		<property name="startDelay" value="360000" />
+		<!-- 6 min -->
+		<property name="repeatInterval" value="360000" />
+		<property name="priority" value="10" />
+	</bean>
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="downloadStatCronTrigger" />
+				<ref bean="resetSearchIndexCronTrigger" />
+				<ref bean="resetQuickTipsIndexCronTrigger" />
+			</list>
+		</property>
+	</bean>
+</beans>

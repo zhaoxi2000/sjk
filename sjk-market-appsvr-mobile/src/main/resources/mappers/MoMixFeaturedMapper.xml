@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ijinshan.sjk.mapper.MoMixFeaturedMapper">
+	<sql id="metrovo">
+		appOrTagId,type,shortDesc,name,picType,bigPics,mediumPics,smallPics
+	</sql>
+	<resultMap type="com.ijinshan.sjk.vo.MetroMobileVO" id="moMixFeaturedMapper">
+		<result property="appOrTagId" column="appOrTagId" />
+		<result property="type" column="type" />
+		<result property="picType" column="picType" />
+		<result property="catalog" column="Catalog" />
+		<result property="bigPics" column="BigPics" />
+		<result property="mediumPics" column="MediumPics" />
+		<result property="smallPics" column="SmallPics" />
+		<result property="ImgUrl" column="ImgUrl"/>
+		<result property="name" column="name"/>
+		<result property="pkname" column="Pkname"/>
+		<result property="versionCode" column="VersionCode"/>
+		<result property="signatureSHA1" column="SignatureSHA1"/>
+		<result property="officialSigSHA1" column="OfficialSigSHA1"/>
+	</resultMap>
+	<select id="getMixFeaturedlist" resultType="com.ijinshan.sjk.vo.MetroMobileVO">
+		select mo.AppOrTagId,mo.`Type`,mo.PicType,app.Catalog,app.`Name`,
+        mo.BigPics,mo.MediumPics,mo.SmallPics,app.Pkname,app.SignatureSHA1,app.OfficialSigSHA1,app.VersionCode
+        from Mo_MixFeatured mo left join App app on mo.AppOrTagId = app.Id where mo.`Type` = 1 and mo.Hidden = 0
+	</select>
+
+
+</mapper>

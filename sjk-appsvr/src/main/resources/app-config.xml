@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+	<bean id="appConfig" class="com.kingsoft.sjk.config.AppConfig">
+		<property name="appsRankTopNum" value="${apps-rank-top-num}" />
+		<property name="downLoadBaseUrl" value="${download-base-url}" />
+		<property name="downLoadDataBaseUrl" value="${download-data-base-url}" />
+		<property name="downLoadOneKeyPackBaseUrl" value="${download-one-key-pack-base-url}" />
+		<property name="appLogoBaseUrl" value="${app-logo-base-url}" />
+		<property name="appImageBaseUrl" value="${app-image-base-url}" />
+		<property name="appDataImageBaseUrl" value="${app-data-image-base-url}" />
+		<property name="appPageBaseUrl" value="${app-page-base-url}" />
+		<property name="topicImageBaseUrl" value="${topic-image-base-url}" />
+		<!-- lucene -->
+		<property name="initIndex" value="${lucene.initIndex}" />
+		<property name="suggestNum" value="${lucene.suggestNum}" />
+		<property name="gameTypeId" value="${lucene.gameTypeId}" />
+		<property name="softTypeId" value="${lucene.softTypeId}" />
+		<property name="gameIndexDir" value="${lucene.gameIndexDir}" />
+		<property name="gameSpellIndexDir" value="${lucene.gameSpellIndexDir}" />
+		<property name="gameSuggestDict" value="${lucene.gameSuggestDict}" />
+		<property name="softIndexDir" value="${lucene.softIndexDir}" />
+		<property name="softSpellIndexDir" value="${lucene.softSpellIndexDir}" />
+		<property name="softSuggestDict" value="${lucene.softSuggestDict}" />
+		<!-- <util:list id="queryFields"> <value type="java.lang.String">name</value> <value type="java.lang.String">description</value> 
+			</util:list> -->
+		<property name="queryFields">
+			<list value-type="java.lang.String">
+				<value>name</value>
+				<value>description</value>
+			</list>
+		</property>
+	</bean>
+</beans>

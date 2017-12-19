@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<assembly>
+	<id>zip-classes</id>
+	<formats>
+		<format>zip</format>
+	</formats>
+	<includeBaseDirectory>false</includeBaseDirectory>
+	<fileSets>
+		<fileSet>
+			<directory>target/classes/com</directory>
+			<outputDirectory>/com</outputDirectory>
+		</fileSet>
+	</fileSets>
+</assembly>

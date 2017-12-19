@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!--<base href="../" />-->
+        <!--IE doesnot support relative path.-->
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>软件列表</title>
+        <link href="../css/admin_dig.css" rel="stylesheet" type="text/css" />
+        <link href="../css/easyui.css" rel="stylesheet" type="text/css" />
+        <link href="../css/common.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../js/lib/jquery-1.7.1.min.js"></script>
+        <script type="text/javascript" src="../js/lib/jquery.easyui.min.js"></script>
+        <script type="text/javascript" src="../js/tag/public.js"></script>
+    </head>
+    <body>
+        <div class="con" id="box">
+            <div class="title">游戏标签</div>
+            <div class="f_l w_800">
+                <input class="w_400 f_l mr_15" name="2" id="gameTag" value="多个标签用英文逗号“,”隔开" /><span id="gameBtn" class="btn w_100" type="button"><button class="w_100">添加标签</button></span>
+                <span class="f_l co_red pl_15 lh_22" id="gameMsg"></span>
+                <div class="tagBox" id="gameBox"></div>
+            </div>
+            
+            <div class="title">软件标签</div>
+            <div class="f_l w_800">
+                <input class="w_400 f_l mr_15" name="1" id="softTag" value="多个标签用英文逗号“,”隔开" /><span id="softBtn" class="btn w_100" type="button"><button class="w_100">添加标签</button></span>
+                <span class="f_l co_red pl_15 lh_22" id="softMsg"></span>
+                <div class="tagBox" id="softBox"></div>
+            </div>
+            
+            <div class="title">大型游戏标签</div>
+            <div class="f_l w_800">
+                <input class="w_400 f_l mr_15" name="100" id="bigGameTag" value="多个标签用英文逗号“,”隔开" /><span id="bigGameBtn" class="btn w_100" type="button"><button class="w_100">添加标签</button></span>
+                <span class="f_l co_red pl_15 lh_22" id="bigGameMsg"></span>
+                <div class="tagBox" id="bigGameBox"></div>
+            </div>
+            
+        </div>
+        <div id="editTag" class="dp_n">
+            <input name="id" type="hidden" /> 
+            <table class="tab3 mt_20" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td class="w_100 ta_r">
+                        修改名称：
+                    </td>
+                    <td>
+                        <input name="names" type="text" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="ta_r">
+                        修改排序：
+                    </td>
+                    <td>
+                        <input name="rank" type="text" /> 
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <span class="btn">
+                            <button type="button" id="editPost">确定</button> 
+                            <button type="button" class="ml_20" id="editClose">取消</button>
+                        </span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>

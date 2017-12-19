@@ -1,0 +1,207 @@
+@CHARSET "UTF-8";
+/** Global*/
+html {
+	/**
+     * popular screen, 1020- 18(y scroll), donot modify it.
+     * let javascript do it. Donot appear scrollbar when document inits.
+     **/
+	overflow: hidden;
+}
+
+head {
+	display: none;
+}
+
+body {
+	font: 12px "微软雅黑", "Microsoft YaHei", "宋体", Arial, sans-serif;
+	line-height: 1.5em;
+	white-space: normal;
+	overflow-y: auto;
+}
+/** hack*/
+html,body {
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	height: 100%;
+}
+
+a {
+	color: #238CD8;
+	cursor: pointer;
+	outline: none;
+	text-decoration: none;
+}
+
+table {
+	font-size: 12px;
+	border-collapse: collapse;
+	border-spacing: 0;
+	border: none;
+	_border: 0;
+}
+
+.singleline {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	word-break: break-all;
+	overflow: hidden;
+}
+
+.singleline p {
+	white-space: inherit;
+	text-overflow: inherit;
+	word-break: inherit;
+	overflow: inherit;
+}
+
+.hide-text {
+	position: absolute;
+	left: -99999999px;
+}
+
+.normalBtn {
+	margin: 0;
+	padding: 0;
+	cursor: pointer;
+	background-color: transparent;
+	outline: none;
+	border: none;
+	_border: 0;
+}
+
+.disable {
+	cursor: default;
+	color: #aaaaaa;
+}
+
+.hidden {
+	display: none;
+}
+
+.show {
+	display: display;
+}
+
+.fl {
+	float: left;
+	_display: inline;
+}
+
+.fr {
+	float: right;
+	_display: inline;
+}
+
+.clear {
+	clear: both;
+}
+
+.cursorPointer {
+	cursor: pointer;
+}
+
+ul,li {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+img {
+	vertical-align: middle;
+	outline: none;
+	border: none;
+	_border: 0;
+}
+
+.colorGreen {
+	color: #12880D;
+}
+
+.colorRed,.colorRedWarn,.red {
+	color: red;
+}
+/* ---------- clearfix hack ---------- */
+.clearfix:after {
+	content: ".";
+	display: block;
+	clear: both;
+	height: 0;
+	visibility: hidden;
+	font-size: 0;
+}
+/* ---------for ie-----------*/
+.clearfix {
+	display: inline-block;
+}
+
+* html .clearfix {
+	height: 1%
+}
+
+.clearfix {
+	display: block;
+}
+/* ----------end holly clearfix --------- */
+
+/** END Global */
+#srContent {
+	vertical-align: middle;
+	margin: 20px 0 0 50px;
+	height: 48px;
+	line-height: 48px;
+}
+
+#srContentAction {
+	height: inherit;
+	line-height: inherit;
+	vertical-align: middle;
+	display: inline-block;
+}
+
+.searchDesc {
+	margin-left: 50px;
+	font-weight: bold;
+}
+
+#totalContainer {
+	margin-left: 50px;
+}
+
+#page {
+	margin-left: 10px;
+}
+
+.app {
+	margin: 15px 0 0 30px;
+	border-width: 1px;
+	border-top-style: dashed;
+}
+
+.logo {
+	float: left;
+	max-height: 60px;
+	max-width: 60px;
+	height: 60px;
+	width: 60px;
+}
+
+.official {
+	margin-left: 10px;
+	background-color: yellow;
+}
+
+.desc {
+	margin: 3px 0 0 3px;
+	max-height: 3em;
+	max-width: 30em;
+	max-height: 3em;
+}
+
+.download {
+	font-size: large;
+}
+
+.marketBox {
+	margin: 0 0 0 20px;
+}

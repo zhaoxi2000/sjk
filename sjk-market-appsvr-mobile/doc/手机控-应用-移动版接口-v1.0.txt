@@ -1,0 +1,528 @@
+手机控appsvr移动 版接口
+测试时将m.app.sjk.ijinshan.com替换为10.20.221.134:9080/sjk-market-appsvr-mobile 或者 绑定m.app.sjk.ijinshan.com 至 10.20.221.134
+说明 
+1:）参数前面的+是表示该参数必选,-是表示该参数可选(即不要提交该参数)
+2:）补充接口时请参照格式补充(名称，格式，参数，返回，示例),其中名称，格式，示例不可为空，参数若有需要说明
+3:）参数不允许提交了而带默认的0 , -1 这种无业务含义的值. 如果需要该参数下所有的数据,就不要传递该参数, 避免使用URITemplate Path形式.
+4:）JSON数据返回值,
+    如果是空数据, 值尽量用 [] 来表示.
+    如果是空字符串, 值尽量是 "" 来表示.
+    如果是空JSON Object , 值还是保留 null 来表示.
+
+
+
+----------------------------------------------------------------------------------------------------
+1:名称：排行（包含游戏排行 ，应用排行 ，分类排行）
+格式：app/api/cdn/app-catalog-order.json?{catalog,page,rows}
+示例：http://m.app.sjk.ijinshan.com/app/api/cdn/app-catalog-order.json?catalog=1&page=1&rows=10
+         http://m.app.sjk.ijinshan.com/app/api/cdn/app-catalog-order.json?catalog=1&subcatalog=3&page=1&rows=10
+测试：http://10.20.221.134:9080/sjk-market-appsvr-mobile/app/api/cdn/app-catalog-order.json?catalog=1&page=1&rows=10
+参数：
++catalog：分类id,1为应用，2为游戏
++page：当前页,从1开始
++rows：每页返回的行数
+-subCatalog：子分类id
+-sortType          // 可选.  整数:   DAYLY(1), WEEKLY(2), REAL_DOWNLOAD(3),DOWNLOADRANK(4)
+
+----------------------------------------------------------------------------------------------------
+2：应用详情接口
+格式：app/api/cdn/app/{id}.json
+示例：http://m.app.sjk.ijinshan.com/app/api/cdn/app/13.json
+测试：http://10.20.221.134:9080/sjk-market-appsvr-mobile/app/api/cdn/app/13.json
+参数：
++id: 为对应App的id
+
+----------------------------------------------------------------------------------------------------
+3：分类列表接口
+格式：catalog-list.json?{catalog}
+示例：http://m.app.sjk.ijinshan.com/app/api/cdn/catalog/catalog-list.json?catalog=1
+测试：http://10.20.221.134:9080/sjk-market-appsvr-mobile/app/api/cdn/catalog/catalog-list.json?catalog=1
+参数：
+-catalog：分类id,1为应用，2为游戏
+返回：
+{(带参数返回)
+    "result": {
+        "code": 0,
+        "msg": "OK!"
+    },
+        "data": [
+            {
+                "id": 3,
+                "name": "通讯",
+                "logoUrl": "http://c11.eoemarket.com/upload/apps/2012/0625/100694/icons/1006941211281853.png"
+            },
+            {
+                "id": 4,
+                "name": "社交",
+                "logoUrl": "http://app.sjk.ijinshan.com/market/img/10720/20121213093326093.png"
+            },
+            ..................
+        ]
+}
+
+示例：http://m.app.sjk.ijinshan.com/app/api/cdn/catalog/catalog-list.json
+测试：http://10.20.221.134:9080/sjk-market-appsvr-mobile/app/api/cdn/catalog/catalog-list.json
+{(当不带任何参数的时候)
+    "result": {
+        "code": 0,
+        "msg": "OK!"
+    },
+    "data": [
+        {
+            "pid": 1,
+            "catalog": [
+                {
+                    "id": 3,
+                    "name": "通讯",
+                    "logoUrl": "http://c11.eoemarket.com/upload/apps/2012/0625/100694/icons/1006941211281853.png"
+                },.....
+            ]
+        },
+        {
+            "pid": 2,
+            "catalog": [
+                {
+                    "id": 3,
+                    "name": "棋牌游戏",
+                    "logoUrl": "http://c11.eoemarket.com/upload/apps/2011/0828/33694/icons/336941212111558.png"
+                },.....
+            ]
+        }
+    ]
+}   
+
+----------------------------------------------------------------------------------------------------
+4：名称:app 更新接口（按包名和签名查找）
+格式: /app/api/cdn/apk/{pkname}/{signaturesha1}.json
+示例: http://m.app.sjk.ijinshan.com/app/api/cdn/apk/ACGame.Yxz/0988c59590e5accd4e9d27b5149ace6ff5c0753a.json
+测试：http://10.20.221.134:9080/sjk-market-appsvr-mobile/app/api/cdn/apk/ACGame.Yxz/0988c59590e5accd4e9d27b5149ace6ff5c0753a.json
+返回:
+        signature: true | false // 如果是true就是两条件下查询到一个App.如果是false,按pkname查找.
+
+
+-----------------------------------------------------------------------------------------------------
+5: 名称:mobile-metroinfo风格列表. 用于手机端首页
+格式: /app/api/cdn/mobile-metroinfo.json
+示例: http://m.app.sjk.ijinshan.com/app/api/cdn/mobile-metroinfo.json
+测试：http://10.20.221.134:9080/sjk-market-appsvr-mobile/app/api/cdn/mobile-metroinfo.json
+返回: 色块的信息(pics:当里面有多个图片地址的时候以","号分开)
+{
+    "result": {
+    "code": 0,
+    "msg": "OK!"
+    },
+        "data": [
+            {
+                "pics": "http://app.sjk.ijinshan.com/market/img/mobile/featured/1/20130201155358692.jpg",
+                "id": 1,
+                "appOrTagId": 7,
+                "shortDesc": "",
+                "url": "http://m.app.sjk.ijinshan.com/app/api/cdn/7.json",
+                "type": "1",
+                "name": "fsdfddd"
+				"bigPics":""
+            },
+            {
+                "pics": "http://app.sjk.ijinshan.com/market/img/mobile/featured/4/20130201174054636.jpg",
+                "id": 4,
+                "appOrTagId": 8,
+                "shortDesc": "",
+                "url": "http://m.app.sjk.ijinshan.com/app/api/cdn/8.json",
+                "type": "1",
+                "name": "tetetu"
+				"bigPics":""
+            }
+        ]
+}
+
+----------------------------------------------------------------------------------------------------
+6:  名称: 专题页面接口
+格式: /app/api/cdn/tagapp/topic/mobile/{tagId}.json
+示例: http://m.app.sjk.ijinshan.com/app/api/cdn/tagapp/topic/mobile/9.json?page=1&rows=2
+测试：http://10.20.221.134:9080/sjk-market-appsvr-mobile/app/api/cdn/tagapp/topic/mobile/9.json?page=1&rows=2 
+参数: tagId   专题编号
+    -page   // 查询的页号
+    -rows
+返回类型: JSON
+格式如:
+{
+	"total": 1,
+	"result": {
+	"code": 0,
+	"msg": "OK!"
+	},
+		"data": [
+			{
+			"id": 1,
+			"name": "新年专题",
+			"pid": 0,
+			"tagDesc": "新年专题",
+			"imgUrl": "http://app.sjk.ijinshan.com/market/img/mobile/tag/1/20130204113934700.png",
+			"tagApps": []
+			}
+		]
+}
+
+
+
+
+----------------------------------------------------------------------------------------------------
+7: 搜索列表.@废除,见以下一个
+格式: /app/api/cdn/search.d?{q,page,rows,noAds,official}
+示例: http://m.app.sjk.ijinshan.com/app/api/cdn/search.d?page=1&rows=10&q=手机毒霸
+测试: http://10.20.221.134:9080/sjk-market-appsvr-mobile/app/api/cdn/search.d?q=%E5%A4%A7&page=1&rows=10
+参数:
+    +q    // encodeURIComponent , 用户输入的搜索词. 
+    -page   // 查询的页号
+    -rows
+    -noAds              // 整数. 1: 过滤广告.
+    -official              // 整数. 1:是官方版本.
+返回:
+----------------------------------------------------------------------------------------------------
+
+7、名称: 搜索.
+格式: /app/api/cdn/s/search.json?{q, page, rows, noAds, official}
+示例:
+    http://m.app.sjk.ijinshan.com/app/api/cdn/s/search.json?q=现代战争4&page=1&rows=10
+    http://m.app.sjk.ijinshan.com/app/api/cdn/s/search.json?q=离线驾照考试复习&page=1&rows=10&noAds=1&official=1
+    http://10.20.221.134:9080/sjk-market-appsvr-mobile/app/api/cdn/s/search.json?q=离线&page=1&rows=10
+    http://127.0.0.1:8080/sjk-market-appsvr-mobile/app/api/cdn/s/search.json?q=离线驾照考试复习&page=1&rows=10&noAds=1&official=1
+参数:
+    +q    encodeURIComponent
+    +page   查询的页号 page > 0
+    +rows   每页条数 rows > 0 && rows <= 10
+    -noAds              // 整数. 1: 过滤广告.
+    -official              // 整数. 1:是官方版本.
+返回:
+    如果没有搜索的数据,会返回搜索相关性的搜索词.keywordTips.
+    {
+        result: {
+            code: 0,
+            msg: "OK!"
+        },
+        spellSuggestions: [string] , // 如果搜索没有结果时,出现该属性
+        data: [
+            {
+            },...
+        ]  // 或者是空的.
+    }
+
+----------------------------------------------------------------------------------------------------
+
+8: 搜索时的快速提示,前缀匹配用的.@废除,见以下一个
+格式: /app/api/cdn/quicktips.d?{q}
+示例: http://m.app.sjk.ijinshan.com/app/api/cdn/quicktips.d?q=abc
+参数:
+返回:
+    {
+        result: {
+            code: 0,
+            msg: "OK!"
+        },
+        data: [string]
+    }
+----------------------------------------------------------------------------------------------------
+8:名称:搜索时的快速提示,前缀匹配用的.
+格式: /app/api/cdn/s/quickTips.json?{q}
+示例: http://m.app.sjk.ijinshan.com/app/api/cdn/s/quickTips.json?q=QQ
+			http://m.app.sjk.ijinshan.com/app/api/cdn/s/quickTips.json?q=QQ
+			http://10.20.221.134:9080/sjk-market-appsvr-mobile/app/api/cdn/s/quickTips.json?q=
+			http://127.0.0.1:18080/sjk-market-appsvr-mobile/app/api/cdn/s/quickTips.json?q=QQ
+			http://10.20.221.134:9080/sjk-market-appsvr-mobile/app/api/cdn/s/quickTips.json?q=QQ
+参数:
+返回:
+    {
+        result: {
+            code: 0,
+            msg: "OK!"
+        },
+        data: [string]
+    }
+    
+----------------------------------------------------------------------------------------------------
+
+
+名称:下载量上报.不要使用客户端缓存.
+格式: /app/api/stat/download/{id}.d
+示例: http://m.app.sjk.ijinshan.com/app/api/stat/download/61525.d
+参数:
+返回:
+    http 的状态码. 
+    
+    
+    ----------------------------------------------------------------------------------------------------
+9.名称: 升级接口,按包名和versionCode(内部版本)查找
+格式: /app/api/cdn/apks/{pkname}/{versionCode}.json
+示例: http://m.app.sjk.ijinshan.com/app/api/cdn/apks/ACGame.Yxz/1.json
+返回: 多个App实体信息
+	{
+	result: {
+	code: 0,
+	msg: "OK!"
+		},
+			data: [
+				{
+				catalog: 2,
+				pkname: "ACGame.Yxz",
+				minsdkversion: 2,
+				version: "1.1",
+				size: 17430167,
+				downloadUrl: "http://apk.91.com/soft/Controller.ashx?Action=jinshandownload&id=4603977",
+				logoUrl: "http://img.yingyonghui.com/icon/48/411131.png",
+				versionCode: 11,
+				updateInfo: "",
+				pathStatus: 0,
+				signatureSha1: "92a881150939845d114d4be8646cd2dbb1c2d87a",
+				officialSigSha1: "",
+				marketName: "m91"
+				}
+			]
+		}
+
+----------------------------------------------------------------------------------------------------
+10.名称: 升级接口,热门App,按热门多版本间按versionCode( order by rank asc , versionCode desc.)排序
+格式: /app/api/cdn/apks/top-n.json
+示例: http://m.app.sjk.ijinshan.com/app/api/cdn/apks/top-n.json
+返回: 多个App
+{
+    data: [
+      {
+        pkname: "com.baidu.BaiduMap",
+        catalog: 1,
+        officialSigSha1: "0f96431205cf3cf37238289b796239ebc9f006ca",
+        logoUrl: "http://app.sjk.ijinshan.com/market/img/319294/20121224221640715.png",
+        apks: [
+                {
+                    minsdkversion: 7,
+                    version: "4.6.0",
+                    size: 8970927,
+                    downloadUrl: "http://www.yingyong.so/DownLoad.aspx?src=1&id=99&tid=1&file=BaiDuMap_v4_60.apk",
+                    versionCode: 350,
+                    updateInfo: "1、新增高速路况功能，跨城出行更便...",
+                    pathStatus: 0,
+                    signatureSha1: "0f96431205cf3cf37238289b796239ebc9f006ca",
+                    marketName: "AppChina"
+                }
+        ] // end apks
+      } // one apk by PK:pkname
+
+    ] // end data
+}
+
+
+11:  名称: 新专题页面接口(当前默认专题号6，6为内网中专供首页metro风格列表页使用，如果外网有数据不对，请检查一下专题号是否为6)
+格式: /app/api/cdn/tagapp/topic/mobile/tag-list.json
+示例: http://m.app.sjk.ijinshan.com/app/api/cdn/tagapp/topic/mobile/tag-list.json?page=1&rows=10
+测试：http://10.20.221.134:9080/sjk-market-appsvr-mobile/app/api/cdn/tagapp/topic/mobile/tag-list.json?page=1&rows=10
+参数: 专题接口默认为专题编号为1
++page：当前页,从1开始
++rows：每页返回的行数
+返回类型: JSON
+格式如:
+{
+	"result": {
+	"code": 0,
+	"msg": "OK!"
+	},
+	"data": {
+		"result": [
+		{},
+			{
+			"id": 12013,
+			"name": "QQ浏览器",
+			"size": 4585642,
+			"pkname": "com.tencent.mtt",
+			"signatureSha1": "7dccaf7c524512988c6cf220bb18bfbc8d793f1f",
+			"officialSigSha1": "7dccaf7c524512988c6cf220bb18bfbc8d793f1f",
+			"version": "3.7",
+			"lastUpdateTime": "2013-03-28 12:13:46",
+			"downloadUrl": "http://apk.91.com/soft/Controller.ashx?Action=jinshandownload&id=4008785",
+			"logoUrl": null,
+			"downloadRank": 57028,
+			"adActionTypes": "",
+			"adPopupTypes": "",
+			"virusKind": 2,
+			"catalog": 0,
+			"marketname": null,
+			"versionCode": 0
+			}
+		],
+	"pageSize": 10,
+	"rows": 0,
+	"currentPage": 1,
+	"totalPage": 1
+	}
+}
+
+----------------------------------------------------------------------------------------------------
+12:  名称: 新专题Metro风格接口
+格式: /app/api/mobile/mobile-metroinfolist.json
+示例: http://m.app.sjk.ijinshan.com/app/api/mobile/mobile-metroinfolist.json
+测试：http://10.20.221.134:9080/sjk-market-appsvr-mobile/app/api/mobile/mobile-metroinfolist.json
+参数: tagId   专题编号
+返回类型: JSON
+格式如:
+{
+	"D": {
+	"metrolist": []
+	},
+	"result": {},
+	"A": {},
+	"B": {},
+	"C": {
+		"metrolist": [
+			{
+				"appOrTagId": 266819,
+				"type": 1,
+				"picType": 3,
+				"bigPics": "http://app.sjk.ijinshan.com/market/img/mobile/featured/7/20130403101555367.png",
+				"mediumPics": ",,",
+				"smallPics": "",
+				"catalog": 1,
+				"ImgUrl": null,
+				"name": null
+				},
+				{
+				"appOrTagId": 1,
+				"type": 2,
+				"picType": 3,
+				"bigPics": "http://app.sjk.ijinshan.com/market/img/mobile/tag/1/20130204113934700.png",
+				"mediumPics": "",
+				"smallPics": "",
+				"catalog": 1,
+				"ImgUrl": "http://app.sjk.ijinshan.com/market/img/mobile/tag/1/20130204113934700.png",
+				"name": "新年专题"
+			}
+		]
+		}
+}
+
+----------------------------------------------------------------------------------------------------
+13:  名称: 新增专题页面列表接口（供metro首页专题列表使用）
+格式: app/api/cdn/tagapp/topic/tag/mobile/#{tagId}.json?page=1&rows=10
+示例: http://m.app.sjk.ijinshan.com/app/api/cdn/tagapp/topic/tag/mobile/2.json?page=1&rows=10
+测试：http://10.20.221.134:9080/sjk-market-appsvr-mobile/app/api/cdn/tagapp/topic/tag/mobile/2.json?page=1&rows=10
+参数: tagId   专题编号
+返回类型: JSON
+格式如:
+{
+	"result": {
+	"code": 0,
+	"msg": "OK!"
+	},
+			"data": [
+				"tag": {
+						"id": 1,
+						"name": "新年专题",
+						"tagDesc": "新年专题",
+						"catalog": 0,
+						"tagType": 1,
+						"imgUrl": "http://app.sjk.ijinshan.com/market/img/mobile/tag/1/20130204113934700.png",
+						"picType": 0,
+						"bigPics": "http://app.sjk.ijinshan.com/market/img/mobile/tag/1/20130204113934700.png",
+						"mediumPics": "",
+						"smallPics": ""
+						},
+				"appList": [
+				{
+					"id": 107071,
+					"name": "91助手",
+					"size": 7097614,
+					"pkname": "com.dragon.android.pandaspace",
+					"signatureSha1": "c3b9d118249c591c66aaad2375637559456ce77c",
+					"officialSigSha1": "c3b9d118249c591c66aaad2375637559456ce77c",
+					"version": "3.2.9.1",
+					"lastUpdateTime": "2013-03-28 07:43:37",
+					"downloadUrl": "http://apk.91.com/soft/Controller.ashx?Action=jinshandownload&id=4025401",
+					"logoUrl": "http://cdn.image.market.hiapk.com/data/upload//2012/11_23/17/201211231701493843.png",
+					"downloadRank": 7374,
+					"adActionTypes": "",
+					"adPopupTypes": "",
+					"virusKind": 2,
+					"catalog": 0,
+					"marketname": "m91",
+					"versionCode": 53
+				}
+			]
+		]
+}
+
+
+
+******************升级接口 end**********************************************************
+
+
+14、名称: 按下载量/最新取的列表.
+格式: /app/api/cdn/latest.json
+示例: http://m.app.sjk.ijinshan.com/app/api/cdn/latest.json?catalog=1&page=1&rows=10
+测试：http://10.20.221.134:9080/app/api/cdn/latest.json?catalog=1&page=1&rows=10
+	catalog     // 大分类的ID值,按约定,1软件,2游戏
+参数:
+    +catalog       
+    -subCatalog
+    -date       GMT时间戳.要查询的哪一天的开始时间.如 2012-08-01转成的霎时间戳:1343779200000.
+    +page   查询的页号
+    +rows
+    -noAds              // 整数. 1: 过滤广告.
+    -noVirus            //  整数. 1: 过滤病毒.
+    -official              // 整数. 1:是官方版本.
+返回:
+    如果没有搜索的数据,会返回搜索相关性的搜索词.keywordTips.
+    {
+        result: {
+            code: 0,
+            msg: "OK!"
+        },
+        data: [
+            {
+                
+            },...
+        ]  // 或者是空的.
+    }
+    
+
+----------------------------------------------------------------------------------------------------
+15、名称: 上升最快的应用排行
+格式: /app/api/cdn/mobile/increment.json
+示例: http://m.app.sjk.ijinshan.com/app/api/cdn/increment.json?page=1&rows=10
+测试：http://10.20.221.134:9080/app/api/cdn/increment.json?page=1&rows=10
+    catalog     // 大分类的ID值,按约定,1软件,2游戏，如果不传递该参数，表示查询所以类别
+参数: 
+    +page   查询的页号
+    +rows 
+返回:
+{
+    total: 500,
+    result: {
+        code: 0,
+        msg: "OK!"
+    },
+    data: [
+    {
+        indexImgUrl: "",
+        adActionTypes: ",5,",
+        adPopupTypes: ",2,",
+        virusKind: 2,
+        shortDesc: "",
+        description: "一款透过相机镜头当做狙击枪的反恐游戏。支持在SD卡上安装；一伙恐怖分子已经占领火车站，并采取一些无辜",
+        freeSize: 0,
+        id: 17759,
+        name: "狙击手",
+        marketName: "m91",
+        logoUrl: "http://c11.eoemarket.com/upload/apps/2010/1218/10530/icons/105301207091727.png",
+        pageUrl: "http://app.sjk.ijinshan.com/market/detail/35/17759.html",
+        catalog: 2,
+        subCatalog: 45,
+        pkname: "com.roidgame.sniper",
+        version: "2.03",
+        downloadRank: 8485,
+        downloadUrl: "http://apk.91.com/soft/Controller.ashx?Action=jinshandownload&id=4846190",
+        versionCode: 31,
+        size: 4158366,
+        signatureSha1: "64bba40fe445dcbbed221773b0455bc842c3521b",
+        officialSigSha1: "",
+        pathStatus: 0,
+        scSta: 0
+    },
+    
+}

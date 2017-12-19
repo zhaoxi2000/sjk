@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!--<base href="../" />-->
+        <!--IE doesnot support relative path.-->
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>软件列表</title>
+        <link href="../css/admin_dig.css?v=201209081245" rel="stylesheet" type="text/css" />
+        <link href="../css/easyui.css" rel="stylesheet" type="text/css" />
+        <link href="../css/common.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../js/lib/jquery-1.7.1.min.js"></script>
+        <script type="text/javascript" src="../js/lib/jquery.easyui.min.js"></script>
+        <script type="text/javascript" src="../js/ijinshan/list.js"></script>
+    </head>
+   <body>
+        <div class="con">
+            <div class="title">
+                <span class="f_l pt_5"><a  class="list_ico">金山市场</a>
+                    <a class="new_ico" target="_blank" href="../admin/ijinshan/1.add.d">新建</a> 
+                    <a class="new_ico" target="_blank" href="../admin/ijinshan/100.add.d">新建大游戏</a>
+                    <a href="list.html" class="ref_ico">刷新</a>
+                    <select  class="f_l w_100 mt_8 mr_10" id="catalogKeyColumn">
+                     <option value="" selected="selected">全部</option>
+                     <option value="1" >应用</option>
+                     <option value="2" >游戏</option>
+                     <option value="100" >大游戏</option>
+                    </select>
+                    <select class="f_l w_100 mt_8 mr_10" id="subCatalogKeyColumn">
+                        <option value="" selected="selected">全部</option>
+                    </select> 
+                    <input name="keywords" type="text" class="f_l w_120 mt_8 mr_10" id="keyword" /> 
+                    <span class="btn w_100 mt_8 "> 
+                        <button type="submit" class="h_20 f_l mr_10" id="search">搜索</button> 
+                    </span>
+                    <br /> 
+                    <span class="btn w_400 pb_10"> 
+                        <button value="" type="button" class="w_100 f_l mr_20" id="idsBtn">批量修改分类</button> 
+                        <button type="button" class="w_100 f_l mr_20" id="hideBtn">批量隐藏</button> 
+                    </span> 
+                </span>
+            </div>
+            <div class="clear"></div>
+            <table id="dataList"></table>
+            <span class="btn pt_10 pb_10"> 
+                <button value="" type="button" class="w_100 f_l mr_20" id="idsBtnBom">批量修改分类</button> 
+                <button type="button" class="w_100 f_l mr_20" id="hideBtnBom">批量隐藏</button> 
+            </span>
+        </div>
+        <div id="editType" class="dp_n">
+            <div class="editType">
+                <ul id="TypeMenu"></ul>
+            </div>
+        </div>
+        <div id="editIds" class="dp_n">
+            <div class="editType">
+                <ul id="IdsMenu"></ul>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <!--<base href="../" />-->
+        <!--IE doesnot support relative path.-->
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>渠道包监控</title>
+        <link href="../css/admin_dig.css" rel="stylesheet" type="text/css" />
+        <link href="../css/easyui.css" rel="stylesheet" type="text/css" />
+        <link href="../css/common.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../js/lib/jquery-1.7.1.min.js"></script>
+        <script type="text/javascript" src="../js/lib/jquery.easyui.min.js"></script>
+        <script type="text/javascript" src="../js/monchannel/list.js"></script>
+    </head>
+    <body>
+        <div class="con">
+            <div class="title">
+                <span class="f_l pt_5">
+                    <a class="new_ico" onclick="AddMon()">添加</a>
+                    <a href="list.html" class="ref_ico">刷新</a>
+                    
+                    <span class="f_l">keyword：</span>
+                    <input name="keyword" type="text" class="f_l w_120 mt_8 mr_10" id="keyword" />
+                    
+                    <span class="btn w_400 mt_8"> 
+                        <button type="submit" class="h_20 f_l mr_10" id="search">搜索</button>
+                        <button value="" type="button" class="w_100 f_l mr_10" id="smsBtn">批量发送短信</button> 
+                        <button value="" type="button" class="w_130 f_l" id="monallBtn">检测覆盖的渠道包</button> 
+                    </span>
+                </span>
+            </div>
+            <div class="clear"></div>
+            <table id="dataList"></table>
+        </div>
+        <div id="editMon" class="dp_n">
+            <table class="tab3 mt_10" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td align='right' class="w_150">
+                        应用名称：
+                    </td>
+                    <td class="w_350">
+                        <input type="hidden" name="id"/>
+                        <input type="text" class="w_200" name="appName"/>
+                    </td>
+                </tr>
+                <tr> 
+                    <td align='right'>
+                        开发者名称：
+                    </td>
+                    <td>
+                        <input type="text" class="w_200" name="devName"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td align='right'>
+                        市场名称：
+                    </td>
+                    <td>
+                        <input type="text" class="w_200" name="marketName"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td align='right'>
+                        apkId：
+                    </td>
+                    <td>
+                        <input type="text" class="w_200" name="apkId"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td align='right'>
+                        联系人：
+                    </td>
+                    <td>
+                        <input type="text" class="w_200" name="userName"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td align='right'>
+                        手机：
+                    </td>
+                    <td>
+                        <input type="text" class="w_200" name="phone"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td align='right'>
+                        短信提醒：
+                    </td>
+                    <td>
+                        <input name="acceptSms" type="radio" value="true" checked="checked" /> 是  <input name="acceptSms" type="radio" value="false"/> 否
+                    </td>
+                </tr>
+                <tr>
+                    <td align='right'>
+                        邮箱：
+                    </td>
+                    <td>
+                        <input type="text" class="w_200" name="email"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td align='right'>
+                        邮件提醒：
+                    </td>
+                    <td>
+                        <input name="acceptMail" type="radio" value="true" checked="checked" /> 是  <input name="acceptMail" type="radio" value="false"/> 否
+                    </td>
+                </tr>
+                <tr>
+                    <td align='right'>
+                        是否可用：
+                    </td>
+                    <td>
+                        <input name="status" type="radio" value="true" checked="checked" /> 是  <input name="status" type="radio" value="false"/> 否
+                    </td>
+                </tr>
+                <tr>
+                    <td align='right'>
+                        是否覆盖：
+                    </td>
+                    <td>
+                        <input name="autoCover" type="radio" value="true" checked="checked" /> 是  <input name="autoCover" type="radio" value="false"/> 否
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <span class="btn"><button id="monPost" type="button">提交</button></span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>

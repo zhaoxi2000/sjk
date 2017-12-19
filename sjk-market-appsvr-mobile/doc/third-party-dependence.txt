@@ -1,0 +1,4 @@
+mvn install:install-file -Dfile=IKAnalyzer2012.jar -DgroupId=org.wltea.analyzer -DartifactId=ik-analyzer -Dversion=2012.u5 -Dpackaging=jar
+
+
+mvn install:install-file -Dfile=IKAnalyzer2012FF_u1.jar -DgroupId=org.wltea.analyzer -DartifactId=ik-analyzer -Dversion=2012FF_u1 -Dpackaging=jar

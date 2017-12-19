@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ijinshan.sjk.mapper.BigGamePackMapper">
+	<sql id="bigGame">
+	   Id,MarketAppId,Cputype,Url,Size,FreeSize,AdPopupTypes,AdActionTypes,Advertises,AdRisk,VirusKind,VirusBehaviors,VirusName,Permissions,SignatureSHA1,OfficialSigSHA1,MD5,PackageSjdbMd5,SignatureMD5,QuickMd5,MarketApkScanTime,MarketUpdateTime
+<!-- 	 bp.Id,bp.MarketAppId,bp.Cputype,bp.Url,bp.Size,bp.FreeSize,bp.AdPopupTypes,bp.AdActionTypes,bp.Advertises,bp.AdRisk,bp.VirusKind,bp.VirusBehaviors,bp.VirusName,bp.Permissions,bp.SignatureSHA1,bp.OfficialSigSHA1,bp.MD5,PackageSjdbMd5,bp.SignatureMD5,bp.QuickMd5,bp.MarketApkScanTime,bp.MarketUpdateTime -->
+	</sql>
+	
+	<select id="getBigGameByMarkAppId" parameterType="int" resultType="com.ijinshan.sjk.po.BigGamePack">
+        select  
+        <include refid="bigGame"/>
+        from BigGamePack
+        where MarketAppId = #{MarketAppId}	
+	</select>
+	
+	<select id="getBigGameByMarkAppIds" resultType="com.ijinshan.sjk.po.BigGamePack">
+	   select
+	   <include refid="bigGame"/>
+	    from BigGamePack
+        where MarketAppId in
+	   <foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
+	       #{item}
+	   </foreach>
+	</select>
+
+</mapper>

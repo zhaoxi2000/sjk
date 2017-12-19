@@ -1,0 +1,5 @@
+生成索引
+/admin/reset.d
+
+更新下载量
+/admin/downloads.d

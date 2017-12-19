@@ -1,0 +1,21 @@
+mvn clean package -pl sjk-market-admin -am -Dmaven.test.skip=true
+mvn clean package -pl sjk-market-appsvr -am -Dmaven.test.skip=true
+
+mvn clean package -pl sjk-market-collection -am -Dmaven.test.skip=true
+
+mvn clean package -pl sjk-market-generate -am -Dmaven.test.skip=true
+
+mvn clean package -pl sjk-market-appsvr-mobile -am -Dmaven.test.skip=true
+
+mvn clean package -pl sjk-market-lucene-index -am -Dmaven.test.skip=true
+
+
+所有web项目加上 /health.d 的请求,方便查看项目运行状态.
+
+database 
+1.尽量少用null,
+2.每表加上物理主键id.
+3.时间字段尽量使用TIMESTAMP DEFAULT "2000-01-01 00:00:00", 避开JAVA或PYTHON等语言的时区计算引发的错误.
+4.AppSvr查询接口凡是列表性质的应用就算是要有简介(长字符描述的),SQL 中也把简介也要截断掉. 
+    substr(Description, 1 ,500) AS  Description减少网络IO.  
+    另外在应用层使用HMTL替换, 让页面不会dom出错.

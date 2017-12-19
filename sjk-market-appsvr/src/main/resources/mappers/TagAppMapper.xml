@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ijinshan.sjk.mapper.TagAppMapper">
+	<!-- <select id="getTags" resultMap="AppAndTagResult"> SELECT AppAndTag.Id AS AppAndTag_Id, AppAndTag.AppId AS AppAndTag_AppId, 
+		AppAndTag.TagId AS AppAndTag_TagId, AppAndTag.Rank AS AppAndTag_Rank, AppAndTag.TagName AS AppAndTag_TagName, AppAndTag.TagType 
+		AS AppAndTag_TagType, Tag.Id AS Tag_Id, Tag.Name as Tag_Name, Tag.TagDesc AS Tag_TagDesc, Tag.PId AS Tag_PId, Tag.Catalog 
+		as Tag_Catalog, Tag.TagType AS Tag_TagType, Tag.ImgUrl AS Tag_ImgUrl, App.Id AS App_Id, App.MarketName AS App_MarketName, 
+		App.Name AS App_Name, App.EngName AS App_EngName, App.Catalog AS App_Catalog, App.SubCatalog AS App_SubCatalog, App.Size 
+		as App_Size, App.FreeSize AS App_FreeSize, App.DownloadUrl AS App_DownloadUrl, App.LogoUrl AS App_LogoUrl, substr(App.Description,1,500) 
+		AS App_Description, App.UpdateInfo AS App_UpdateInfo, App.PublisherShortName AS App_PublisherShortName, App.Version AS App_Version, 
+		App.Minsdkversion AS App_Minsdkversion, App.VersionCode AS App_VersionCode, App.OSVersion AS App_OSVersion, App.Pkname AS 
+		App_Pkname, App.LastUpdateTime AS App_LastUpdateTime, App.LastFetchTime as App_LastFetchTime, App.DetailUrl AS App_DetailUrl, 
+		App.Price AS App_Price, App.Screens AS App_Screens, App.Models AS App_Models, App.StarRating AS App_StarRating, App.DownloadRank 
+		AS App_DownloadRank, App.Supportpad AS App_Supportpad, App.StrImageUrls AS App_StrImageUrls, App.PageUrl AS App_PageUrl, 
+		App.ShortDesc AS App_ShortDesc, App.IndexImgUrl AS App_IndexImgUrl, App.Notice AS App_Notice, App.OfficeHomepage AS App_OfficeHomepage, 
+		App.Language AS App_Language, App.PathStatus AS App_PathStatus, App.SignatureSHA1 AS App_SignatureSHA1, App.OfficialSigSHA1 
+		AS App_OfficialSigSHA1, App.Advertises AS App_Advertises, App.AdActionTypes AS App_AdActionTypes, App.AdPopupTypes AS App_AdPopupTypes, 
+		App.VirusKind AS App_VirusKind, App.RealDownload AS App_RealDownload, App.DeltaDownload AS App_DeltaDownload, App.LastDayDownload 
+		AS App_LastDayDownload, App.LastDayDelta AS App_LastDayDelta, App.LastWeekDownload AS App_LastWeekDownload, App.LastWeekDelta 
+		AS App_LastWeekDelta, App.Md5 AS App_Md5, App.Logo1Url AS App_Logo1Url FROM AppAndTag AS AppAndTag LEFT JOIN Tag AS Tag ON 
+		AppAndTag.TagId = Tag.Id LEFT JOIN App AS App ON App.Id = AppAndTag.AppId WHERE (AppAndTag.TagId = #{tagId} OR Tag.PId = 
+		#{tagId} ) AND App.Hidden=0 ORDER BY Tag.Rank ,AppAndTag.Rank DESC </select> -->
+	<select id="getTags" resultMap="AppAndTagResult">
+		SELECT
+		AppAndTag.Id AS AppAndTag_Id,
+		AppAndTag.AppId AS AppAndTag_AppId,
+		AppAndTag.TagId AS AppAndTag_TagId,
+		AppAndTag.Rank AS AppAndTag_Rank,
+		AppAndTag.TagName AS AppAndTag_TagName,
+		AppAndTag.TagType AS AppAndTag_TagType,
+		A.Id AS Tag_Id,
+		A. NAME AS Tag_Name,
+		A.TagDesc AS Tag_TagDesc,
+		A.PId AS Tag_PId,
+		A.Catalog AS Tag_Catalog,
+		A.TagType AS Tag_TagType,
+		A.ImgUrl AS Tag_ImgUrl,
+		App.Id AS App_Id,
+		App.MarketName AS
+		App_MarketName,
+		App. NAME AS App_Name,
+		App.EngName AS App_EngName,
+		App.Catalog AS App_Catalog,
+		App.SubCatalog AS
+		App_SubCatalog,
+		App.Size AS App_Size,
+		App.FreeSize AS App_FreeSize,
+		App.DownloadUrl AS App_DownloadUrl,
+		App.LogoUrl AS
+		App_LogoUrl,
+		substr(App.Description, 1, 500) AS App_Description,
+		App.UpdateInfo AS App_UpdateInfo,
+		App.PublisherShortName AS App_PublisherShortName,
+		App.Version AS App_Version,
+		App.Minsdkversion AS App_Minsdkversion,
+		App.VersionCode AS App_VersionCode,
+		App.OSVersion AS App_OSVersion,
+		App.Pkname AS App_Pkname,
+		App.LastUpdateTime AS
+		App_LastUpdateTime,
+		App.LastFetchTime AS App_LastFetchTime,
+		App.DetailUrl AS App_DetailUrl,
+		App.Price AS App_Price,
+		App.Screens AS App_Screens,
+		App.Models AS App_Models,
+		App.StarRating AS App_StarRating,
+		App.DownloadRank AS
+		App_DownloadRank,
+		App.Supportpad AS App_Supportpad,
+		App.StrImageUrls AS App_StrImageUrls,
+		App.PageUrl AS App_PageUrl,
+		App.ShortDesc AS App_ShortDesc,
+		App.IndexImgUrl AS App_IndexImgUrl,
+		App.Notice AS App_Notice,
+		App.OfficeHomepage AS
+		App_OfficeHomepage,
+		App. LANGUAGE AS App_Language,
+		App.PathStatus AS App_PathStatus,
+		App.SignatureSHA1 AS
+		App_SignatureSHA1,
+		App.OfficialSigSHA1 AS App_OfficialSigSHA1,
+		App.Advertises AS App_Advertises,
+		App.AdActionTypes AS
+		App_AdActionTypes,
+		App.AdPopupTypes AS App_AdPopupTypes,
+		App.VirusKind AS App_VirusKind,
+		App.RealDownload AS
+		App_RealDownload,
+		App.DeltaDownload AS App_DeltaDownload,
+		App.LastDayDownload AS App_LastDayDownload,
+		App.LastDayDelta AS
+		App_LastDayDelta,
+		App.LastWeekDownload AS App_LastWeekDownload,
+		App.LastWeekDelta AS App_LastWeekDelta,
+		App.Md5 AS
+		App_Md5,
+		App.Logo1Url AS App_Logo1Url
+		FROM
+		(
+		SELECT
+		Id,
+		NAME,
+		TagDesc,
+		PId,
+		Catalog,
+		TagType,
+		ImgUrl,
+		Rank
+		FROM
+		Tag
+		WHERE
+		ID =
+		#{tagId}
+		OR PID = #{tagId}
+		) A
+		INNER JOIN AppAndTag AppAndTag ON AppAndTag.TagID = A.ID
+		INNER JOIN App App ON
+		AppAndTag.AppID = App.ID
+		AND App.Hidden = 0
+		ORDER BY
+		A.Rank DESC,
+		AppAndTag.Rank DESC;
+	</select>
+
+
+
+	<resultMap id="AppAndTagResult" type="AppAndTag">
+		<id property="id" column="AppAndTag_Id" />
+		<result property="appId" column="AppAndTag_AppId" />
+		<result property="tagId" column="AppAndTag_TagId" />
+		<result property="rank" column="AppAndTag_Rank" />
+		<result property="tagName" column="AppAndTag_TagName" />
+		<result property="tagType" column="AppAndTag_TagType" />
+		<association property="tag" column="AppAndTag_TagId" javaType="Tag" resultMap="tagResult" />
+		<association property="app" column="AppAndTag_AppId" javaType="App" resultMap="appResult" />
+	</resultMap>
+
+	<resultMap id="tagResult" type="Tag">
+		<id property="id" column="Tag_Id" />
+		<result property="name" column="Tag_Name" />
+		<result property="pid" column="Tag_PId" />
+		<result property="tagDesc" column="Tag_TagDesc" />
+		<result property="catalog" column="Tag_Catalog" />
+		<result property="tagType" column="Tag_TagType" />
+		<result property="imgUrl" column="Tag_ImgUrl" />
+	</resultMap>
+
+	<resultMap id="appResult" type="App">
+		<id property="id" column="App_Id" />
+		<result property="name" column="App_Name" />
+		<result property="version" column="App_Version" />
+		<result property="catalog" column="App_Catalog" />
+		<result property="subCatalog" column="App_SubCatalog" />
+		<result property="size" column="App_Size" />
+		<result property="downloadUrl" column="App_DownloadUrl" />
+		<result property="logoUrl" column="App_LogoUrl" />
+		<result property="versionCode" column="App_VersionCode" />
+		<result property="pkname" column="App_Pkname" />
+		<result property="downloadRank" column="App_DownloadRank" />
+		<result property="pageUrl" column="App_PageUrl" />
+		<result property="shortDesc" column="App_ShortDesc" />
+		<result property="description" column="App_Description" />
+		<result property="signatureSha1" column="App_SignatureSHA1" />
+		<result property="officialSigSha1" column="App_OfficialSigSHA1" />
+		<result property="advertises" column="App_Advertises" />
+		<result property="adActionTypes" column="App_AdActionTypes" />
+		<result property="adPopupTypes" column="App_AdPopupTypes" />
+		<result property="virusKind" column="App_VirusKind" />
+		<result property="marketName" column="App_MarketName" />
+	</resultMap>
+
+
+	<resultMap id="Apps4TopicResultV1" type="com.ijinshan.sjk.vo.pc.abstracttag.TagApps">
+		<id property="id" column="Tag_Id" />
+		<result property="pid" column="Tag_PId" />
+		<result property="name" column="Tag_Name" />
+		<result property="tagDesc" column="Tag_TagDesc" />
+		<result property="imgUrl" column="Tag_ImgUrl" />
+		<collection property="tagApps" column="Tag_Id" javaType="ArrayList" ofType="com.ijinshan.sjk.vo.pc.App4Summary"
+			resultMap="SimpleTagAppResult">
+		</collection>
+	</resultMap>
+	<resultMap id="SimpleTagAppResult" type="com.ijinshan.sjk.vo.pc.App4Summary">
+		<id property="id" column="App_Id" />
+		<result property="name" column="App_Name" />
+		<result property="version" column="App_Version" />
+		<result property="catalog" column="App_Catalog" />
+		<result property="subCatalog" column="App_SubCatalog" />
+		<result property="size" column="App_Size" />
+		<result property="downloadUrl" column="App_DownloadUrl" />
+		<result property="logoUrl" column="App_LogoUrl" />
+		<result property="versionCode" column="App_VersionCode" />
+		<result property="pkname" column="App_Pkname" />
+		<result property="downloadRank" column="App_DownloadRank" />
+		<result property="pageUrl" column="App_PageUrl" />
+		<result property="shortDesc" column="App_ShortDesc" />
+		<result property="description" column="App_Description" />
+		<result property="signatureSha1" column="App_SignatureSHA1" />
+		<result property="officialSigSha1" column="App_OfficialSigSHA1" />
+		<result property="adActionTypes" column="App_AdActionTypes" />
+		<result property="adPopupTypes" column="App_AdPopupTypes" />
+		<result property="virusKind" column="App_VirusKind" />
+		<result property="marketName" column="App_MarketName" />
+	</resultMap>
+	<!-- AppAndTag.Id AS AppAndTag_Id, AppAndTag.AppId AS AppAndTag_AppId, AppAndTag.TagId AS AppAndTag_TagId, AppAndTag.TagName 
+		AS AppAndTag_TagName, AppAndTag.TagType AS AppAndTag_TagType, -->
+	<!-- <select id="getApps4Topic" resultMap="Apps4TopicResultV1"> SELECT Tag.Id AS Tag_Id, Tag.Name AS Tag_Name, Tag.TagDesc 
+		AS Tag_TagDesc, Tag.PId AS Tag_PId, Tag.Catalog AS Tag_Catalog, Tag.TagType AS Tag_TagType, Tag.ImgUrl AS Tag_ImgUrl, App.Id 
+		AS App_Id, App.Name AS App_Name, App.Catalog AS App_Catalog, App.SubCatalog AS App_SubCatalog, App.Size AS App_Size, App.FreeSize 
+		AS App_FreeSize, App.DownloadUrl AS App_DownloadUrl, App.LogoUrl AS App_LogoUrl, App.Version AS App_Version, App.VersionCode 
+		AS App_VersionCode, App.Pkname AS App_Pkname, App.DownloadRank AS App_DownloadRank, App.PageUrl AS App_PageUrl, App.ShortDesc 
+		AS App_ShortDesc, substr(App.Description,1,500) AS App_Description, App.SignatureSHA1 AS App_SignatureSHA1, App.OfficialSigSHA1 
+		AS App_OfficialSigSHA1, App.AdActionTypes AS App_AdActionTypes, App.AdPopupTypes AS App_AdPopupTypes, App.VirusKind AS App_VirusKind, 
+		App.PathStatus AS App_PathStatus FROM AppAndTag AS AppAndTag LEFT JOIN Tag AS Tag ON AppAndTag.TagId = Tag.Id LEFT JOIN App 
+		AS App ON App.Id = AppAndTag.AppId WHERE (AppAndTag.TagId = #{tagId} OR Tag.PId = #{tagId} ) AND App.Hidden=0 ORDER BY Tag.Rank 
+		DESC ,AppAndTag.Rank DESC </select> -->
+	<select id="getApps4Topic" resultMap="Apps4TopicResultV1">
+		SELECT
+		A.Id AS Tag_Id,
+		A. NAME AS Tag_Name,
+		A.TagDesc AS Tag_TagDesc,
+		A.PId AS
+		Tag_PId,
+		A.Catalog AS Tag_Catalog,
+		A.TagType AS Tag_TagType,
+		A.ImgUrl AS Tag_ImgUrl,
+		App.Id AS App_Id,
+		App. NAME AS
+		App_Name,
+		App.Catalog AS App_Catalog,
+		App.SubCatalog AS App_SubCatalog,
+		App.Size AS App_Size,
+		App.FreeSize AS
+		App_FreeSize,
+		App.DownloadUrl AS App_DownloadUrl,
+		App.LogoUrl AS App_LogoUrl,
+		App.Version AS App_Version,
+		App.VersionCode
+		AS App_VersionCode,
+		App.Pkname AS App_Pkname,
+		App.DownloadRank AS App_DownloadRank,
+		App.PageUrl AS App_PageUrl,
+		App.ShortDesc AS App_ShortDesc,
+		substr(App.Description, 1, 500) AS App_Description,
+		App.SignatureSHA1 AS
+		App_SignatureSHA1,
+		App.OfficialSigSHA1 AS App_OfficialSigSHA1,
+		App.AdActionTypes AS App_AdActionTypes,
+		App.AdPopupTypes
+		AS App_AdPopupTypes,
+		App.VirusKind AS App_VirusKind,
+		App.PathStatus AS App_PathStatus,
+		App.MarketName AS App_MarketName
+		FROM
+		(
+		SELECT
+		Id,
+		NAME,
+		TagDesc,
+		PId,
+		Catalog,
+		TagType,
+		ImgUrl,
+		Rank
+		FROM
+		Tag
+		WHERE
+		ID = #{tagId}
+		OR PID = #{tagId}
+		) A
+		INNER JOIN AppAndTag AppAndTag ON
+		AppAndTag.TagID = A.ID
+		INNER JOIN App App ON AppAndTag.AppID = App.ID
+		AND App.Hidden = 0
+		ORDER BY
+		A.Rank DESC,
+		AppAndTag.Rank DESC
+	</select>
+</mapper>

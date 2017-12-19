@@ -1,0 +1,15 @@
+    <bean name="memcachedClient" class="net.rubyeye.xmemcached.utils.XMemcachedClientFactoryBean" destroy-method="shutdown">
+        <property name="servers">
+            <value>${memcached.servers}</value>
+        </property>
+        <!-- server's weights -->
+        <!-- <property name="weights"> <list> <value>1</value> </list> </property> -->
+        <!-- nio connection pool size -->
+        <property name="connectionPoolSize" value="${memcached.connectionPoolSize}" />
+        <!-- Use binary protocol,default is TextCommandFactory -->
+        <property name="commandFactory">
+            <bean class="net.rubyeye.xmemcached.command.BinaryCommandFactory" />
+        </property>
+        <!-- Failure mode -->
+        <property name="failureMode" value="true" />
+    </bean>

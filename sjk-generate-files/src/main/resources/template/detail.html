@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+    <head>
+        <title>{@name@}</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="../../css/default.css" rel="stylesheet" type="text/css" />
+        <script src="../../js/jquery.min1.js" type="text/javascript"></script>
+        <script src="../../js/common.js" type="text/javascript"></script>
+        <link type="text/css" href="../../css/jquery.jscrollpane.css" rel="stylesheet" />
+        <script type="text/javascript" src="../../js/jquery.mousewheel.js"></script>
+        <script type="text/javascript" src="../../js/jquery.jscrollpane.min.js"></script>
+        <script type="text/javascript" src="../../js/jquery.jscrollpane.min.my.js"></script>
+        <script type="text/javascript">
+            tab_height = 360;
+            function loadFunction() {
+                try {
+                    tab_height = $("#con_two_1").height();
+                } catch(err) {
+                    tab_height = 360;
+                }
+
+                resetarrow(tab_height)
+            }
+
+
+            $(document).ready(function() {
+                var bg = getParameterByName("bg");
+                if(bg == 1)
+                    $('.wrap2').addClass("wrap2bg");
+                resetarrow(tab_height);
+                if($("#akin").attr("haveData") == "1" || $("#akin").attr("haveData") == 1) {
+                    $("#akin").show();
+                }
+            });
+
+        </script>
+    </head>
+    <body style="overflow-x:hidden;" onload='loadFunction()'>
+        <div id="full-page-container">
+            <div class="wrap2">
+                <div class="content2">
+                    <div class="left">
+                        <div class="leftcontent">
+                            <h1>{@name@}</h1>
+                            <div class="jianjie">
+                                简介
+                            </div>
+                            {@Description@}
+
+                            {@UpdateInfo@}
+                            <div class="pics">
+                                <script> function prePic() {
+                                    if(cursel > 1) {
+                                    cursel--;
+                                    } else {
+                                    cursel = n;
+                                    }
+
+                                    for( i = n; i > 0; i--) {
+                                    var menu = document.getElementById("two" + i);
+                                    var con = document.getElementById("con_two_" + i);
+                                    menu.src = i == cursel ? "../../images/tab01_ico01.jpg" : "../../images/tab01_ico02.jpg";
+                                    con.style.display = i == cursel ? "block" : "none";
+                                    }
+                                    }
+
+                                    function nxtPic() {
+                                    if(cursel < n) {
+                                    cursel++;
+                                    } else {
+                                    cursel = 1;
+                                    }
+
+                                    for( i = n; i > 0; i--) {
+                                    var menu = document.getElementById("two" + i);
+                                    var con = document.getElementById("con_two_" + i);
+                                    menu.src = i == cursel ? "../../images/tab01_ico01.jpg" : "../../images/tab01_ico02.jpg";
+                                    con.style.display = i == cursel ? "block" : "none";
+
+                                    }
+                                    }
+
+                                    var cursel = 1;
+                                    var n = {@imageCount@};
+                                    //预设图片数量</script>
+                                <!--tab标签开始-->
+                                <div id="Tab_con04">
+                                    <a class="lefta" href="javascript:;"  style="display:none" onclick="prePic()"  onfocus="this.blur();"></a>
+                                    <a class="righta" href="javascript:;" style="display:none" onclick="nxtPic()" onfocus="this.blur();"></a>
+                                    {@tabimgsHtml@}
+                                </div>
+                                <div id="Tab_nav04">
+                                    {@tabnumHtml@}
+                                </div>
+                                <!--tab标签结束-->
+                            </div>
+                        </div>
+                    </div>
+                    <!--begin right-->
+                    <div class="right">
+                        <div class="rightcontent">
+                            <div class="imganzhuang">
+                                <p>
+                                    <span class="icon">
+                                        <img src="{@logoUrl@}" />
+                                        <span class="akin" id="akin" style="display:none" haveData="{@haveData@}" ></span> </span>
+                                </p>
+                                <p>
+                                    <img  style="cursor:pointer"  haveData="{@haveData@}" onclick="{@jsdownfunction@}" src="../../images/anzhuang.png" width="78" height="25" />
+                                </p>
+                            </div>
+                            <div class="softcanshu">
+                                <p>
+                                    版本：{@version@}
+                                </p>
+                                <p>
+                                    大小：{@size@}
+                                </p>
+                                <p>
+                                    语言：{@language@}
+                                </p>
+                                <p>
+                                    系统：{@oSVersionGroupName@}
+                                </p>
+                                <p>
+                                    更新：{@updateDate@}
+                                </p>
+                                <p>
+                                    开发商：{@publisherShortName@}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!--end right-->
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+<script  type="text/javascript">
+    setTimeout(function() {
+        resetarrow(tab_height);
+        jQuery('a.lefta,a.righta').show();
+    }, 1500);
+
+</script>

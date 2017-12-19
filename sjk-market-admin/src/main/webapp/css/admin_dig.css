@@ -1,0 +1,203 @@
+@CHARSET "UTF-8";
+.hidden{ overflow:hidden}
+
+/*框架结构*/
+.topDiv{ width:100%; position:absolute; background:url(../img/soft_bg.png)}
+.centerDiv { width:100%; height:100%}
+*html .centerDiv{ padding:100px 0 0 0}
+.leftDiv { width:180px; height:100%; position:absolute; left:0px; overflow:auto;  overflow-x:hidden; background-color:#EBEBEB}
+.rightDiv { width:100%; height:100%; position:absolute; left:180px; overflow:hidden}
+.mainDiv{ width:100%; height:100%}
+.mainDiv > .centerDiv { height:auto; position:absolute; top:0; bottom:0}
+.centerDiv > .rightDiv { width:auto; position:absolute; right:0; overflow:hidden}
+
+/*头部导航*/
+.logo{ width:160px; height:25px; float:left; margin:6px; background:url(../img/logo.png) no-repeat}
+.nav{ width:100%; height:63px; float:left; color:#fff}
+.nav ul{ width:100%; height:32px; float:left}
+.nav ul li{ float:left}
+.nav ul li a{ padding:0 20px; height:32px; color:#fff; line-height:32px; float:left; text-align:center; border-right:1px solid #6284AE}
+.nav ul li a:hover, .nav ul a.n_cur{ background:#435B85; text-decoration:none}
+.nav .info{ width:100%; height:33px; line-height:33px; float:left; text-align:right; color:#666}
+.nav .info a{ margin:0 8px; color:#666}
+
+.login_nav{ width:160px; line-height:32px; padding-left:20px; float:left; height:32px; overflow:hidden; background:url(../img/soft_bg.png) repeat-x 0 -37px; color:#FFF; text-decoration:none}
+
+/*左边菜单*/
+.menu{ width:180px; float:left; display:none}
+.menu li{ width:180px; float:left; height:32px; overflow:hidden; border-bottom:1px solid #ccc}
+.menu li a.up{ width:160px; float:left; height:32px; cursor:pointer; line-height:32px; padding-left:20px; color:#555}
+.menu li a.up:hover, .menu li a.up.la_cur{ background:url(../img/soft_bg.png) repeat-x 0 -37px; color:#FFF; text-decoration:none}
+.menu li a.link{ width:130px; float:left; line-height:20px; padding-left:50px; margin:3px 0; color:#555; background:url(../img/icon.png) no-repeat 33px -347px}
+.menu li a.link:hover, .menu li a.link.a_cur{ background-position:33px -397px; color:#256BB0; text-decoration:underline}
+
+/*修改分类和排序*/
+.editType{ width:460px; height:200px; overflow-y:auto; overflow-x:hidden;  padding:10px; float:left}
+.editType li{ float:left; padding: 0 10px 10px 0; overflow:hidden}
+.editType li a{ padding: 0 15px; height: 26px; font-size: 14px; line-height: 26px; float: left; text-align: center; color: #333}
+.editType li a:hover, .editType li .cur{ background-color: #435B85; color: #fff; text-decoration: none}
+
+/*修改专题应用*/
+.editTagApps{ width:460px; height:280px; overflow-y:auto; overflow-x:hidden;  padding:10px; float:left}
+.editTagApps li{ float:left; padding: 0 10px 10px 0; overflow:hidden}
+.editTagApps li a{ padding: 0 15px; height: 26px; font-size: 14px; line-height: 26px; float: left; text-align: center; color: #333}
+.editTagApps li a:hover, .editType li .cur{ background-color: #435B85; color: #fff; text-decoration: none}
+
+/*内容*/
+.con{ padding:0 10px}
+.title{ width:100%; line-height:38px; float:left; margin-bottom:12px; border-bottom:1px solid #ccc}
+.title .tag{ color:#256BB0; float:left}
+.title .tag a{ color:#256BB0}
+.bom_none{ border-bottom:none}
+
+.than{ width: 600px; padding:12px; margin-right: 20px; float: left; border: 1px solid #ccc}
+.than h3{ width: 600px; float: left; line-height: 18px; padding-bottom: 5px; font-size: 14px; color:#256BB0}
+
+.tagWin{ width: 700px; height: 340px; display: none; background-color: #fff; border: 1px solid #ccc; float: left; position:absolute; top:50%; left:50%; margin: -170px 0 0 -350px}
+.tagBox{ width: 800px; height: 300px; margin-top: 15px; float: left; overflow-y:auto; overflow-x:hidden}
+.tagBox span{ width:auto; float: left; margin:0 10px 10px 0; background-color:#4E719B}
+.tagBox a.con{ width:auto; color: #fff; float: left; line-height: 28px; padding:0 5px 0 15px}
+.tagBox a.con:hover{ text-decoration: none}
+.tagBox a.close{ width:13px; height: 13px; float: left; background:url(../img/close.png) no-repeat 0 3px}
+
+
+.new_ico, .rel_ico, .del_ico, .mov_ico, .cop_ico, .rec_ico, .ref_ico, .edi_ico, .pas_ico, .list_ico, .type_ico,.loginout_ico,.editpwd_ico{ padding-left:20px; float:left; margin-right:10px; background:url(../img/icon.png) no-repeat 0 11px; color:#333}
+.rel_ico{ background-position:0 -39px}
+.del_ico{ background-position:0 -89px}
+.mov_ico{ background-position:0 -138px}
+.cop_ico{ background-position:0 -189px}
+.rec_ico{ background-position:0 -239px}
+.ref_ico{ background-position:0 -286px}
+.edi_ico{ background-position:0 -388px}
+.pas_ico{ background-position:0 -438px}
+.list_ico{ background-position:0 -489px}
+.type_ico{ background-position:0 -539px}
+.loginout_ico{background-position:0 -750px}
+.editpwd_ico{background-position:0 -719px}
+/*表格*/
+.tab1{ width:1000px; float:left; line-height: 26px; margin-bottom: 10px; color:#333}
+.tab1 th{ background-color: #E8E8E8; padding-left: 5px; text-align: left; color: #256bb0}
+.tab1 td{ padding-left: 5px; height:26px}
+.tab1 tr{ border-bottom: 1px solid #ccc}
+.tab1 .trhover{ background-color: #EFF3F8}
+.tab1 .trclick{ background-color: #FBEC88}
+
+.tab2{ width:1020px; float:left; line-height: 40px; color:#333}
+.tab2 td{ height:40px}
+.tab2 .bd_Col_Corner { height:40px; border-bottom: 1px solid #FF0000}
+
+.tab3{ width:500px; float:left; line-height: 40px; color:#333}
+.tab3 td{ height:40px}
+
+.addImg{ width: 400px; float: left}
+.addImg li{ width: 400px; float: left; height: 38px}
+
+.addImg_800 li{ width: 800px}
+.addImg_1100 li{ width: 1100px}
+
+.wh_20{ max-width: 20px; max-height: 20px; float: left; margin-left: 8px; cursor:pointer}
+.wh_40{ max-width: 40px; max-height: 40px; float: left; margin-left: 8px; cursor:pointer}
+.enlarge{ max-width:1024px; max-height:1024px; position:absolute; cursor:pointer}
+
+/*下拉列表*/
+.list{ width: 500px; line-height: 26px; height: 428px; overflow: hidden; float: left; border: 1px solid #ccc; background-color: #fff; z-index: 9999; position:absolute; display: none}
+.list .editcon{ width: 500px; height: 190px; border-bottom: 1px solid #ccc; float: left; overflow-x:hidden; overflow-y:auto}
+.list .editcon a{ width:auto; color: #000; margin-right: 10px; float:left}
+.list .editcon a:hover{ background-color: #39f; color: #fff; text-decoration: none}
+.list .editcon .con{ float: left; padding:0 6px 0 5px}
+.list .editcon .close{ width: 13px; height: 10px; margin-top: 3px; float: left; background: url(../img/close.png) no-repeat}
+.list .addinfo{ width: 500px; height: 47px; float: left; margin-top: 5px; border-top: 1px solid #ccc}
+.list .addinfo input{ width: 200px; line-height: 20px; float: left; height: 20px; margin: 10px 10px 0 10px; padding: 0}
+
+.fixedBox{ width: 500px; height: 210px; float: left; overflow:hidden}
+.mobileBox{ width: 1000px; height: 210px; float: left; overflow:hidden}
+
+.brandList{ width: 500px; height: 204px; float: left; overflow-x:hidden; overflow-y:auto}
+.brandList a{ width:auto; color: #000; float:left; padding:0 10px; margin-right: 10px}
+.brandList a:hover, .brandList .cur{ background-color: #39f; color: #fff; text-decoration: none}
+
+.listNav{ width: 500px; height: 30px; line-height: 30px; float: left; border-bottom: 1px solid #ccc}
+.listNav a{ color: #06f}
+
+/*按钮*/
+.btn{ width:100%; float:left}
+.btn button{ width:60px; height:22px; line-height:22px; border:0; background:url(../img/soft_bg.png) no-repeat 0 -350px; color:#fff}
+.btn .h_20{ height:20px; line-height:20px; background-position:0 -300px}
+.btn .w_30{ width:30px; background-position:0 -250px; line-height:20px}
+.btn .w_100{ width:100px; background-position:0 -400px}
+.btn .w_114_36{ width:114px; font-size:14px; height:36px; line-height:36px; background:url(../img/login_bg.png) no-repeat 0 -330px; color:#333}
+.btn .w_100_26{ width:100px; height:26px; line-height:26px; font-size:14px; background-position:0 -450px}
+.btn .w_130{ width:130px; background-position:0 -500px}
+
+/*登录*/
+.login{ width:482px; height:190px; padding-top:102px; float:left; position:absolute; color:#fff; top:50%; left:50%; margin:-146px 0 0 -241px; background:url(../img/login_bg.png)}
+.login a{ float:left; color:#256BB0}
+.ip_box{ width:408px; height:28px; line-height:28px; float:left; padding:0 8px; margin:0 0 23px 45px}
+.ip_box label{ width:38px; color:#000; float:left}
+.ip_box input{ width:340px; height:28px; line-height:28px; padding:0; float:left; background:none; border:0; color:#333}
+
+/*注册*/
+.main{ width:800px; margin:auto}
+.r_logo{ width:220px; height:35px; float:left; background:url(../img/logo.png) no-repeat 0 -100px; margin:15px 0 15px 5px}
+.reg{ width:800px; float:left}
+.reg h2{ width:785px; line-height:37px; height:37px; float:left; color:#fff; padding-left:15px; background:url(../img/reg_bg.png) no-repeat}
+.reg .r_con{ width:798px; float:left; background-color:#fff; border-left:1px solid #C0C0C0; border-right:1px solid #C0C0C0}
+.reg .b_bg{ width:800px; float:left; height:10px; background:url(../img/reg_bg.png) no-repeat 0 -52px; overflow:hidden}
+.reg .f_msg{ width:500px; float:left; padding:30px 0 30px 150px; line-height:32px}
+
+/*宽高 间距 颜色*/
+.mt_4{ margin-top:4px}
+.mt_8{ margin-top:8px}
+.ml_60{ margin-left:60px}
+.ml_80{ margin-left:80px}
+.ml_130{ margin-left:130px}
+.ml_140{ margin-left:140px}
+.ml_150{ margin-left:150px}
+.ml_210{ margin-left:210px}
+.mr_18{ margin-right:18px}
+.pl_33{ padding-left:33px}
+.pl_38{ padding-left:38px}
+.pl_80{ padding-left:80px}
+.pl_120{ padding-left:120px}
+.pl_140{ padding-left:140px}
+.pb_64{ padding-bottom: 64px}
+
+.lh_36{ line-height:36px}
+
+.onError{ color:#F00}
+.bg_gr{ background-color:#f7f7f7}
+.bo_red{ border: 1px solid #F00}
+.bori_gr{ border-right: 1px solid #ccc}
+.co_green{ color:#390}
+.cursor{ cursor:pointer}
+
+.opacity{ opacity: 0}
+
+.wh_0{ width: 0; height: 0; float: left; overflow: hidden}
+.w_48{ width: 48px}
+.w_72{ width: 72px}
+.w_210{ width:210px}
+.w_220{ width:220px}
+.w_225{ width:225px}
+.w_240{ width:240px}
+.w_250{ width:250px}
+.w_320{ width:320px}
+.w_340{ width:340px}
+.w_350{ width:350px}
+.w_380{ width:380px}
+.w_390{ width:390px}
+.w_440{ width:440px}
+.w_470{ width:470px}
+.w_520{ width:520px}
+.w_560{ width:560px}
+.w_630{ width:630px}
+.w_660{ width:660px}
+.w_820{ width:820px}
+.w_960{ width:960px}
+.w_1100{ width:1100px}
+.w_1200{ width:1200px}
+.w_1245{ width:1245px}
+.w_1300{ width:1300px}
+.h_72{ height:72px}
+.h_150{ height:150px}
+.h_280{ height:280px}

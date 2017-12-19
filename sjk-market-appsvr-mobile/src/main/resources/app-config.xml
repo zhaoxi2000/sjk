@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+	<bean id="appConfig" class="com.ijinshan.sjk.config.AppConfig">
+		<property name="appsRankTopNum" value="${apps-rank-top-num}" />
+		<!-- search -->
+		<property name="keywordMaxLength" value="${keyword-max-length}" />
+		<property name="initIndex" value="${lucene.initIndex}" />
+		<property name="searchNum" value="${lucene.searchNum}" />
+		<property name="spellCheckerNum" value="${lucene.spellCheckerNum}" />
+		<property name="quickTipsNum" value="${lucene.quickTipsNum}" />
+		<property name="queryFields">
+			<list value-type="java.lang.String">
+				<value>name</value>
+				<value>description</value>
+				<value>keywords</value>
+			</list>
+		</property>
+		<!-- all index -->
+		<property name="oldAllIndexDir" value="${lucene.oldAllIndexDir}" />
+		<property name="oldAllSpellCheckerDir" value="${lucene.oldAllSpellcheckDir}" />
+		<property name="oldAllQuickTipsIndex" value="${lucene.oldAllQuickTipsIndex}" />
+
+		<property name="allQuickTipsIndexDir" value="${lucene.allQuickTipsIndexDir}" />
+		<property name="allIndexDir" value="${lucene.allIndexDir}" />
+		<property name="allSpellCheckerDir" value="${lucene.allSpellCheckerDir}" />
+		
+		<!-- scan cdn cacheable time -->
+		<property name="scanIfHit" value="${scanIfHit}" />
+		<property name="scanIfMiss" value="${scanIfMiss}" />
+		<!-- App对应的url和专题 对应的 url -->
+		<property name="appurl" value="${appurl}" />
+		<property name="tagurl" value="${tagurl}" />
+
+		<property name="trustIPs">
+			<set value-type="java.lang.String">
+				<value>127.0.0.1</value>
+				<value>0:0:0:0:0:0:0:1</value>
+				<value>113.106.106.131</value>
+			</set>
+		</property>
+	</bean>
+</beans>

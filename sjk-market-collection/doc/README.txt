@@ -1,0 +1,3 @@
+包扫描
+select name from MarketApp where signaturesha1 is not null and MarketApkScanTime is not null and MarketUpdateTime is not null and MarketApkScanTime > MarketUpdateTime and ( AppFetchTime is null or MarketUpdateTime > AppFetchTime );
+select count(1) from MarketApp where signaturesha1 is not null and MarketApkScanTime is not null and MarketUpdateTime is not null and MarketApkScanTime > MarketUpdateTime and ( AppFetchTime is null or MarketUpdateTime > AppFetchTime );

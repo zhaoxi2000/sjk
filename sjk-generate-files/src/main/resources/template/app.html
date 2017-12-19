@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>${App.Name}</title>
+        <link href="../css/detail_style.css" rel="stylesheet" type="text/css" />
+        <link href="../css/common.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <div class="main">
+            <div class="nav">
+                <span class="f_l pt_5 pl_30 pr_20">
+                    <a class="ret" onclick="history.back()">后退</a>
+                    <a class="going" onclick="history.forward()">前进</a>
+                    <a class="ref" id="ref" href="${App.pageUrl}">刷新</a>
+                </span>
+                <span class="tage" id="tage">
+                    <a value="0">热 门</a>
+                    <a value="1" class="cur">最 新</a>
+                </span>
+                <span class="search"> <input id="keyword" name="keyword" type="text" value="请输入搜索内容" /> <button id="keyBtn"></button> </span>
+            </div>
+            
+            <div id="defScroll" class="detascroll">
+                <div class="scrollbar dis_n">
+                    <div class="track">
+                        <div class="thumb">
+                            <div class="end"></div>
+                            <div class="bom"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="viewport">
+                    <div id="defoverview" class="overview">
+                        <div class="basic">
+                            <span class="img">
+                                <img src="${App.LogoUrl}" />
+                            </span>
+                            
+                            <a class="btn" onclick="window.external.DownApk('${App.pkname}','${App.Name}','${App.Version}','${App.LogoUrl}','${App.DownloadUrl}','${App.Size}')"/>安装</a>
+                            
+                            <span class="con">
+                                <span class="co_gr">类型：</span>${Catalog.name}<br /> 
+                                <span class="co_gr">版本：</span>${App.Version}<br /> 
+                                <span class="co_gr">大小：</span><span id="setSize">${App.size}</span><br />
+                                <span class="co_gr">系统：</span>${App.osversion}<br /> 
+                                <span class="co_gr">更新：</span><span id="setDate">${App.lastUpdateTime}</span>
+                            </span>
+                        </div>
+                        
+                        <div id="detH" class="detBox">
+                            <div class="detail">
+                                <span class="tit">${App.Name}</span>
+                                
+                                <span class="bri">简介</span>
+                                <span id="briBox" class="conBox">
+                                    <span id="bricon" class="con">
+                                        ${App.Description}
+                                    </span>
+                                </span>
+                                <span id="brimore" class="more"><span>更多</span></span>
+                                
+                                #if($App.updateInfo)
+                                <span class="update">版本更新</span>
+                                <span id="upBox" class="conBox">
+                                    <span id="upcon" class="con">
+                                        ${App.updateInfo}
+                                    </span>
+                                </span>
+                                <span id="upmore" class="more"><span>更多</span></span>
+                                #end
+                            </div>
+                            
+                            <div class="revPic" id="revPic"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input name="" type="hidden" id="picDate" picsrc="${App.strImageUrls}" />
+        <input type="hidden" id="catalog" name="catalog" value="${App.catalog}"/>
+        <script src="../js/jquery-1.6.4.min.js" type="text/javascript"></script>
+        <script src="../js/jquery.tinyscrollbar.min.js" type="text/javascript"></script>
+        <script src="../js/index.js" type="text/javascript"></script>
+        #if($App.updateInfo)
+        <script type="text/javascript">
+            $(function(){
+                ConEve("upBox","upcon","upmore",465);
+            })
+        </script>
+        #end
+    </body>
+</html>

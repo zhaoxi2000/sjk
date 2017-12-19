@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>搜索效果</title>
+<link rel="stylesheet" href="search.css" />
+</head>
+<body id="body">
+    <div id="srContent">
+        <span id="srContentAction"> <input type="radio" name="appType" value="1" checked="checked" />应用 <input type="radio" name="appType" value="2" />游戏 <input id="word" name="word" type="text" autocomplete="off" maxlength="50" size="20" /> <input id="rows" type="number" min="1" max="30" width="30" value="10" />条数 <input id="page" type="number" min="1" max="40" width="30" value="1" />页码
+            <button id="srBtn" name="srBtn" type="button">搜索</button>
+        </span> <img id="loading" class="hidden" src="loading.gif" />
+    </div>
+
+    <div class="searchDesc">搜索排序:下载量&gt;渠道 </div>
+
+    <div id="totalContainer" style="margin-top: 20px">
+        总条数:&nbsp;<em id="total"></em>
+    </div>
+    <ul id="resultContainer"></ul>
+    <li id="appTmplate" class="app hidden"><img class="logo" src="loading.gif" />
+        <div class="summary">
+            <div>
+                <span class="name"></span><span class="official hidden" name="official">官 </span>
+            </div>
+            <div class="desc singleline"></div>
+            <span class="downloadBox">下载量&nbsp;<span class="download"></span></span><span class="marketBox">市场&nbsp;<em class="market"></em></span>
+        </div>
+
+        <div class="clear"></div></li>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.1.min.js"></script>
+    <script src="./search.js?t=0325-1654"></script>
+</body>
+</html>

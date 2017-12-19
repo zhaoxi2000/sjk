@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ijinshan.sjk.mapper.MetorMapper">
+	<sql id="metor">
+		pics,ShortDesc,AppOrTagId,type,name,picType,bigPics
+	</sql>
+	<sql id="app">
+		Id,Name,Size,SignatureSHA1,OfficialSigSHA1,Pkname,DownloadUrl,LogoUrl,Version,VersionCode,LastUpdateTime,
+		AdActionTypes,AdPopupTypes,VirusKind,Marketname,downloadRank
+	</sql>
+	<sql id="metromobile">
+		mo.appOrTagId,mo.type,mo.shortDesc,mo.name,mo.picType,mo.marketname,mo.versionCode,mo.bigPics,mo.mediumPics,mo.smallPics
+	</sql>
+	<resultMap type="com.ijinshan.sjk.vo.MetroOldMobileVO" id="moFeaturedMapper">
+		<!-- <id property="id" column="id" /> -->
+		<result property="pics" column="pics" />
+		<result property="url" column="url" />
+		<result property="type" column="type" />
+		<result property="appOrTagId" column="appOrTagId" />
+		<result property="name" column="name" />
+		<result property="shortDesc" column="shortDesc" />
+		<result property="picType" column="picType" />
+		<result property="catalog" column="Catalog" />
+		<result property="marketname" column="MarketName" />
+		<result property="versionCode" column="VersionCode" />
+		<result property="bigPics" column="BigPics" />
+	</resultMap>
+
+	<select id="getMoFeaturedlist" resultMap="moFeaturedMapper">
+		SELECT x.pics,
+		x.name, x.ShortDesc, x.type, x.AppOrTagId,x.PicType,x.BigPics,p.Catalog,p.MarketName,p.VersionCode
+		FROM
+		Mo_Featured x
+		LEFT JOIN App p ON x.AppOrTagId=p.Id
+		WHERE
+		x.hidden = 0 and deleted = 0 order by x.Rank asc
+		<!--SELECT x.pics, x.name, x.ShortDesc, x.type, x.AppOrTagId,x.PicType FROM Mo_Featured x WHERE x.hidden = 0 and deleted 
+			= 0 order by x.Rank asc -->
+	</select>
+</mapper>

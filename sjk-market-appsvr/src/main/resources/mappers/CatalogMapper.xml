@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ijinshan.sjk.mapper.CatalogMapper">
+	<sql id="catalog">
+		Id,PId,Name
+	</sql>
+	<select id="listCatalogInfoByFilters" resultType="com.ijinshan.sjk.po.CatalogInfo">
+		SELECT
+		x.id , x.name , COUNT(y.id) AS count
+		FROM Catalog x
+		LEFT JOIN
+		App y
+		ON x.pid = y.catalog
+		AND x.id = y.subcatalog
+		WHERE
+		x.pid = #{catalog}
+		and
+		y.hidden = 0
+		<choose>
+			<when test="noAds != null">
+				and ( y.adPopupTypes is null or y.adPopupTypes='' )
+				and ( y.adActionTypes is null or
+				y.adActionTypes='' )
+			</when>
+		</choose>
+		<choose>
+			<when test="official != null and official">
+				and y.signatureSha1 is not null and y.signatureSha1 =
+				y.officialSigSha1
+			</when>
+		</choose>
+		GROUP BY x.id
+		HAVING COUNT(y.id) >0
+		ORDER BY x.rank ASC
+	</select>
+</mapper>

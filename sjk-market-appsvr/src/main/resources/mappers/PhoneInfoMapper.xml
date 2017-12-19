@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ijinshan.sjk.mapper.PhoneInfoMapper">
+
+	<sql id="phoneforbiggame">
+		pinfo.Id,pinfo.ProductId,pinfo.Brand,pinfo.Product,pinfo.Support
+	</sql>
+
+	<resultMap id="phoneInfoVo" type="com.ijinshan.sjk.vo.PhoneVo">
+		<result property="phoneType" column="PhoneType" />
+		<result property="cpu" column="Cpu" />
+		<result property="phoneId" column="PhoneId" />
+	</resultMap>
+
+	<select id="findPhoneInfoList" parameterType="string" resultMap="phoneInfoVo">
+		SELECT
+		PhoneType,
+		cpu,
+		phoneId
+		FROM
+		(
+		SELECT
+		pinfo.Product AS PhoneType,
+		(
+		SELECT
+		cpu
+		FROM
+		PhoneRelations prel
+		WHERE
+		pinfo.Id =
+		prel.PhoneId
+		AND prel.Cpu > 0
+		LIMIT 1
+		) AS cpu,
+		pinfo.Id AS phoneId
+		FROM
+		PhoneBasicInfo pinfo
+		WHERE
+		pinfo.Product NOT IN (
+		'',
+		'设备',
+		'Android设备'
+		)
+		AND pinfo.Brand = #{brand}
+		) A
+		WHERE A.cpu IS NOT NULL
+		<!-- SELECT pinfo.Product as PhoneType,(SELECT cpu FROM PhoneRelations prel WHERE pinfo.Id = prel.PhoneId and prel.Cpu 
+			> 0 LIMIT 1) as cpu, pinfo.Id as phoneId FROM PhoneBasicInfo pinfo WHERE pinfo.Product NOT IN ('', '璁惧', 'Android璁惧') AND 
+			pinfo.Brand = #{brand} -->
+		<!-- select pinfo.Product as PhoneType,prel.Cpu as cpu,prel.PhoneId -->
+		<!-- as phoneId -->
+		<!-- <![CDATA[ -->
+		<!-- from PhoneRelations prel join PhoneBasicInfo pinfo -->
+		<!-- where pinfo.Id = prel.PhoneId and pinfo.Brand = #{brand} -->
+		<!-- and prel.Cpu > 0 -->
+		<!-- and (pinfo.Product <> 'Android设备' and pinfo.Product <> '设备') -->
+		<!-- and pinfo.Product is not null and pinfo.Product <> '' -->
+		<!-- group by pinfo.Id -->
+		<!-- ]]> -->
+	</select>
+
+	<select id="findPhoneInfoByParams" resultType="Integer">
+		select prel.PhoneId as PhoneId
+		 <![CDATA[
+		from PhoneRelations prel
+		join PhoneBasicInfo pinfo where pinfo.Id = prel.PhoneId
+		and prel.Cpu = #{cputype}
+		and pinfo.Brand = #{brand}
+		and prel.Cpu >0 
+		and (pinfo.Product <> 'Android设备' and pinfo.Product <> '设备')
+		and  pinfo.Product is not null
+         ]]>
+		<if test="product!=null">
+			and pinfo.Product = #{product}
+		</if>
+	</select>
+
+	<select id="getPhoneList" resultType="com.ijinshan.sjk.po.PhoneBasicInfo">
+		select
+		<include refid="phoneforbiggame" />
+	   <![CDATA[
+	   FROM PhoneBasicInfo pinfo 
+		WHERE EXISTS(
+		    SELECT 1 FROM PhoneRelations prel 
+		    WHERE pinfo.Id = prel.PhoneId and prel.Cpu > 0
+		)
+		AND pinfo.Product NOT IN ('', '设备', 'Android设备')
+		AND pinfo.Product= #{product} and pinfo.Brand= #{brand}
+		]]>
+	</select>
+
+</mapper>

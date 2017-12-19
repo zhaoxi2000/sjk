@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+	<bean id="appConfig" class="com.ijinshan.sjk.config.AppConfig">
+		<property name="appsRankTopNum" value="${apps-rank-top-num}" />
+		<!-- search -->
+		<property name="keywordMaxLength" value="${keyword-max-length}" />
+		<property name="initIndex" value="${lucene.initIndex}" />
+		<property name="searchMaxNum" value="${lucene.searchMaxNum}" />
+		<property name="spellCheckerNum" value="${lucene.spellCheckerNum}" />
+		<property name="quickTipsNum" value="${lucene.quickTipsNum}" />
+		<property name="quickTipsIndex" value="${lucene.quickTipsIndex}" />
+		<property name="queryFields">
+			<list value-type="java.lang.String">
+				<value>name</value>
+				<value>description</value>
+				<value>keywords</value>
+			</list>
+		</property>
+		<!-- all index -->
+		<property name="allIndexDir" value="${lucene.allIndexDir}" />
+		<property name="allQuickTipsIndexDir" value="${lucene.allQuickTipsIndexDir}" />
+		<property name="allSpellCheckerDir" value="${lucene.allSpellCheckerDir}" />
+		<!-- all index end -->
+
+		<property name="spellCheckerDir" value="${lucene.spellCheckerDir}" />
+		<property name="indexDir" value="${lucene.indexDir}" />
+		<!-- soft -->
+		<property name="softCatalog" value="${lucene.softTypeId}" />
+		<property name="softIndexDir" value="${lucene.softIndexDir}" />
+		<property name="softDic" value="${lucene.softDic}" />
+		<property name="softSpellcheckDir" value="${lucene.softSpellcheckDir}" />
+		<!-- game -->
+		<property name="gameCatalog" value="${lucene.gameTypeId}" />
+		<property name="gameIndexDir" value="${lucene.gameIndexDir}" />
+		<property name="gameDic" value="${lucene.gameDic}" />
+		<property name="gameSpellcheckDir" value="${lucene.gameSpellcheckDir}" />
+		<!-- biggame -->
+		<property name="biggameCatalog" value="${lucene.biggameTypeId}" />
+		<property name="biggameIndexDir" value="${lucene.biggameIndexDir}" />
+		<property name="biggameDic" value="${lucene.biggameDic}" />
+		<property name="biggameSpellcheckDir" value="${lucene.biggameSpellcheckDir}" />
+        <!-- 分页限制 -->
+        <property name="maxOffset" value="${maxOffset}" />
+         <!-- Redis配置 -->
+        <property name="redisFindMax" value="${redis.FindMax}"></property>
+		<!-- scan cdn cacheable time -->
+		<property name="scanIfHit" value="${scanIfHit}" />
+		<property name="scanIfMiss" value="${scanIfMiss}" />
+		<property name="trustIPs">
+			<set value-type="java.lang.String">
+				<value>127.0.0.1</value>
+				<value>0:0:0:0:0:0:0:1</value>
+				<value>113.106.106.131</value>
+			</set>
+		</property>
+	</bean>
+</beans>

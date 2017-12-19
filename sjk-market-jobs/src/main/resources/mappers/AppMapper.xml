@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ijinshan.sjk.mapper.AppMapper">
+	
+	<select id="getAllApp" resultMap="com.ijinshan.sjk.vo.App">
+        SELECT
+        Id,Catalog, SubCatalog,
+        (CASE WHEN (AdPopupTypes IS NULL OR AdPopupTypes = '') AND (AdActionTypes IS NULL OR AdActionTypes = '') THEN 1 ELSE 0 END)
+        NoAds,
+        (CASE WHEN SignatureSha1 IS NOT NULL AND signatureSha1 = officialSigSha1 THEN 1 ELSE 0 END) Official,
+        DownloadRank,
+        LastUpdateTime
+        FROM App
+        WHERE Hidden = 0;
+	</select>
+</mapper>

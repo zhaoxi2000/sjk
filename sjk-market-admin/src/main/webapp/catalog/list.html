@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!--<base href="../" />-->
+        <!--IE doesnot support relative path.-->
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>软件列表</title>
+        <link href="../css/admin_dig.css" rel="stylesheet" type="text/css" />
+        <link href="../css/easyui.css" rel="stylesheet" type="text/css" />
+        <link href="../css/common.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../js/lib/jquery-1.7.1.min.js"></script>
+        <script type="text/javascript" src="../js/lib/jquery.easyui.min.js"></script> 
+        <script type="text/javascript" src="../js/catalog/list.js"></script>
+        
+    </head>
+    <body>
+        <div class="con">
+            <div class="title">   
+            	<div class="title tag">   
+            	平台类别管理
+            	</div> 
+            	<div class="clear"></div>
+                <span class="f_l pt_5"> 
+                    <a   class="new_ico" onclick="Add()">添加</a> 
+                    <a href="list.html" class="ref_ico">刷新</a>
+                    <select class="f_l w_100 mt_8 mr_10" id="keyCatalog">
+                        <option value="0" selected="selected">全部</option>
+                        <option  value="1">软件</option>
+                        <option  value="2">游戏</option>
+                        <option  value="100">大型游戏</option>
+                    </select> 
+                    <select class="f_l w_100 mt_8 mr_10" id="keySubCatalog">
+                        <option value="0" selected="selected">全部</option>
+                    </select> 
+                    <input name="keyword" type="text" class="f_l w_120 mt_8 mr_10" id="keyword" /> 
+                    <span class="btn w_100 mt_8 "> 
+                        <button type="submit" class="h_20 f_l mr_10" id="search">搜索</button> 
+                    </span> 
+                </span>
+            </div>
+            <div class="clear"></div>
+            <table id="dataList"></table> 
+        </div> 
+        
+        
+    <div id="editPanl" class="dp_n"> 
+        <div class="editTagApps w_550" style="height:300">
+                <table class="tab2 w_520 datagrid-htable" border="0" cellspacing="0" cellpadding="0">
+                    <tbody>
+                        <tr>
+                            <td align='right' class="w_120">
+                                <input type="hidden" name="id" id="id" value="0" />上级类别：
+                            </td>
+                            <td class="w_200">
+                                <select id="sltCatalog" name="PId">  
+                                    <option value="1">软件</option>
+                                    <option value="2">游戏</option>
+                                    <option value="100">大游戏</option>
+                                </select>
+                            </td>
+                            <td><span class="co_red" id="errorCatalog"></span></td>
+                        </tr>
+                        <tr >
+                            <td align='right'>类别名称：</td>
+                            <td><input type="text" name="name" id="txtName" /></td>
+                            <td><span class="co_red" id="errorName"></span></td>
+                        </tr> 
+                        <tr>
+                            <td align='right'>排序（rank)：</td>
+                            <td><input type="text" name="rank" id="txtRank" /></td>
+                            <td></td>
+                        </tr> 
+                        <tr>
+                            <td align='right'>关键字：</td>
+                            <td>
+                              <input type="text" name="keywords" id="txtKeywords" />
+                            </td>
+                            <td></td>
+                        </tr>  
+                        <tr>
+                            <td align='right'>描述：</td>
+                            <td><input type="text" name="description" id="txtDescription" /></td>
+                            <td></td>
+                        </tr> 
+                       
+                        <tr>
+                            <td></td>
+                            <td><span class="btn"><button id="tagsPost" type="button">提交</button></span></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table> 
+        </div> 
+    </div>
+    </body>
+</html>

@@ -1,0 +1,20 @@
+部署测试接口:
+curl "http://127.0.0.1:9080/sjk-market-appsvr/health.d"
+curl "http://127.0.0.1:9080/sjk-market-appsvr/app/api/cdn/hot.json?catalog=2&page=1&rows=10&sortType=1"
+curl "http://127.0.0.1:9080/sjk-market-appsvr/app/api/cdn/hot.json?catalog=2&page=1&rows=8"
+curl "http://127.0.0.1:9080/sjk-market-appsvr/app/api/cdn/hot.json?catalog=1&page=3&rows=8&noAds=0&official=0"
+curl "http://127.0.0.1:9080/sjk-market-appsvr/app/api/cdn/s/search.json?q=离线驾照考试复习&page=1&rows=10&noAds=1&official=1"
+curl "http://127.0.0.1:9080/sjk-market-appsvr/app/api/cdn/s/search.json?q=qq&page=1&rows=10&noAds=1&official=1"
+curl "http://127.0.0.1:9080/sjk-market-appsvr/app/api/cdn/s/search.json?q=召唤仙境&page=1&rows=10"
+
+curl "http://127.0.0.1:9080/sjk-market-appsvr/app/api/cdn/hot.json?catalog=2&page=1&rows=7"
+curl "http://127.0.0.1:9080/sjk-market-appsvr/app/api/cdn/rank.json?sortType=4&rows=3&page=1"
+curl "http://127.0.0.1:9080/sjk-market-appsvr/app/api/cdn/increment.json?catalog=1"
+curl "http://127.0.0.1:9080/sjk-market-appsvr/app/api/cdn/increment.json"
+curl "http://127.0.0.1:9080/sjk-market-appsvr/app/api/cdn/s/quickTips.json?q=QQ"
+
+测试环境.
+ memcached -d -p 11211 -u root -m 768 -n 3000 -f 1.25 -t 8 -c 10240
+ 
+ 生产环境.
+ memcached -d -p 11211 -u root -m 5120 -n 3000 -f 1.25 -t 8 -c 5000

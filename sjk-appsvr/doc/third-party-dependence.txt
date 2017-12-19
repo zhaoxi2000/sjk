@@ -1,0 +1,1 @@
+mvn install:install-file -Dfile=paoding-analysis.jar -DgroupId=net.paoding.analysis -DartifactId=net.paoding.analysis -Dversion=1.0 -Dpackaging=jar

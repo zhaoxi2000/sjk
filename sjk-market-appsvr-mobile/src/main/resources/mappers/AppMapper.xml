@@ -1,0 +1,587 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ijinshan.sjk.mapper.AppMapper">
+	<!-- 完整App信息 -->
+	<sql id="app">
+		Id,MarketName,Name,EngName,Catalog,SubCatalog,Size,FreeSize,DownloadUrl,LogoUrl,Description,UpdateInfo,PublisherShortName,Version,Minsdkversion,VersionCode,OSVersion,Pkname,LastUpdateTime,DetailUrl,Price,Screens,Models,Keywords,StarRating,ViewCount,Supportpad,StrImageUrls,PageUrl,ShortDesc,IndexImgUrl,Notice,OfficeHomepage,Language,PathStatus,SignatureSHA1,OfficialSigSHA1,Advertises,AdActionTypes,AdPopupTypes,VirusKind,DownloadRank,RealDownload,DeltaDownload,Logo1Url
+	</sql>
+	<!-- 分类列表 -->
+	<sql id="apps">
+		Id,Name,Size,DownloadUrl,LogoUrl,VersionCode,Pkname,LastUpdateTime,StrImageUrls,SignatureSHA1,OfficialSigSHA1,AdActionTypes,AdPopupTypes,VirusKind,DownloadRank
+	</sql>
+	<!-- 大游戏 -->
+	<sql id="bigGame">
+		Id,MarketAppId,Cputype,Url,Size,FreeSize,AdPopupTypes,AdActionTypes,Advertises,AdRisk,VirusKind,VirusBehaviors,VirusName,Permissions,SignatureSHA1,OfficialSigSHA1,MD5,PackageSjdbMd5,SignatureMD5,QuickMd5,MarketApkScanTime,MarketUpdateTime
+	</sql>
+	<!-- 升级 -->
+	<sql id="scanApp">
+		id, catalog , pkname, minsdkversion, name, downloadUrl,
+		logoUrl, size, version, versionCode,
+		updateInfo,
+		signatureSHA1,
+		officialSigSHA1,
+		lastUpdateTime,
+		pathStatus,
+		marketName
+	</sql>
+	<!-- 详情内容 -->
+	<sql id="appVo">
+		Id,MarketName,Name,SubCatalog,Size,FreeSize,DownloadUrl,LogoUrl,Description,UpdateInfo,PublisherShortName,Version,Minsdkversion,VersionCode,OSVersion,Pkname,LastUpdateTime,DetailUrl,Price,Screens,Models,Keywords,StarRating,ViewCount,Supportpad,StrImageUrls,PageUrl,ShortDesc,Notice,OfficeHomepage,Language,PathStatus,SignatureSHA1,OfficialSigSHA1,Advertises,AdActionTypes,AdPopupTypes,VirusKind,DownloadRank
+	</sql>
+	<!-- 排行列表 -->
+	<sql id="searchApp">
+		Id,Name,SubCatalog,Size,DownloadUrl,LogoUrl,Pkname,Version,LastUpdateTime,SignatureSHA1,OfficialSigSHA1,AdActionTypes,AdPopupTypes,VirusKind,DownloadRank,Catalog,MarketName,VersionCode
+	</sql>
+	<!-- latest 最新,日期过滤 -->
+    <sql id="apps4Latest">
+		Id,Name, LogoUrl, PageUrl, Catalog, SubCatalog, Pkname,
+		Version, DownloadRank, DownloadUrl, VersionCode,
+		Size,
+		PathStatus,
+		SignatureSha1,
+		OfficialSigSha1,Advertises,AdActionTypes,AdPopupTypes,VirusKind
+		,
+		ShortDesc,
+		LastUpdateTime, freeSize, MarketName,scSta,
+		substr(Description, 1 ,
+		500) AS Description
+	</sql>
+	<!-- 搜索列表 -->
+	<sql id="apps4Search">
+		Id,Name,Catalog,SubCatalog,Size,DownloadUrl,LogoUrl,Pkname,Version,LastUpdateTime,SignatureSHA1,OfficialSigSHA1,AdActionTypes,AdPopupTypes,VirusKind,DownloadRank,MarketName
+	</sql>
+	<resultMap id="appAndBigGamesVo" type="com.ijinshan.sjk.vo.AppAndBigGamesVo">
+		<id property="id" column="id" javaType="int" />
+		<result property="version" column="version" />
+		<result property="marketAppId" column="MarketAppId" />
+		<result property="marketName" column="MarketName" />
+		<result property="name" column="Name" />
+		<result property="engName" column="EngName" />
+		<result property="catalog" column="Catalog" />
+		<result property="subCatalog" column="SubCatalog" />
+		<result property="size" column="Size" />
+		<result property="freeSize" column="FreeSize" />
+		<result property="downloadUrl" column="DownloadUrl" />
+		<result property="logoUrl" column="LogoUrl" />
+		<result property="description" column="Description" />
+		<result property="updateInfo" column="UpdateInfo" />
+		<result property="publisherShortName" column="PublisherShortName" />
+		<result property="minsdkversion" column="Minsdkversion" />
+		<result property="versionCode" column="VersionCode" />
+		<result property="osversion" column="OSVersion" />
+		<result property="pkname" column="Pkname" />
+		<result property="lastUpdateTime" column="LastUpdateTime" />
+		<result property="lastFetchTime" column="LastFetchTime" />
+		<result property="detailUrl" column="DetailUrl" />
+		<result property="price" column="Price" />
+		<result property="screens" column="Screens" />
+		<result property="models" column="Models" />
+		<result property="keywords" column="Keywords" />
+		<result property="starRating" column="StarRating" />
+		<result property="viewCount" column="ViewCount" />
+		<result property="downloads" column="Downloads" />
+		<result property="downloadRank" column="DownloadRank" />
+		<result property="supportpad" column="Supportpad" />
+		<result property="enumStatus" column="EnumStatus" />
+		<result property="strImageUrls" column="StrImageUrls" />
+		<result property="auditCatalog" column="AuditCatalog" />
+		<result property="hidden" column="Hidden" />
+		<result property="pageUrl" column="PageUrl" />
+		<result property="shortDesc" column="ShortDesc" />
+		<result property="indexImgUrl" column="IndexImgUrl" />
+		<result property="notice" column="Notice" />
+		<result property="officeHomepage" column="OfficeHomepage" />
+		<result property="language" column="Language" />
+		<result property="audit" column="Audit" />
+		<result property="pathStatus" column="PathStatus" />
+		<result property="permissions" column="Permissions" />
+		<result property="signatureSha1" column="SignatureSHA1" />
+		<result property="officialSigSha1" column="OfficialSigSHA1" />
+		<result property="apkScanTime" column="ApkScanTime" />
+		<result property="advertises" column="Advertises" />
+		<result property="adActionTypes" column="AdActionTypes" />
+		<result property="adPopupTypes" column="AdPopupTypes" />
+		<result property="adRisk" column="AdRisk" />
+		<result property="realDownload" column="RealDownload" />
+		<result property="deltaDownload" column="DeltaDownload" />
+		<result property="lastDayDownload" column="LastDayDownload" />
+		<result property="lastWeekDownload" column="LastWeekDownload" />
+		<result property="lastWeekDelta" column="LastDayDelta" />
+		<result property="virusKind" column="VirusKind" />
+		<result property="lastWeekDelta" column="LastWeekDelta" />
+		<result property="virusBehaviors" column="VirusBehaviors" />
+		<result property="virusName" column="VirusName" />
+		<result property="md5" column="Md5" />
+		<result property="appId" column="AppId" />
+		<result property="apkId" column="ApkId" />
+		<result property="logo1url" column="Logo1Url" />
+		<result property="status" column="Status" />
+		<result property="autoCover" column="AutoCover" />
+		<!-- <collection property="bigGamePackList" column="MarketAppId" javaType="ArrayList" ofType="com.ijinshan.sjk.po.BigGamePack" 
+			select="com.ijinshan.sjk.mapper.BigGamePackMapper.getBigGameByMarkAppId"> </collection> -->
+	</resultMap>
+
+	<resultMap id="scanAppTopN_resultMap" type="com.ijinshan.sjk.vo.pc.ScanApks">
+		<id property="pkname" column="pkname" javaType="String" />
+		<result property="catalog" column="catalog" javaType="short" />
+		<result property="officialSigSha1" column="officialSigSHA1" />
+		<result property="logoUrl" column="logoUrl" />
+		<collection property="apks" javaType="ArrayList" ofType="com.ijinshan.sjk.vo.pc.SimpleScanApk" column="pkname">
+			<result property="minsdkversion" column="minsdkversion" javaType="java.lang.Short" />
+			<result property="downloadUrl" column="downloadUrl" />
+			<result property="size" column="size" javaType="int" />
+			<result property="version" column="version" />
+			<result property="versionCode" column="versionCode" javaType="int" />
+			<result property="updateInfo" column="updateInfo" />
+			<result property="pathStatus" column="pathStatus" javaType="byte" />
+			<result property="signatureSha1" column="signatureSHA1" />
+			<result property="marketName" column="marketName" />
+		</collection>
+	</resultMap>
+
+
+	<select id="get" parameterType="int" resultType="com.ijinshan.sjk.po.App">
+		select
+		<include refid="app" />
+		from App
+		where Id = #{id}
+	</select>
+	<select id="getAppByPackageName" parameterType="string" resultType="com.ijinshan.sjk.vo.ScanApp">
+		select
+		<include refid="scanApp" />
+		from App
+		where Pkname = #{packagename}
+		and hidden = 0
+		order by downloadRank desc
+		limit 0, 1
+	</select>
+	<select id="getAppByApk" resultType="com.ijinshan.sjk.vo.ScanApp">
+		select
+		<include refid="scanApp" />
+		from App
+		where
+		Pkname = #{pkname}
+		and Signaturesha1 = #{signaturesha1}
+		and hidden = 0
+		limit 0, 1
+	</select>
+	<select id="getLatest" resultType="com.ijinshan.sjk.vo.pc.LatestApp">
+        select
+        <include refid="apps4Latest" />
+        from App
+        where
+        hidden = 0
+        <if test="catalog != null">
+            and catalog = #{catalog}
+        </if>
+        <if test="subCatalog != null">
+            and subCatalog = #{subCatalog}
+        </if>
+        <if test="noAds != null">
+            and ( adPopupTypes is null or adPopupTypes='' )
+            and (
+            adActionTypes is null or
+            adActionTypes='' )
+        </if>
+        <if test="official != null and official">
+            and signatureSha1 is not null and signatureSha1 =
+            officialSigSha1
+        </if>
+        <if test="startDate != null and endDate != null">
+			and lastUpdateTime between
+			#{startDate,jdbcType=TIMESTAMP}
+			and
+			#{endDate,jdbcType=TIMESTAMP}
+		</if>
+		order by downloadrank desc
+        limit ${offset} , ${rowCount}
+    </select>
+
+	<select id="getByIds" resultType="com.ijinshan.sjk.vo.MobileSearchApp">
+		select
+		<include refid="searchApp" />
+		from App
+		where
+		hidden = 0
+		and id in
+		<foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+		<if test="sortColumn != null">
+			order by ${sortColumn}
+		</if>
+		<if test="sortColumn != null and order != null">
+			${order}
+		</if>
+	</select>
+	<select id="getForIndex" resultType="com.ijinshan.sjk.po.App">
+		select
+		<include refid="app" />
+		from App
+		where
+		hidden = 0
+		<if test="catalog != null">
+			and subCatalog = #{catalog}
+		</if>
+		<if test="subCatalog != null">
+			and subCatalog = #{subCatalog}
+		</if>
+		limit ${offset} , ${rowCount}
+	</select>
+	<select id="count" resultType="long">
+		select count(id) from App where hidden = 0
+		<if test="catalog != null">
+			and catalog = #{catalog}
+		</if>
+	</select>
+	<select id="getLatestCount" resultType="long">
+        select count(id) from App where hidden = 0 
+        <if test="catalog != null">
+            and catalog = #{catalog}
+        </if>
+        <if test="subCatalog != null">
+            and subCatalog = #{subCatalog}
+        </if>
+        <if test="noAds != null">
+            and ( adPopupTypes is null or adPopupTypes='' )
+            and (
+            adActionTypes is null or
+            adActionTypes='' )
+        </if>
+        <if test="official != null and official">
+            and signatureSha1 is not null and signatureSha1 =
+            officialSigSha1
+        </if>
+        <if test="startDate != null and endDate != null">
+			and lastUpdateTime between
+			#{startDate,jdbcType=TIMESTAMP}
+			and
+			#{endDate,jdbcType=TIMESTAMP}
+		</if>
+    </select>
+	<select id="list" resultType="com.ijinshan.sjk.po.App">
+		select
+		<include refid="app" />
+		from App where hidden = 0
+		and catalog = #{catalog}
+		<if test="subCatalog != null">
+			and subCatalog = #{subCatalog}
+		</if>
+		<if test="noAds != null">
+			and ( adPopupTypes is null or adPopupTypes='' )
+			and (
+			adActionTypes is null or
+			adActionTypes='' )
+		</if>
+		<if test="official != null and official">
+			and signatureSha1 is not null and signatureSha1 =
+			officialSigSha1
+		</if>
+		<if test="sortColumn != null">
+			order by ${sortColumn}
+		</if>
+		<if test="sortColumn != null and order != null">
+			${order}
+		</if>
+		limit ${offset} , ${rowCount}
+	</select>
+	<select id="countByFilters" resultType="long">
+		select count(id) from App where hidden = 0
+		and catalog = #{catalog}
+		<if test="subCatalog != null">
+			and subCatalog = #{subCatalog}
+		</if>
+		<if test="noAds != null">
+			and ( adPopupTypes is null or adPopupTypes='' )
+			and (
+			adActionTypes is null or
+			adActionTypes='' )
+		</if>
+		<if test="official != null and official">
+			and signatureSha1 is not null and signatureSha1 =
+			officialSigSha1
+		</if>
+	</select>
+	<!-- latest -->
+	<select id="getLatestDates" resultType="String">
+		select distinct date(lastUpdateTime) AS lastUpdateTime
+		from App
+		where
+		hidden = 0
+		and catalog = #{catalog}
+		and subCatalog
+		=#{subCatalog}
+		<if test="noAds != null">
+			and ( adPopupTypes is null or adPopupTypes='' )
+			and (
+			adActionTypes is null or
+			adActionTypes='' )
+		</if>
+		<if test="official != null and official">
+			and signatureSha1 is not null and signatureSha1 =
+			officialSigSha1
+		</if>
+		order by lastUpdateTime desc
+		limit ${offset} , ${rowCount}
+	</select>
+	<select id="getLatestDatesCount" resultType="long">
+		select count(distinct date(lastUpdateTime)) AS count
+		from App
+		where
+		hidden = 0
+		and catalog = #{catalog}
+		and subCatalog
+		=#{subCatalog}
+		<if test="noAds != null">
+			and ( adPopupTypes is null or adPopupTypes='' )
+			and (
+			adActionTypes is null or
+			adActionTypes='' )
+		</if>
+		<if test="official != null and official">
+			and signatureSha1 is not null and signatureSha1 =
+			officialSigSha1
+		</if>
+	</select>
+	<select id="getLatestDate" resultType="com.ijinshan.sjk.vo.LatestDate">
+		SELECT catalog , subCatalog , lastUpdateTime
+		FROM
+		(
+		SELECT DISTINCT
+		DATE(lastUpdateTime) AS lastUpdateTime , subCatalog ,
+		catalog FROM
+		Catalog y1
+		LEFT JOIN App x1
+		ON
+		x1.catalog = y1.pid AND
+		x1.subCatalog =
+		y1.id
+		WHERE hidden = 0
+		<if test="noAds != null">
+			and ( adPopupTypes is null or adPopupTypes='' )
+			and (
+			adActionTypes is null or
+			adActionTypes='' )
+		</if>
+		<if test="official != null and official">
+			and signatureSha1 is not null and signatureSha1 =
+			officialSigSha1
+		</if>
+		ORDER BY lastUpdateTime DESC
+		) AS x
+		GROUP BY catalog , subCatalog
+		ORDER
+		BY
+		lastUpdateTime DESC
+	</select>
+	<!-- latest end -->
+	<select id="getScanTop" parameterType="int" resultType="com.ijinshan.sjk.po.App">
+		select
+		<include refid="scanApp" />
+		from App
+		where hidden = 0
+		order by downloadrank desc
+		limit 30
+	</select>
+
+	<update id="updateIncrementDownload" flushCache="true">
+		update App set
+		realDownload = realDownload +
+		${delta},downloadrank = realDownload
+		+deltaDownload
+		where id = #{id}
+	</update>
+	<select id="getMaxDownloadOfDay" resultType="com.ijinshan.sjk.po.App">
+		select
+		<include refid="app" />
+		from App
+		where
+		hidden = 0
+		order by lastDayDelta desc
+		limit 0,15
+	</select>
+	<select id="getMaxDownloadOfWeek" resultType="com.ijinshan.sjk.po.App">
+		select
+		<include refid="app" />
+		from App
+		where
+		hidden = 0
+		order by lastWeekDelta desc
+		limit 0,15
+	</select>
+	<select id="getByPackageName" resultType="com.ijinshan.sjk.po.App">
+		select
+		<include refid="scanApp" />
+		from App
+		where
+		hidden = 0
+		and pkname = #{pkname}
+		order by versionCode desc
+		limit 0,2
+	</select>
+
+	<select id="getAppListByCatalog" resultMap="appAndBigGamesVo">
+		select
+		<include refid="apps" />
+		from App where Catalog = #{catalog} and hidden = 0
+		<if test="subCatalog!=null">
+			and SubCatalog = #{subCatalog}
+		</if>
+	</select>
+
+	<select id="getSearchAppListByParams" resultType="com.ijinshan.sjk.vo.MobileSearchApp">
+		select
+		<include refid="searchApp" />
+		from App where hidden = 0 and Catalog = #{catalog}
+		<if test="subCatalog!=null">
+			and SubCatalog = #{subCatalog}
+		</if>
+		<choose>
+			<when test="sort == null or sort='' ">
+				order by downloadrank desc
+			</when>
+			<otherwise>
+				order by #{sort} desc
+			</otherwise>
+		</choose>
+		limit ${offset} , ${rowCount}
+	</select>
+
+	<select id="getSearchAppListByParamsCount" resultType="long">
+		select count(id)
+		from App where hidden = 0 and Catalog = #{catalog}
+		<if test="subCatalog!=null">
+			and SubCatalog = #{subCatalog}
+		</if>
+		<choose>
+			<when test="sort == null or sort='' ">
+				order by downloadrank desc
+			</when>
+			<otherwise>
+				order by #{sort} desc
+			</otherwise>
+		</choose>
+	</select>
+
+	<select id="getAppVoById" parameterType="int" resultType="com.ijinshan.sjk.vo.AppVo">
+		select
+		<include refid="appVo" />
+		from App
+		where Id = #{id}
+	</select>
+
+	<select id="getApks" resultType="com.ijinshan.sjk.vo.pc.ScanApp">
+		select
+		<include refid="scanApp" />
+		from App
+		where
+		Pkname = #{pkname}
+		and VersionCode > #{versionCode}
+		and
+		hidden = 0
+		ORDER BY VersionCode DESC
+		limit 0, 10
+	</select>
+
+	<select id="getScanAppTopN" resultMap="scanAppTopN_resultMap">
+		SELECT
+		y.catalog ,
+		y.pkname,
+		y.minsdkversion, y.downloadUrl,
+		y.logoUrl,
+		y.size, y.version,
+		y.versionCode,
+		y.updateInfo, y.pathStatus,
+		y.signatureSHA1,
+		y.officialSigSHA1,
+		y.marketName
+		FROM
+		UserTopApp x
+		LEFT
+		JOIN App y
+		ON
+		x.pkname = y.pkname
+		WHERE y.pkname IS NOT NULL
+		ORDER BY x.rank ASC,
+		y.versioncode DESC
+	</select>
+
+	<!-- search -->
+	<select id="getSearchAppByIds" resultType="com.ijinshan.sjk.vo.MobileSearchApp">
+		select
+		<include refid="searchApp" />
+		from App
+		where
+		hidden = 0
+		and id in
+		<foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+	<!-- search end -->
+
+	<!-- query Increment -->
+	<select id="getIncrement" resultType="com.ijinshan.sjk.vo.pc.App4Summary">
+		SELECT
+		Id,
+		NAME,
+		LogoUrl,
+		PageUrl,
+		Catalog,
+		SubCatalog,
+		Pkname,
+		Version,
+		DownloadRank,
+		DownloadUrl,
+		VersionCode,
+		Size,
+		PathStatus,
+		SignatureSha1,
+		OfficialSigSha1,
+		Advertises,
+		AdActionTypes,
+		AdPopupTypes,
+		VirusKind,
+		ShortDesc,
+		MarketName,
+		IndexImgUrl,
+		freeSize,
+		MarketName,
+		substr(Description, 1, 500) AS Description
+		FROM
+		(
+		SELECT
+		package
+		FROM
+		mobile_app_downloadtop200_percent_stat
+		WHERE
+		date >=DATE(#{date,jdbcType=TIMESTAMP})
+		<if test="catalog!=null">
+			AND type = ${catalog}
+		</if>
+		ORDER BY
+		percent DESC
+		) A
+		INNER JOIN App B ON A.package = B.PkName
+		AND B.Hidden = 0
+		AND
+		B.DownloadRank > 20
+		limit ${offset} ,
+		${rowCount} ;
+	</select>
+
+	<select id="getIncrementCount" resultType="long">
+		select count(1) FROM
+		mobile_app_downloadtop200_percent_stat
+		WHERE
+		date =DATE(#{date,jdbcType=TIMESTAMP})
+		<if test="catalog!=null">
+			AND type = ${catalog}
+		</if>
+	</select>
+	<!--end query Increment -->
+
+</mapper>

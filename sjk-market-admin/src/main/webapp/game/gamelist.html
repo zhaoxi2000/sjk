@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!--<base href="../" />-->
+        <!--IE doesnot support relative path.-->
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>软件列表</title>
+        <link href="../css/admin_dig.css" rel="stylesheet" type="text/css" />
+        <link href="../css/easyui.css" rel="stylesheet" type="text/css" />
+        <link href="../css/common.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../js/lib/jquery-1.7.1.min.js"></script>
+        <script type="text/javascript" src="../js/lib/jquery.easyui.min.js"></script>
+        <script type="text/javascript" src="../js/game/gamelist.js"></script>
+    </head>
+    <body>
+        <div class="con">
+            <div class="title">
+                <span class="f_l pt_5"> 
+                    <a class="new_ico" target="_blank" href="../admin/app/add-edit.d">新建</a> 
+                    <a href="gamelist.html" class="ref_ico">刷新</a>
+                    
+                    <select class="f_l w_100 mt_8 mr_10" id="keyColumn">
+                        <option value="" selected="selected">全部</option>
+                    </select>
+                    
+                    <span class="f_l">keyword：</span> 
+                    <input name="keyword" type="text" class="f_l w_120 mt_8 mr_10" id="keyword" />
+                    
+                    <span class="f_l">Id：</span>
+                    <input name="Id" type="text" class="f_l w_80 mt_8 mr_10" id="keyId" />
+                    
+                    <span class="f_l mr_10">开始时间：
+                        <input name="startDate" class="easyui-datebox" type="text" id="startDate" />
+                    </span>
+                    
+                    <span class="f_l mr_10">结束时间：
+                        <input name="endDate" class="easyui-datebox" type="text" id="endDate" />
+                    </span>
+                    
+                    <span class="f_l">审核状态：</span>
+                    <select name="status" class="f_l w_60 mt_10 mr_10" id="statusColumn">
+                        <option value="" selected="selected">全部</option>
+                        <option value="1">已审核</option>
+                        <option value="2">免审核</option>
+                        <option value="0">未审核</option>
+                    </select>
+                    
+                    <span class="f_l">是否官网：</span>
+                    <select name="official" class="f_l w_60 mt_10 mr_10" id="official">
+                        <option value="" selected="selected">全部</option>
+                        <option value="1">是</option>
+                        <option value="0">否</option>
+                    </select>
+                    
+                    <span class="btn w_60 mt_10"> 
+                        <button type="submit" class="h_20 f_l" id="search">搜索</button> 
+                    </span>
+                    <br /> 
+                    <span class="btn w_960 pb_10"> 
+                        <button value="" type="button" class="w_100 f_l mr_20" id="idsBtn">批量修改分类</button> 
+                        <button type="button" class="w_100 f_l mr_20" id="hideBtn">批量隐藏</button> 
+                        <button value="" type="button" class="w_100 f_l mr_20" id="tagsBtn">批量修改标签</button> 
+                        <button value="" type="button" class="w_100 f_l mr_20" id="TopicssBtn">批量修改专题</button> 
+                        <button value="" type="button" class="w_130 f_l mr_20" id="MoTagsBtn">批量修改手机标签</button> 
+                        <button value="" type="button" class="w_130 f_l mr_20" id="MoTopicssBtn">批量修改手机专题</button> 
+                        <button value="" type="button" class="w_130 f_l" id="MoStatusBtn">批量修改审核状态</button> 
+                    </span> 
+                </span>
+            </div>
+            <div class="clear"></div>
+            <table id="softList"></table>
+            <span class="btn pt_10 pb_10"> <button value="" type="button" class="w_100 f_l mr_20" id="idsBtnBom">批量修改分类</button> <button type="button" class="w_100 f_l mr_20" id="hideBtnBom">批量隐藏</button> <button value="" type="button" class="w_100 f_l mr_20"
+                id="tagsBtnBom">批量修改标签</button> <button value="" type="button" class="w_100 f_l mr_20"
+                id="TopicssBtnBom">批量修改专题</button> <button value="" type="button" class="w_130 f_l mr_20"
+                id="MoTagsBtnBom">批量修改手机标签</button> <button value="" type="button" class="w_130 f_l mr_20"
+                id="MoTopicssBtnBom">批量修改手机专题</button> <button value="" type="button" class="w_130 f_l" id="MoStatusBtnBom">批量修改审核状态</button> </span>
+        </div>
+        <div id="editType" class="dp_n">
+            <div class="editType">
+                <ul id="TypeMenu"></ul>
+            </div>
+        </div>
+        <div id="editIds" class="dp_n">
+            <div class="editType">
+                <ul id="IdsMenu"></ul>
+            </div>
+        </div>
+        <div id="editMoStatus" class="dp_n">
+            <div class="editType">
+                <ul id="MoStatusMenu"></ul>
+            </div>
+        </div>
+        <div id="editTag" class="dp_n">
+            <div class="editType w_660 h_280">
+                <ul id="TagMenu"></ul>
+            </div>
+            <span class="btn"><button class="ml_20" id="tagPost">提交</button></span>
+        </div>
+        <div id="editTags" class="dp_n">
+            <div class="editType w_660 h_280">
+                <ul id="TagsMenu"></ul>
+            </div>
+            <span class="btn"><button class="ml_20" id="tagsPost">提交</button></span>
+        </div>
+        <div id="editTopics" class="dp_n">
+            <div class="editType w_660 h_280">
+                <ul id="TopicsMenu"></ul>
+            </div>
+            <span class="btn"><button class="ml_20" id="TopicsPost">提交</button></span>
+        </div>
+        <div id="editTopicss" class="dp_n">
+            <div class="editType w_660 h_280">
+                <ul id="TopicssMenu"></ul>
+            </div>
+            <span class="btn"><button class="ml_20" id="TopicssPost">提交</button></span>
+        </div>
+        <div id="editMoTopicss" class="dp_n">
+            <div class="editType w_660 h_280">
+                <ul id="MoTopicssMenu"></ul>
+            </div>
+            <span class="btn"><button class="ml_20" id="MoTopicssPost">提交</button></span>
+        </div>
+        <div id="editMoTags" class="dp_n">
+            <div class="editType w_660 h_280">
+                <ul id="MoTagsMenu"></ul>
+            </div>
+            <span class="btn"><button class="ml_20" id="MoTagsPost">提交</button></span>
+        </div>
+        <div id="editDelta" class="dp_n">
+            <table class="tab3 mt_20" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td class="w_100 ta_r">
+                        增减量：
+                    </td>
+                    <td><input class="w_150" type="text" id="deltaDownload" />
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <span class="btn"><button type="button"
+                            id="addDelta">确定</button> <button type="button" class="ml_20" id="closeDelta">取消</button></span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id="editKeywordsBox" class="dp_n">
+            <textarea style="width: 98%; height: 80%" name="keywords"
+			id="editKeywordsText" cols="" rows=""></textarea>
+            <input type="hidden" name="id" id="keywordsId" /><span class="btn"> <a class="ml_20 f_l" onclick="splitText()">将空格换成逗号</a> <button class="ml_20 f_l w_50" id="editKeywordsPost">提交</button>
+                <lable
+                class="ml_40 co_red">
+                    多个关键字用半角逗号隔开
+                </lable> </span>
+        </div>
+    </body>
+</html>

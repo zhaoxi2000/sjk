@@ -1,0 +1,432 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>${App.Name}</title>
+        <link href="../css/detail_style.css?v=201212121648" rel="stylesheet" type="text/css" />
+        <link href="../css/common.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <div id="indexSt" class="main">
+            <div id="navSt" class="dis_n">
+                <div class="nav">
+                    <span class="toptage">
+                        <a id="indexUrl">首页</a>
+                        <a class="cure drop" id="more">分类</a>
+                        <span class="f_l h_37" id="toptage">
+                            <a href="bigGame.html" class="dis_n" id="BgIndex">大型游戏</a>
+                        </span>
+                    </span>
+                    
+                    <span class="search" id="searBox">
+                        <input id="keyword" name="keyword" type="text" value="请输入搜索内容" maxlength="26" index="0" />
+                        <button id="keyBtn"></button>
+                    </span>
+                    
+                    <span class="f_r">
+                        <a class="ref" id="reload" onclick="window.location.reload()"></a>
+                        <a class="ret" id="reBack"></a>
+                    </span>
+                    <div class="keylist" id="keylist"></div>
+                </div>
+                
+                <div class="typeBox" id="typeBox">
+                    <span class="l_bg"></span>
+                    <div class="m_bg">
+                        <div id="softType" class="type">
+                            <span class="angle"></span>
+                            <ul id="typeList" class="f_l w_200">
+                                <li><a value="0" class="full"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <span class="r_bg"></span>
+                </div>
+            </div>
+            
+            <a class="retTop" id="retTop" value="0"></a>
+            
+            <div id="defScroll" class="detascroll">
+                <div class="scrollbar dis_n">
+                    <div class="track">
+                        <div class="thumb">
+                            <div class="end"></div>
+                            <div class="bom"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="viewport">
+                    <div id="defoverview" class="overview">
+                    
+                        <div id="detH" class="f_l" name="0">
+                            <div class="detBox">
+                                <span class="t_bg"></span>
+                                <div class="m_bg" id="detBoxH">
+                                    <div class="f_l" id="detBoxConH">
+                                        <div class="basic pb_5" id="basic">
+                                            <span class="f_l w_80 pr_10">
+                                                <span class="icon"><img src="${App.LogoUrl}"/></span>
+                                            </span>
+                                            
+                                            <span class="f_l w_560">
+                                                <span class="tit">
+                                                    <span class="f_l">${App.Name}</span>
+                                                    #if(${App.signatureSha1}==${App.officialSigSha1})
+                                                        <span class="off_icon" title="官方版"></span>
+                                                    #end
+                                                </span>
+                                                
+                                                #if(${App.catalog}==100)
+                                                    <a class="btn" value="1" id="DownApk" marketName="${App.marketName}" catalog="${App.catalog}" subCatalog="${App.subCatalog}" softid="${App.id}" strPackageName="${App.pkname}" strAppName="${App.Name}" strVersion="${App.Version}" strIconUrl="${App.LogoUrl}" strApkUrl="${App.DownloadUrl}" nAkpSize="${App.Size}" freeSize="${App.freeSize}">一键安装</a>
+                                                #else
+                                                    <a class="btn" value="1" softid="${App.id}" id="DownApk" marketName="${App.marketName}" catalog="${App.catalog}" subCatalog="${App.subCatalog}" strPackageName="${App.pkname}" strAppName="${App.Name}" strVersion="${App.Version}" strIconUrl="${App.LogoUrl}" strApkUrl="${App.DownloadUrl}" nAkpSize="${App.Size}">安装</a>
+                                                #end
+                                            </span>
+                                            
+                                            <div class="tab">
+                                                <span class="f_l pr_20">
+                                                    <span class="co_94">下载：</span>
+                                                    #if(${App.realDownload}<1000)
+                                                        不到1千次
+                                                    #elseif(${App.realDownload}>999 && ${App.realDownload}<2000)
+                                                        超过1千次
+                                                    #elseif(${App.realDownload}>1999 && ${App.realDownload}<3000)
+                                                        超过2千次
+                                                    #elseif(${App.realDownload}>2999 && ${App.realDownload}<4000)
+                                                        超过3千次
+                                                    #elseif(${App.realDownload}>3999 && ${App.realDownload}<5000)
+                                                        超过4千次
+                                                    #elseif(${App.realDownload}>4999 && ${App.realDownload}<6000)
+                                                        超过5千次
+                                                    #elseif(${App.realDownload}>5999 && ${App.realDownload}<7000)
+                                                        超过6千次
+                                                    #elseif(${App.realDownload}>6999 && ${App.realDownload}<8000)
+                                                        超过7千次
+                                                    #elseif(${App.realDownload}>7999 && ${App.realDownload}<9000)
+                                                        超过8千次
+                                                    #elseif(${App.realDownload}>8999 && ${App.realDownload}<10000)
+                                                        超过9千次
+                                                    #elseif(${App.realDownload}>9999 && ${App.realDownload}<20000)
+                                                        超过1万次
+                                                    #elseif(${App.realDownload}>19999 && ${App.realDownload}<30000)
+                                                        超过2万次
+                                                    #elseif(${App.realDownload}>29999 && ${App.realDownload}<40000)
+                                                        超过3万次
+                                                    #elseif(${App.realDownload}>39999 && ${App.realDownload}<50000)
+                                                        超过4万次
+                                                    #elseif(${App.realDownload}>49999 && ${App.realDownload}<60000)
+                                                        超过5万次
+                                                    #elseif(${App.realDownload}>59999 && ${App.realDownload}<70000)
+                                                        超过6万次
+                                                    #elseif(${App.realDownload}>69999 && ${App.realDownload}<80000)
+                                                        超过7万次
+                                                    #elseif(${App.realDownload}>79999 && ${App.realDownload}<90000)
+                                                        超过8万次
+                                                    #elseif(${App.realDownload}>89999 && ${App.realDownload}<100000)
+                                                        超过9万次
+                                                    #else(${App.realDownload}>99999)
+                                                        超过10万次
+                                                    #end
+                                                </span>
+                                                <span class="f_l pr_20">
+                                                    <span class="co_94">大小：</span>
+                                                    <span id="setSize" class="dis_n">${App.size}</span>
+                                                </span>
+                                                <span class="f_l pr_20">
+                                                    <span class="co_94">更新：</span>
+                                                    <span id="setDate" class="dis_n">${App.lastUpdateTime}</span>
+                                                </span>
+                                                <span class="f_l pr_20">
+                                                    <span class="co_94">版本：</span>
+                                                    ${App.Version}
+                                                </span>
+                                                #if(${App.catalog}!=100)
+                                                    <span class="f_l pr_20">
+                                                        <span class="co_94">来源：</span>
+                                                        <a target="_blank" href="${App.detailUrl}">${App.marketName}</a>
+                                                    </span>
+                                                #end
+                                                <span class="f_l">
+                                                    <span class="co_94">分类：</span>
+                                                    ${Catalog.name}
+                                                </span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="iuBox" id="intBox">
+                                            <div class="intUpda" id="intro">
+                                                <span class="tit">简介：</span>
+                                                <span class="con">${App.Description}</span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="d_away dis_n" id="intAway">
+                                            <span class="line"></span>
+                                            <span class="more"></span>
+                                        </div>
+                                        
+                                        <div class="iuBox" id="upBox">
+                                            <div class="intUpda" id="update">
+                                                <span class="tit">更新：</span>
+                                                <span class="con" id="upCon">#if(${App.updateInfo}) ${App.updateInfo} #end</span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="d_away dis_n" id="upAway">
+                                            <span class="line"></span>
+                                            <span class="more"></span>
+                                        </div>
+                                    
+                                        <div class="rbox" id="rbox">
+                                            <div class="recbox" id="recbox">
+                                                <ul id="revPic"></ul>
+                                            </div>
+                                            <span class="prev" id="prev"></span>
+                                            <span class="next" id="next"></span>
+                                        </div>
+                                        
+                                        <span id="loading" class="loading">正在加载...</span>
+                                    </div>
+                                </div>
+                                <span class="b_bg"></span>
+                            </div>
+                            
+                            <div class="abaBox">
+                                <span class="t_bg"></span>
+                                <div class="m_bg" id="abaBoxH">
+                                    <div class="f_l" id="abaBoxConH">
+                                        <div class="appBeAn">
+                                            <span class="tit">APP行为分析</span>
+                                            
+                                            <span class="conBox">
+                                                <a target="_blank" href="http://m.duba.com/">手机毒霸</a>
+                                                <span class="f_l pl_5">提供权威分析</span>
+                                            </span>
+                                            
+                                            #if(${App.adPopupTypes} || ${App.safe} || ${App.permissions} || ${App.virusBehaviors})  
+                                                <div id="haveData">
+
+                                                    <span class="baTage pt_10">
+                                                        <span class="f_l">应用安全：</span>
+                                                        
+                                                        #if(${App.safe.contains(",3,")})  
+                                                            <span class="dan_icon"></span>
+                                                        #else
+                                                            <span class="sec_icon"></span>
+                                                        #end
+                                                    </span>
+                                                    
+                                                    <span class="baTage pt_10">
+                                                        <span class="f_l">广告详情：</span>
+                                                        
+                                                        #if(${App.adPopupTypes.contains(",1,")} || ${App.adActionTypes.contains(",1,")})  
+                                                            <span class="malAdv_icon"></span>
+                                                        #elseif(${App.adActionTypes.contains(",2,")} || ${App.adActionTypes.contains(",3,")} || ${App.adPopupTypes.contains(",2,")} || ${App.adPopupTypes.contains(",3,")} || ${App.adPopupTypes.contains(",4,")})
+                                                            <span class="adv_icon"></span>
+                                                        #else
+                                                            <span class="noAdv_icon"></span>
+                                                        #end
+                                                    </span>
+                                                    
+                                                    <span class="advBeBox" id="advBeBox">
+                                                        <span class="advBe" id="advBe">
+                                                            #if(${App.adActionTypes.contains(",1,")} || ${App.adActionTypes.contains(",2,")} || ${App.adActionTypes.contains(",3,")} || ${App.adPopupTypes.contains(",1,")} || ${App.adPopupTypes.contains(",2,")} || ${App.adPopupTypes.contains(",3,")} || ${App.adPopupTypes.contains(",4,")})
+                                                                <span class="a_con" id="Adware">
+                                                                    #if(${App.adPopupTypes.contains(",1,")} || ${App.adActionTypes.contains(",1,")})  
+                                                                        <span class="a_tit">风险行为：</span>
+                                                                    #elseif(${App.adActionTypes.contains(",2,")} || ${App.adActionTypes.contains(",3,")} || ${App.adPopupTypes.contains(",2,")} || ${App.adPopupTypes.contains(",3,")} || ${App.adPopupTypes.contains(",4,")})
+                                                                        <span class="a_tit">广告行为：</span>
+                                                                    #end
+                                                                    
+                                                                    #if(${App.adActionTypes.contains(",1,")})
+                                                                        <span>获取手机号码</span>
+                                                                    #end
+                                                                    #if(${App.adActionTypes.contains(",2,")})
+                                                                        <span>获取定位信息</span>
+                                                                    #end
+                                                                    #if(${App.adActionTypes.contains(",3,")})
+                                                                        <span>获取APP列表</span>
+                                                                    #end
+                                                                    #if(${App.adPopupTypes.contains(",2,")})
+                                                                        <span>程序内嵌类广告</span>
+                                                                    #end
+                                                                    #if(${App.adPopupTypes.contains(",1,")})
+                                                                        <span>通知栏弹出类广告</span>
+                                                                    #end
+                                                                    #if(${App.adPopupTypes.contains(",3,")})
+                                                                        <span>弹出窗口</span>
+                                                                    #end
+                                                                    #if(${App.adPopupTypes.contains(",4,")})
+                                                                        <span>软件下载积分墙广告</span>
+                                                                    #end
+                                                                </span>
+                                                            #end
+                                                            
+                                                            #if(${App.adPopupTypes.contains(",1,")} || ${App.adPopupTypes.contains(",2,")} || ${App.adPopupTypes.contains(",3,")} || ${App.adPopupTypes.contains(",4,")})
+                                                                <span id="advStyle">
+                                                                    <span class="a_con">
+                                                                        <span class="a_tit">广告样式：</span>
+                                                                    </span>
+                                                                    
+                                                                    <span class="a_con ta_c pt_0">
+                                                                        <span class="a_tit co_94" id="styleTit"></span>
+                                                                    </span>
+                                                                    
+                                                                    <span class="advBox mt_5">
+                                                                        <ul id="advBox">
+                                                                            #if(${App.adPopupTypes.contains(",2,")})
+                                                                                <li name="程序内嵌类广告"><img src="../images/popup_type_1.png" /></li>
+                                                                            #end
+                                                                            #if(${App.adPopupTypes.contains(",1,")})
+                                                                                <li name="通知栏弹出类广告"><img src="../images/popup_type_2.png" /></li>
+                                                                            #end
+                                                                            #if(${App.adPopupTypes.contains(",3,")})
+                                                                                <li name="弹出窗口"><img src="../images/popup_type_3.png" /></li>
+                                                                            #end
+                                                                            #if(${App.adPopupTypes.contains(",4,")})
+                                                                                <li name="软件下载积分墙广告"><img src="../images/popup_type_4.png" /></li>
+                                                                            #end
+                                                                        </ul>
+                                                                    </span>
+                                                                    
+                                                                    <span class="swBtn" id="swBtn"></span>
+                                                                </span>
+                                                            #end
+                                                    
+                                                            <span id="priAcBox">
+                                                                <span class="baTage pt_10">
+                                                                    <span class="f_l">隐私行为：</span>
+                                                                    <span class="sumBg" id="priAcSum"></span>
+                                                                </span>
+                                                                
+                                                                <span class="conBox noline pt_5 pb_0">
+                                                                    <span class="advBe" id="priAc" name="${App.permissions}"></span>
+                                                                    <span class="clear"></span>
+                                                                </span>
+                                                            </span>
+                                                    
+                                                        </span>
+                                                    </span>
+                                                    
+                                                    <div class="d_away adv_away dis_n" id="advAway">
+                                                        <span class="line"></span>
+                                                        <span class="more"></span>
+                                                    </div>
+                                                    
+                                                </div>
+                                            #else
+                                                <div id="noData">
+                                                    <span class="cloud"></span>
+                                                    <span class="noda_msg">
+                                                        抱歉，该APP行为分析<br />
+                                                        正在云端处理中，请稍后
+                                                    </span>
+                                                </div>
+                                            #end
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="b_bg"></span>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            #if(${App.catalog}==100)
+                <div class="mark" id="mark"></div>
+        
+                <div class="bgTips" id="bgTips">
+                    <span class="t_close" id="topClose"></span>
+                    <span class="clear"></span>
+                    <span class="tit" id="bgTit"></span>
+                    <span class="size">大小：<span id="bgSize"></span>M</span>
+                    
+                    <div class="proBox pr_50">
+                        <span class="p_tit" id="spaCap"></span>
+                        
+                        <div class="proPic capBg" id="sdCapBg">
+                            <div id="graph"></div>
+                        </div>
+                        
+                        <div id="sdUk" class="dis_n">   
+                            <span class="con">
+                                未检测到SD卡<br />
+                                预计所需空间：XG
+                            </span>
+                        </div>
+                        
+                        <div id="sdStatus">   
+                            <span class="con w_200">
+                                <span class="w_200 f_l">
+                                    <span id="usedBg"></span>
+                                    <span class="f_l pr_10">已用：<span id="usedSize"></span></span>
+                                    <span id="remBg"></span>
+                                    <span class="f_l"><span id="remTit"></span><span id="remSize"></span></span>
+                                </span>
+                                <span class="w_180 f_l">
+                                    <span id="SpaceBg"></span>
+                                    <span class="f_l" id="isSpace"></span>
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="proBox pr_25">
+                        <span class="p_tit">下载约<span id="downTime"></span>分钟</span>
+                        
+                        <div class="proPic" id="downTimeBg"></div>
+                        
+                        <span class="con">
+                            <span class="f_l">若您的网络ADSL为</span><span class="gr_ba"><input name="" id="bandWidth" nAkpSize="" type="text" value="6"/></span><span class="f_l">M</span><br />
+                            预计下载时间为：<span class="pco_or"><span id="isDownTime"></span>分钟</span>
+                        </span>
+                    </div>
+                    
+                    <div class="proBox">
+                        <span class="p_tit">安装约<span id="insTime"></span>分钟</span>
+                        
+                        <div class="proPic" id="insTimeBg"></div>
+                        
+                        <span class="con">
+                            根据安装包文件推算，<br />
+                            预计游戏安装时间约为： <span class="pco_or"><span id="isInsTime"></span>分钟</span>
+                        </span>
+                    </div>
+                    
+                    <span class="f_r pt_15">
+                        <a class="btn" id="bomClose">取消</a>
+                        <a class="btn" id="DownGamePack" value="1">一键安装</a>
+                    </span>
+                </div>
+            #end
+            <a class="closeIf closeShow" id="closeShow"></a>
+            <a class="closeIf" id="closeIframe"></a>
+        </div>
+        <input name="id" type="hidden" value="${App.id}" />
+        <input name="strImageUrls" type="hidden" id="picDate" picsrc="${App.strImageUrls}" />
+        <input type="hidden" id="catalog" name="catalog" value="${App.catalog}"/>
+        <input type="hidden" id="subCatalog" name="subCatalog" value="${App.subCatalog}"/>
+        <script src="../js/jquery-1.6.4.min.js" type="text/javascript"></script>
+        <script src="../js/jquery.tinyscrollbar.min.js" type="text/javascript"></script>
+        <script src="../js/index.js?v=201212121648" type="text/javascript"></script>
+        <script src="../js/jscharts.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            $(function(){
+                #if(${App.catalog}==100)
+                    InsTips()
+                #else
+                    DownApk();
+                #end
+                
+                #if(${App.adActionTypes.contains(",1,")} || ${App.adActionTypes.contains(",2,")} || ${App.adActionTypes.contains(",3,")} || ${App.adPopupTypes.contains(",1,")} || ${App.adPopupTypes.contains(",2,")} || ${App.adPopupTypes.contains(",3,")} || ${App.adPopupTypes.contains(",4,")})
+                    if ($.browser.msie && $.browser.version == "6.0") {
+                        AdwareEve();
+                    }
+                #end
+            })
+        </script>
+        <span class="dis_n"><script src="http://v7.cnzz.com/stat.php?id=4823575&web_id=4823575" language="JavaScript"></script></span>
+    </body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!--<base href="../" />-->
+        <!--IE doesnot support relative path.-->
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>软件列表</title>
+        <link href="../css/admin_dig.css?v=201209081245" rel="stylesheet" type="text/css" />
+        <link href="../css/easyui.css" rel="stylesheet" type="text/css" />
+        <link href="../css/common.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../js/lib/jquery-1.7.1.min.js"></script>
+        <script type="text/javascript" src="../js/lib/jquery.easyui.min.js"></script>
+        <script type="text/javascript" src="../js/big-game/list.js"></script>
+    </head>
+    <body>
+        <div class="con">
+            <div class="title">
+                <span class="f_l pt_5"> 
+                    <a class="list_ico">App库大游戏</a> 
+                    <!-- <a class="new_ico" target="_blank" href="../admin/biggame/add.d">新建</a> --> 
+                    <a href="list.html" class="ref_ico">刷新</a>
+                    <select class="f_l w_100 mt_8 mr_10" id="keyColumn">
+                        <option value="" selected="selected">全部</option>
+                    </select> 
+                    <span class="f_l w_200">keyword:
+                        <input name="keywords" type="text" class="f_r w_120 mt_8 mr_10" id="keyword" />
+                    </span> 
+                    <span class="f_l w_150">Id:
+                        <input name="Id" type="text" class="f_r w_100 mt_8 mr_10" id="keyId" /> 
+                    </span> 
+                    <span class="btn w_100 mt_8 "> 
+                        <button type="submit" class="h_20 f_l mr_10" id="search">搜索</button> 
+                    </span> 
+                    <br /> 
+                    <span class="btn w_500 pb_10"> 
+                        <button value="" type="button" class="w_100 f_l mr_20" id="idsBtn">批量修改分类</button> 
+                        <button type="button" class="w_100 f_l mr_20" id="hideBtn">批量隐藏</button> 
+                        <button value="" type="button" class="w_100 f_l mr_20" id="tagsBtn">批量修改标签</button> 
+                        <button value="" type="button" class="w_100 f_l" id="TopicssBtn">批量修改专题</button> 
+                    </span> 
+                </span>
+            </div>
+            <div class="clear"></div>
+            <table id="softList"></table>
+            <span class="btn pt_10 pb_10"> <button value="" type="button" class="w_100 f_l mr_20" id="idsBtnBom">批量修改分类</button> <button type="button" class="w_100 f_l mr_20" id="hideBtnBom">批量隐藏</button> <button value="" type="button" class="w_100 f_l mr_20" id="tagsBtnBom">批量修改标签</button> <button value="" type="button" class="w_100 f_l" id="TopicssBtnBom">批量修改专题</button> </span>
+        </div>
+        <div id="editType" class="dp_n">
+            <div class="editType">
+                <ul id="TypeMenu"></ul>
+            </div>
+        </div>
+        <div id="editIds" class="dp_n">
+            <div class="editType">
+                <ul id="IdsMenu"></ul>
+            </div>
+        </div>
+        <div id="editTag" class="dp_n">
+            <div class="editType w_660 h_280">
+                <ul id="TagMenu"></ul>
+            </div>
+            <span class="btn"><button class="ml_20" id="tagPost">提交</button></span>
+        </div>
+        <div id="editTags" class="dp_n">
+            <div class="editType w_660 h_280">
+                <ul id="TagsMenu"></ul>
+            </div>
+            <span class="btn"><button class="ml_20" id="tagsPost">提交</button></span>
+        </div>
+        <div id="editTopics" class="dp_n">
+            <div class="editType w_660 h_280">
+                <ul id="TopicsMenu"></ul>
+            </div>
+            <span class="btn"><button class="ml_20" id="TopicsPost">提交</button></span>
+        </div>
+        <div id="editTopicss" class="dp_n">
+            <div class="editType w_660 h_280">
+                <ul id="TopicssMenu"></ul>
+            </div>
+            <span class="btn"><button class="ml_20" id="TopicssPost">提交</button></span>
+        </div>
+        <div id="editDelta" class="dp_n">
+            <table class="tab3 mt_20" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td class="w_100 ta_r">
+                        增减量：
+                    </td>
+                    <td><input class="w_150" type="text" id="deltaDownload" />
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <span class="btn"><button type="button" id="addDelta">确定</button><button type="button" class="ml_20" id="closeDelta">取消</button></span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>

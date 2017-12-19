@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title></title>
+        <link href="css/admin_dig.css" rel="stylesheet" type="text/css" />
+        <link href="css/common.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="js/lib/jquery-1.7.1.min.js"></script>
+        <script type="text/javascript" src="js/lib/jquery.form.js"></script>
+    </head>
+    <body>
+        <div class="login">
+            <form id="loginFm" action="admin/user/doLogin.d" method="POST">
+                <span class="ip_box"> <label>帐号：</label> <input id="username"
+                    name="username" type="text" /> </span><span class="ip_box"> <label>密码：</label> <input id="pwd"
+                    name="pwd" type="password" /> </span><span class="btn w_400 pl_38 pt_10"> <button type="submit" class="w_114_36 f_l">确定</button> <span
+                    id="msg" class="lh_36 co_red pl_15 f_l"></span></span>
+            </form>
+        </div>
+        <script type="text/javascript">
+            $(function() {
+                $('#loginFm').ajaxForm({
+                    dataType : 'json',
+                    beforeSubmit : function() {
+                        var usernme = $.trim($("#username").val());
+                        var pwd = $.trim($("#pwd").val());
+                        var msg = $("#msg");
+                        if(usernme == "") {
+                            msg.text("请输入用户名。");
+                            return false;
+                        }
+                        if(pwd == "") {
+                            msg.text("请输入密码。");
+                            return false;
+                        }
+                    },
+                    success : function(data) {
+                        var msg = $("#msg");
+                        if(!data.status) {
+                            msg.text("帐号或者密码错误。");
+                        } else {
+                            window.location.href = "index.html";
+                        }
+                    }
+                });
+            })
+        </script>
+    </body>
